@@ -734,75 +734,88 @@ def pagina_admin():
 # ─────────────────────────────────────────────────────────────────────────────
 # NAVEGACIÓN PRINCIPAL
 # ─────────────────────────────────────────────────────────────────────────────
-def main():
-    inject_css()
-    init_db()
+def inject_css():
+    SIDEBAR_BG  = "#1B3A6B"   # Azul oscuro ICA  |  verde: "#1a4d2e"
+    SIDEBAR_ACC = "#2e6da4"   # Acento más claro  |  verde: "#2d7a4f"
 
-    # ── SIDEBAR ──────────────────────────────────────────────────────
-    with st.sidebar:
+    st.markdown(f"""
+    <style>
+    /* ── SIDEBAR ─────────────────────────────────────────────── */
+    [data-testid="stSidebar"],
+    [data-testid="stSidebarHeader"],
+    section[data-testid="stSidebar"] > div:first-child {{
+        background-color: {SIDEBAR_BG} !important;
+    }}
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] small,
+    [data-testid="stSidebar"] .stMarkdown {{
+        color: #e8eef8 !important;
+    }}
+    [data-testid="stSidebar"] hr {{
+        border-color: rgba(255,255,255,0.2) !important;
+    }}
+    /* ── Radio navegación ─────────────────────────────────────── */
+    [data-testid="stSidebar"] .stRadio > label > div {{
+        color: rgba(255,255,255,0.6) !important;
+        font-size: 0.78rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.07em;
+    }}
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
+        color: #ccd8ee !important;
+        padding: 6px 12px; border-radius: 8px;
+        font-size: 0.9rem; transition: background 0.15s;
+    }}
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {{
+        background: rgba(255,255,255,0.10) !important;
+    }}
+    /* ── Métricas ─────────────────────────────────────────────── */
+    [data-testid="stMetric"] {{
+        background: #f5f7fb; border-radius: 10px;
+        padding: 1rem 1.2rem;
+        border-left: 4px solid {SIDEBAR_BG};
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }}
+    [data-testid="stMetricLabel"] p {{
+        font-size: 0.78rem !important; font-weight: 700 !important;
+        color: #555 !important; text-transform: uppercase; letter-spacing: 0.04em;
+    }}
+    [data-testid="stMetricValue"] div {{
+        font-size: 1.9rem !important; font-weight: 800 !important;
+        color: {SIDEBAR_BG} !important;
+    }}
+    /* ── Botones ──────────────────────────────────────────────── */
+    .stButton > button {{
+        background: linear-gradient(135deg, {SIDEBAR_BG}, {SIDEBAR_ACC});
+        color: #FFFFFF !important; border: none; border-radius: 8px;
+        font-weight: 600; box-shadow: 0 2px 6px rgba(27,58,107,0.30);
+        transition: all 0.18s;
+    }}
+    .stButton > button:hover {{
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(27,58,107,0.40);
+    }}
+    /* ── Tabs ─────────────────────────────────────────────────── */
+    .stTabs [data-baseweb="tab-list"] {{
+        background: #f0f3f9; border-radius: 8px; padding: 4px;
+    }}
+    .stTabs [aria-selected="true"] {{
+        background: {SIDEBAR_BG} !important;
+        color: #fff !important; border-radius: 6px !important;
+    }}
+    /* ── Alertas (mantener las clases existentes) ─────────────── */
+    .alerta-roja     {{ background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }}
+    .alerta-verde    {{ background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }}
+    .alerta-amarilla {{ background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }}
+    .stProgress > div > div > div > div {{ background-color: #27ae60; }}
+    /* ── Misc ─────────────────────────────────────────────────── */
+    [data-testid="stDataFrame"] {{ border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }}
+    footer {{visibility: hidden;}}
+    #MainMenu {{visibility: hidden;}}
+    </style>
+    """, unsafe_allow_html=True)
 
-        # ── Logo ICA ────────────────────────────────────────────────
-        # Opción A: logo en el repo (recomendada)
-        LOGO_URL = (
-            "https://raw.githubusercontent.com/"
-            "mauricio-chem/programa_entrenamiento_iiad/main/assets/logo_ica.png"
-        )
-        # Opción B: logo local (si corres en local)
-        # LOGO_URL = "assets/logo_ica.png"
 
-        st.markdown(f"""
-        <div style="text-align:center; padding:1.2rem 0.5rem 0.6rem 0.5rem;">
-            <img src="{LOGO_URL}"
-                 style="max-width:150px; filter:brightness(0) invert(1);"
-                 onerror="this.style.display='none'" />
-        </div>
-        """, unsafe_allow_html=True)
-
-        # ── Identificación institucional ────────────────────────────
-        st.markdown("""
-        <div style="text-align:center; padding:0 0.5rem 0.8rem 0.5rem; 
-                    border-bottom:1px solid rgba(255,255,255,0.18); 
-                    margin-bottom:0.8rem;">
-            <div style="font-size:0.82rem; font-weight:700; 
-                        color:#FFFFFF; letter-spacing:0.02em;">
-                Subgerencia de Análisis y Diagnóstico
-            </div>
-            <div style="font-size:0.70rem; color:rgba(255,255,255,0.55); 
-                        margin-top:3px;">
-                Área IIAD · ISO 17034 | ISO 17043
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-        # ── Menú de navegación ──────────────────────────────────────
-        pagina = st.radio(
-            "NAVEGACIÓN",
-            [
-                "🏠 Dashboard",
-                "📝 Registro de Avances",
-                "📊 Análisis por Rol",
-                "📅 Cronograma",
-                "📋 Reportes",
-            ],
-        )
-
-        # ── Pie de sidebar ──────────────────────────────────────────
-        st.markdown("""
-        <div style="position:absolute; bottom:1rem; left:0; right:0; 
-                    text-align:center; padding:0 1rem;">
-            <div style="font-size:0.65rem; color:rgba(255,255,255,0.35); 
-                        border-top:1px solid rgba(255,255,255,0.12); 
-                        padding-top:0.6rem;">
-                v2.0 · Feb 2026<br>
-                🗄️ GitHub JSON · ARCAL RLA5091
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
-
-    # ── CONTENIDO PRINCIPAL ──────────────────────────────────────────
-    if   pagina == "🏠 Dashboard":           pagina_dashboard()
-    elif pagina == "📝 Registro de Avances": pagina_registro()
-    elif pagina == "📊 Análisis por Rol":    pagina_analisis_rol()
-    elif pagina == "📅 Cronograma":          pagina_cronograma()
-    elif pagina == "📋 Reportes":            pagina_reportes()
+    
 
