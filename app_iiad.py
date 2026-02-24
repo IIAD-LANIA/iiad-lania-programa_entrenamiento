@@ -1,21 +1,9 @@
 #!/usr/bin/env python3
 # =============================================================================
 # SISTEMA DE SEGUIMIENTO DE FORMACIÓN - ÁREA IIAD / ICA
-# Versión 2.0 | Almacenamiento: JSON en repositorio GitHub
+# Versión 2.1 | Almacenamiento: JSON en repositorio GitHub
 # Desarrollado para cumplimiento ISO 17034 & ISO 17043
 # =============================================================================
-# INSTALACIÓN:
-#   pip install streamlit pandas plotly openpyxl requests
-#
-# CONFIGURACIÓN (.streamlit/secrets.toml):
-#   GITHUB_TOKEN = "ghp_xxxxxxxxxxxxxxxxxxxx"
-#   GITHUB_OWNER = "Mauricio-CHEM"
-#   GITHUB_REPO  = "programa_entrenamiento_iiad"
-#
-# EJECUCIÓN:
-#   streamlit run app_iiad.py
-# =============================================================================
-
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -56,8 +44,6 @@ def _gh_headers():
 
 
 def load_data_from_github():
-    """Lee el JSON de datos desde el repositorio GitHub.
-    Retorna (data_dict, sha_str). Si el archivo no existe crea los datos iniciales."""
     url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{DATA_FILE}"
     try:
         r = requests.get(url, headers=_gh_headers(), timeout=10)
@@ -67,7 +53,6 @@ def load_data_from_github():
             data = json.loads(raw)
             return data, payload["sha"]
         elif r.status_code == 404:
-            # Primera ejecución: crear con datos iniciales
             return _datos_iniciales(), None
         else:
             st.warning(f"GitHub respondió {r.status_code}. Usando datos de sesión.")
@@ -78,7 +63,6 @@ def load_data_from_github():
 
 
 def save_data_to_github(data, sha=None):
-    """Escribe el JSON de datos en el repositorio GitHub (PUT)."""
     url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{DATA_FILE}"
     content_b64 = base64.b64encode(
         json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
@@ -103,7 +87,6 @@ def save_data_to_github(data, sha=None):
 
 
 def get_data():
-    """Retorna los datos desde session_state (caché intra-sesión)."""
     if "app_data" not in st.session_state or st.session_state.get("refresh", False):
         data, sha = load_data_from_github()
         st.session_state["app_data"] = data
@@ -113,7 +96,6 @@ def get_data():
 
 
 def save_data(data):
-    """Guarda datos en GitHub y actualiza session_state."""
     sha = st.session_state.get("data_sha")
     ok  = save_data_to_github(data, sha)
     if ok:
@@ -123,10 +105,9 @@ def save_data(data):
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# DATOS INICIALES (se usan sólo la primera vez que se crea el JSON)
+# DATOS INICIALES
 # ─────────────────────────────────────────────────────────────────────────────
 def _datos_iniciales():
-    """Estructura JSON completa con catálogo de documentos, roles y personal de ejemplo."""
     documentos = [
         {"id":  1, "codigo": "GSA-SAD-MC-001",  "nombre": "Manual del Sistema de Calidad SAD",         "categoria": "SGC Base",         "horas": 1.5, "nivel": "Nivel 2", "norma_cubierta": "ISO 17034 §8 / ISO 17043 §8",            "es_critico": 1},
         {"id":  2, "codigo": "GSA-SAD-MC-003",  "nombre": "Manual Técnico Áreas de Referencia",        "categoria": "SGC Base",         "horas": 4.0, "nivel": "Nivel 4", "norma_cubierta": "ISO 17034 §8.2 / ISO 17043 §8.2",        "es_critico": 1},
@@ -232,9 +213,9 @@ def _datos_iniciales():
                 req_id += 1
 
     personal_ejemplo = [
-        {"id": 1, "nombre": "Iván Mauricio Huérfano",    "rol": "Responsable área IIAD",      "fecha_ingreso": "2026-02-11", "estado": "Activo"},
-        {"id": 2, "nombre": "Clauida Marcela Duarte", "rol": "Profesional área IIAD",      "fecha_ingreso": "2025-01-10", "estado": "Activo"},
-        {"id": 3, "nombre": "David Esquivel Valderrama",  "rol": "Profesional área IIAD",        "fecha_ingreso": "2026-01-10", "estado": "Activo"},
+        {"id": 1, "nombre": "Iván Mauricio Huérfano",    "rol": "Responsable área IIAD",     "fecha_ingreso": "2026-02-11", "estado": "Activo"},
+        {"id": 2, "nombre": "Claudia Marcela Duarte",    "rol": "Profesional área IIAD",     "fecha_ingreso": "2025-01-10", "estado": "Activo"},
+        {"id": 3, "nombre": "David Esquivel Valderrama", "rol": "Profesional área IIAD",     "fecha_ingreso": "2026-01-10", "estado": "Activo"},
     ]
 
     return {
@@ -243,7 +224,7 @@ def _datos_iniciales():
         "requisitos_rol": requisitos_rol,
         "avances": [],
         "_meta": {
-            "version": "2.0",
+            "version": "2.1",
             "creado": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "descripcion": "Datos formación IIAD - ICA | Almacenamiento GitHub JSON"
         }
@@ -251,7 +232,7 @@ def _datos_iniciales():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# FUNCIONES DE ACCESO A DATOS  (operan sobre el dict en memoria)
+# FUNCIONES DE ACCESO A DATOS
 # ─────────────────────────────────────────────────────────────────────────────
 def get_personal():
     data = get_data()
@@ -300,7 +281,6 @@ def calcular_estadisticas_persona(persona_id, rol):
     if docs_rol.empty:
         return {"total": 0, "completados": 0, "en_curso": 0, "pendientes": 0,
                 "pct_avance": 0.0, "horas_completadas": 0.0, "horas_totales": 0.0}
-    merged = docs_rol.merge(avances, left_on="id", right_on="documento_id", how="left")
     avances_clean = avances.drop(columns=["id"], errors="ignore")
     merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
@@ -344,12 +324,88 @@ def exportar_excel():
 # ESTILOS CSS
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
-    st.markdown("""
+    SIDEBAR_BG  = "#1B3A6B"   # Azul oscuro ICA  |  verde oscuro: "#1a4d2e"
+    SIDEBAR_ACC = "#2e6da4"   # Acento más claro  |  verde acento: "#2d7a4f"
+
+    st.markdown(f"""
     <style>
-        .alerta-roja      { background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }
-        .alerta-verde     { background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }
-        .alerta-amarilla  { background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }
-        .stProgress > div > div > div > div { background-color: #27ae60; }
+    /* ── SIDEBAR fondo ────────────────────────────────────────── */
+    [data-testid="stSidebar"],
+    [data-testid="stSidebarHeader"],
+    section[data-testid="stSidebar"] > div:first-child {{
+        background-color: {SIDEBAR_BG} !important;
+    }}
+    [data-testid="stSidebar"] p,
+    [data-testid="stSidebar"] span,
+    [data-testid="stSidebar"] label,
+    [data-testid="stSidebar"] small,
+    [data-testid="stSidebar"] .stMarkdown {{
+        color: #e8eef8 !important;
+    }}
+    [data-testid="stSidebar"] hr {{
+        border-color: rgba(255,255,255,0.2) !important;
+    }}
+    /* ── Radio navegación ─────────────────────────────────────── */
+    [data-testid="stSidebar"] .stRadio > label > div {{
+        color: rgba(255,255,255,0.6) !important;
+        font-size: 0.78rem; font-weight: 700;
+        text-transform: uppercase; letter-spacing: 0.07em;
+    }}
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
+        color: #ccd8ee !important;
+        padding: 6px 12px; border-radius: 8px;
+        font-size: 0.9rem; transition: background 0.15s;
+    }}
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {{
+        background: rgba(255,255,255,0.10) !important;
+    }}
+    /* ── Métricas ─────────────────────────────────────────────── */
+    [data-testid="stMetric"] {{
+        background: #f5f7fb; border-radius: 10px;
+        padding: 1rem 1.2rem;
+        border-left: 4px solid {SIDEBAR_BG};
+        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }}
+    [data-testid="stMetricLabel"] p {{
+        font-size: 0.78rem !important; font-weight: 700 !important;
+        color: #555 !important; text-transform: uppercase; letter-spacing: 0.04em;
+    }}
+    [data-testid="stMetricValue"] div {{
+        font-size: 1.9rem !important; font-weight: 800 !important;
+        color: {SIDEBAR_BG} !important;
+    }}
+    /* ── Botones ──────────────────────────────────────────────── */
+    .stButton > button {{
+        background: linear-gradient(135deg, {SIDEBAR_BG}, {SIDEBAR_ACC});
+        color: #FFFFFF !important; border: none; border-radius: 8px;
+        font-weight: 600; box-shadow: 0 2px 6px rgba(27,58,107,0.30);
+        transition: all 0.18s;
+    }}
+    .stButton > button:hover {{
+        transform: translateY(-1px);
+        box-shadow: 0 4px 14px rgba(27,58,107,0.40);
+    }}
+    /* ── Tabs ─────────────────────────────────────────────────── */
+    .stTabs [data-baseweb="tab-list"] {{
+        background: #f0f3f9; border-radius: 8px; padding: 4px;
+    }}
+    .stTabs [aria-selected="true"] {{
+        background: {SIDEBAR_BG} !important;
+        color: #fff !important; border-radius: 6px !important;
+    }}
+    /* ── DataFrames ───────────────────────────────────────────── */
+    [data-testid="stDataFrame"] {{
+        border-radius: 8px; overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }}
+    /* ── Alertas ──────────────────────────────────────────────── */
+    .alerta-roja     {{ background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }}
+    .alerta-verde    {{ background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }}
+    .alerta-amarilla {{ background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }}
+    .stProgress > div > div > div > div {{ background-color: #27ae60; }}
+    /* ── Misc ─────────────────────────────────────────────────── */
+    footer {{visibility: hidden;}}
+    #MainMenu {{visibility: hidden;}}
     </style>
     """, unsafe_allow_html=True)
 
@@ -445,7 +501,6 @@ def pagina_registro():
 
     docs_rol = get_docs_por_rol(persona["rol"])
     avances  = get_avance_persona(persona["id"])
-    merged   = docs_rol.merge(avances, left_on="id", right_on="documento_id", how="left")
     avances_clean = avances.drop(columns=["id"], errors="ignore")
     merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
@@ -586,47 +641,49 @@ def pagina_cronograma():
     st.caption("Período: Marzo – Agosto 2026")
 
     cronograma_data = [
-        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-MC-001",  "Manual SGC SAD",             1.5,"TODOS",             "Presencial grupal",     "⚠️ CRÍTICA"),
-        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-MC-003",  "Manual Técnico AR",          4.0,"TODOS",             "Presencial grupal",     "⚠️ CRÍTICA"),
-        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-009",   "Confidencialidad",           1.5,"TODOS",             "Presencial grupal",     "⚠️ CRÍTICA"),
-        (2, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-020",   "Manejo documentos SAD",      1.5,"TODOS",             "Presencial grupal",     "ALTA"),
-        (2, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-012",   "Gestión Personal",           3.0,"Resp/Prof/Líderes", "Presencial grupal",     "ALTA"),
-        (3, 1,"Mar","Normas ISO Núcleo",  "ISO 17034:2017",  "Requisitos PMR",             4.0,"Resp/Prof/Líd.Prod","Taller externo INM",    "⚠️ CRÍTICA"),
-        (3, 1,"Mar","Normas ISO Núcleo",  "ISO 17043:2023",  "Requisitos PEA",             4.0,"Resp/Líd.Comp/PA",  "Taller externo INM",    "⚠️ CRÍTICA"),
-        (4, 1,"Mar","Normas ISO Núcleo",  "ISO 17025:2017",  "Laboratorios",               3.0,"TODOS",             "Autoestudio guiado",    "ALTA"),
-        (5, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-024",   "Producción MR",              3.0,"Resp/Prof/Líd.Prod","Taller técnico",        "⚠️ CRÍTICA"),
-        (5, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-026",   "Homogeneidad y Estabilidad", 4.0,"Resp/Líd.Prod/PA",  "Taller c/ejercicios",   "⚠️ CRÍTICA"),
-        (6, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-031",   "Diseño EA/CI",               4.0,"Líd.Comp/PA",       "Taller técnico",        "⚠️ CRÍTICA"),
-        (6, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-033",   "Diseño estadístico PT",      4.0,"Resp/Líd.Comp/PA",  "Taller c/software",     "⚠️ CRÍTICA"),
-        (7, 2,"Abr","Estadística Crítica","ISO 13528:2022",  "Métodos Estadísticos PT",    8.0,"Líd.Comp/PA/Resp",  "Curso externo CENAM",   "⚠️ MUY CRÍTICA"),
-        (8, 2,"Abr","Estadística Crítica","GSA-SAD-P-027",   "Análisis datos PT",          4.0,"Resp/Líd.Comp/PA",  "Taller casos prácticos","⚠️ CRÍTICA"),
-        (9, 3,"May","Normas Técnicas",    "ISO 33405:2022",  "Homog. y Estab.",             4.0,"Todos técnicos",    "Taller externo",        "⚠️ CRÍTICA"),
-        (9, 3,"May","Normas Técnicas",    "ISO 33403:2023",  "Caracterización MR",         4.0,"Resp/Prof/Líd.Prod","Taller externo",        "⚠️ CRÍTICA"),
-        (10,3,"May","Normas Técnicas",    "GSA-SAD-P-003",   "Incertidumbre",              4.0,"TODOS",             "Taller c/ejercicios",   "ALTA"),
-        (10,3,"May","Normas Técnicas",    "GSA-SAD-P-002",   "Validación métodos",         4.0,"Resp/Prof/Líderes", "Taller técnico",        "ALTA"),
-        (11,3,"May","Normas Técnicas",    "ISO 33402:2022",  "Certificados MRC",           3.0,"Líd.Prod/Prof",     "Autoestudio+ejercicio", "ALTA"),
-        (13,4,"Jun","SGC Operativo",      "GSA-SAD-P-001",   "Gestión equipos",            3.0,"Resp/Líderes",      "Taller práctico",       "ALTA"),
-        (13,4,"Jun","SGC Operativo",      "GSA-SAD-P-004",   "Trabajo no conforme",        3.0,"Resp/Prof/Líderes", "Taller c/casos",        "ALTA"),
-        (15,4,"Jun","SGC Operativo",      "GSA-I-SAD-006",   "Auditorías internas",        1.5,"TODOS",             "Taller simulacro",      "ALTA"),
-        (17,5,"Jul","Calidad Avanzada",   "GSA-I-SAD-038",   "Riesgos y oportunidades",    3.0,"Resp/PA",           "Taller DOFA/AMFE",      "ALTA"),
-        (17,5,"Jul","Calidad Avanzada",   "GSA-I-SAD-007",   "Acciones correctivas",       3.0,"Resp/Líderes",      "Taller c/Form 3-604",   "ALTA"),
-        (22,6,"Ago","Integración Final",  "SIMULACRO-AUDIT", "Simulacro auditoría",        4.0,"TODOS",             "Auditoría simulada",    "⚠️ CRÍTICA"),
-        (24,6,"Ago","Certificación",      "EVAL-FINAL",      "Evaluación Final Integral",  4.0,"TODOS",             "Examen + entrevista",   "⚠️ CRÍTICA"),
+        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-MC-001",  "Manual SGC SAD",             1.5,"TODOS",             "Presencial grupal",      "⚠️ CRÍTICA"),
+        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-MC-003",  "Manual Técnico AR",          4.0,"TODOS",             "Presencial grupal",      "⚠️ CRÍTICA"),
+        (1, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-009",   "Confidencialidad",           1.5,"TODOS",             "Presencial grupal",      "⚠️ CRÍTICA"),
+        (2, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-020",   "Manejo documentos SAD",      1.5,"TODOS",             "Presencial grupal",      "ALTA"),
+        (2, 1,"Mar","Fundamentos SGC",    "GSA-SAD-P-012",   "Gestión Personal",           3.0,"Resp/Prof/Líderes", "Presencial grupal",      "ALTA"),
+        (3, 1,"Mar","Normas ISO Núcleo",  "ISO 17034:2017",  "Requisitos PMR",             4.0,"Resp/Prof/Líd.Prod","Taller externo INM",     "⚠️ CRÍTICA"),
+        (3, 1,"Mar","Normas ISO Núcleo",  "ISO 17043:2023",  "Requisitos PEA",             4.0,"Resp/Líd.Comp/PA",  "Taller externo INM",     "⚠️ CRÍTICA"),
+        (4, 1,"Mar","Normas ISO Núcleo",  "ISO 17025:2017",  "Laboratorios",               3.0,"TODOS",             "Autoestudio guiado",     "ALTA"),
+        (5, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-024",   "Producción MR",              3.0,"Resp/Prof/Líd.Prod","Taller técnico",         "⚠️ CRÍTICA"),
+        (5, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-026",   "Homogeneidad y Estabilidad", 4.0,"Resp/Líd.Prod/PA",  "Taller c/ejercicios",    "⚠️ CRÍTICA"),
+        (6, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-031",   "Diseño EA/CI",               4.0,"Líd.Comp/PA",       "Taller técnico",         "⚠️ CRÍTICA"),
+        (6, 2,"Abr","Procesos Técnicos",  "GSA-SAD-P-033",   "Diseño estadístico PT",      4.0,"Resp/Líd.Comp/PA",  "Taller c/software",      "⚠️ CRÍTICA"),
+        (7, 2,"Abr","Estadística Crítica","ISO 13528:2022",  "Métodos Estadísticos PT",    8.0,"Líd.Comp/PA/Resp",  "Curso externo CENAM",    "⚠️ MUY CRÍTICA"),
+        (8, 2,"Abr","Estadística Crítica","GSA-SAD-P-027",   "Análisis datos PT",          4.0,"Resp/Líd.Comp/PA",  "Taller casos prácticos", "⚠️ CRÍTICA"),
+        (9, 3,"May","Normas Técnicas",    "ISO 33405:2022",  "Homog. y Estab.",            4.0,"Todos técnicos",    "Taller externo",         "⚠️ CRÍTICA"),
+        (9, 3,"May","Normas Técnicas",    "ISO 33403:2023",  "Caracterización MR",         4.0,"Resp/Prof/Líd.Prod","Taller externo",         "⚠️ CRÍTICA"),
+        (10,3,"May","Normas Técnicas",    "GSA-SAD-P-003",   "Incertidumbre",              4.0,"TODOS",             "Taller c/ejercicios",    "ALTA"),
+        (10,3,"May","Normas Técnicas",    "GSA-SAD-P-002",   "Validación métodos",         4.0,"Resp/Prof/Líderes", "Taller técnico",         "ALTA"),
+        (11,3,"May","Normas Técnicas",    "ISO 33402:2022",  "Certificados MRC",           3.0,"Líd.Prod/Prof",     "Autoestudio/ejercicio",  "ALTA"),
+        (13,4,"Jun","SGC Operativo",      "GSA-SAD-P-001",   "Gestión equipos",            3.0,"Resp/Líderes",      "Taller práctico",        "ALTA"),
+        (13,4,"Jun","SGC Operativo",      "GSA-SAD-P-004",   "Trabajo no conforme",        3.0,"Resp/Prof/Líderes", "Taller c/casos",         "ALTA"),
+        (15,4,"Jun","SGC Operativo",      "GSA-I-SAD-006",   "Auditorías internas",        1.5,"TODOS",             "Taller simulacro",       "ALTA"),
+        (17,5,"Jul","Calidad Avanzada",   "GSA-I-SAD-038",   "Riesgos y oportunidades",    3.0,"Resp/PA",           "Taller DOFA/AMFE",       "ALTA"),
+        (17,5,"Jul","Calidad Avanzada",   "GSA-I-SAD-007",   "Acciones correctivas",       3.0,"Resp/Líderes",      "Taller c/Form 3-604",    "ALTA"),
+        (22,6,"Ago","Integración Final",  "SIMULACRO-AUDIT", "Simulacro auditoría",        4.0,"TODOS",             "Auditoría simulada",     "⚠️ CRÍTICA"),
+        (24,6,"Ago","Certificación",      "EVAL-FINAL",      "Evaluación Final Integral",  4.0,"TODOS",             "Examen + entrevista",    "⚠️ CRÍTICA"),
     ]
+
     df_cron = pd.DataFrame(cronograma_data,
-        columns=["Semana","Mes","Mes_Nom","Bloque","Código","Actividad","Horas",
+        columns=["Semana","Mes","MesNom","Bloque","Código","Actividad","Horas",
                  "Roles","Modalidad","Prioridad"])
 
     mes_sel = st.selectbox("Filtrar por mes", ["Todos"] + [f"Mes {i}" for i in range(1, 7)])
     if mes_sel != "Todos":
-        df_cron = df_cron[df_cron["Mes"] == int(mes_sel.split()[-1])]
+        df_cron = df_cron[df_cron["Mes"] == int(mes_sel.split("-")[1])]
 
-    st.dataframe(df_cron[["Semana","Mes_Nom","Bloque","Código","Actividad",
+    st.dataframe(df_cron[["Semana","MesNom","Bloque","Código","Actividad",
                            "Horas","Roles","Modalidad","Prioridad"]],
                  use_container_width=True, hide_index=True)
 
-    meses_horas = df_cron.groupby("Mes_Nom")["Horas"].sum().reset_index()
-    fig = px.bar(meses_horas, x="Mes_Nom", y="Horas", title="Distribución de Horas por Mes",
+    meses_horas = df_cron.groupby("MesNom")["Horas"].sum().reset_index()
+    fig = px.bar(meses_horas, x="MesNom", y="Horas",
+                 title="Distribución de Horas por Mes",
                  color="Horas", color_continuous_scale="Blues", text="Horas")
     fig.update_traces(texttemplate="%{text:.0f}h", textposition="outside")
     st.plotly_chart(fig, use_container_width=True)
@@ -641,35 +698,35 @@ def pagina_reportes():
 
     col1, col2 = st.columns(2)
     with col1:
-        st.subheader("📄 Reporte Individual")
+        st.subheader("Reporte Individual")
         nombre_sel = st.selectbox("Seleccionar persona", personal["nombre"].tolist(), key="rep_ind")
         persona = personal[personal["nombre"] == nombre_sel].iloc[0]
         if st.button("Generar Vista Previa"):
             stats    = calcular_estadisticas_persona(persona["id"], persona["rol"])
             docs_rol = get_docs_por_rol(persona["rol"])
             avances  = get_avance_persona(persona["id"])
-            merged   = docs_rol.merge(avances, left_on="id", right_on="documento_id", how="left")
+            # ── FIX: eliminar columna 'id' de avances antes del merge ──
+            avances_clean = avances.drop(columns=["id"], errors="ignore")
+            merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
             merged["estado"] = merged["estado"].fillna("Pendiente")
-            st.info(f"""
-            **{persona['nombre']}** | Rol: {persona['rol']}
-            - Avance: **{stats['pct_avance']}%**
-            - Docs completados: {stats['completados']} / {stats['total']}
-            - Horas: {stats['horas_completadas']}h / {stats['horas_totales']}h
-            """)
+            st.info(f"**{persona['nombre']}** | Rol: {persona['rol']} | "
+                    f"Avance: {stats['pct_avance']}% | "
+                    f"Docs: {stats['completados']}/{stats['total']} | "
+                    f"Horas: {stats['horas_completadas']}h/{stats['horas_totales']}h")
             st.dataframe(merged[["codigo","nombre","categoria","horas","nivel","estado",
                                   "fecha_completitud","calificacion"]],
                          use_container_width=True, hide_index=True)
     with col2:
-        st.subheader("📊 Reporte Ejecutivo (Excel)")
+        st.subheader("Reporte Ejecutivo Excel")
         excel_data = exportar_excel()
         st.download_button(
-            label="⬇️ Descargar Reporte Excel",
+            label="📥 Descargar Reporte Excel",
             data=excel_data,
-            file_name=f"Reporte_Formacion_IIAD_{date.today()}.xlsx",
+            file_name=f"ReporteFormacionIIAD_{date.today()}.xlsx",
             mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
             type="primary"
         )
-        st.caption("Incluye: Maestro de personal + Resumen de avances por persona")
+        st.caption("Incluye: Maestro de personal · Resumen de avances por persona")
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -682,13 +739,12 @@ def pagina_admin():
     with tab1:
         st.subheader("Gestión de Personal")
         st.dataframe(get_personal(), use_container_width=True, hide_index=True)
-        st.subheader("➕ Agregar Nueva Persona")
+        st.subheader("Agregar Nueva Persona")
         with st.form("form_persona"):
             nombre = st.text_input("Nombre Completo")
-            rol    = st.selectbox("Rol", [
-                "Responsable área IIAD","Profesional área IIAD",
-                "Líder de producción","Líder de comparación","Profesional análisis datos"
-            ])
+            rol    = st.selectbox("Rol", ["Responsable área IIAD","Profesional área IIAD",
+                                          "Líder de producción","Líder de comparación",
+                                          "Profesional análisis datos"])
             fecha_ingreso = st.date_input("Fecha de ingreso")
             if st.form_submit_button("Guardar") and nombre:
                 with st.spinner("Guardando en GitHub..."):
@@ -704,118 +760,97 @@ def pagina_admin():
         st.subheader("Información del Sistema — Almacenamiento GitHub")
         data = get_data()
         c1, c2, c3 = st.columns(3)
-        c1.metric("Personal registrado",    len(data.get("personal",   [])))
+        c1.metric("Personal registrado",    len(data.get("personal", [])))
         c2.metric("Documentos en catálogo", len(data.get("documentos", [])))
-        c3.metric("Registros de avance",    len(data.get("avances",    [])))
-        st.info(f"""
-        📦 **Repositorio:** `{GITHUB_OWNER}/{GITHUB_REPO}`
-        📄 **Archivo JSON:** `{DATA_FILE}`
-        🔗 **Ver en GitHub:** [Abrir datos](https://github.com/{GITHUB_OWNER}/{GITHUB_REPO}/blob/main/{DATA_FILE})
-        """)
+        c3.metric("Registros de avance",    len(data.get("avances", [])))
+        st.info(f"📦 Repositorio: `{GITHUB_OWNER}/{GITHUB_REPO}` | Archivo: `{DATA_FILE}`")
         meta = data.get("_meta", {})
         if meta:
-            st.caption(f"Versión: {meta.get('version','—')} | Creado: {meta.get('creado','—')}")
+            st.caption(f"Versión: {meta.get('version')} | Creado: {meta.get('creado')}")
         if st.button("🔄 Forzar recarga desde GitHub"):
             for k in ["app_data", "data_sha", "refresh"]:
                 st.session_state.pop(k, None)
             st.rerun()
         st.divider()
-        st.subheader("⬇️ Descargar JSON")
+        st.subheader("Descargar JSON")
         json_str = json.dumps(data, ensure_ascii=False, indent=2)
-        st.download_button(
-            "Descargar formacion_iiad.json", data=json_str,
-            file_name=f"formacion_iiad_{date.today()}.json", mime="application/json"
-        )
-        with st.expander("👁️ Vista previa JSON"):
-            preview = {**data, "avances": data.get("avances", [])[:50]}
+        st.download_button("📥 Descargar formacion_iiad.json", data=json_str,
+                           file_name=f"formacion_iiad_{date.today()}.json",
+                           mime="application/json")
+        with st.expander("Vista previa JSON"):
+            preview = {**data, "avances": data.get("avances", [])[:5]}
             st.json(preview)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# NAVEGACIÓN PRINCIPAL
+# MAIN
 # ─────────────────────────────────────────────────────────────────────────────
-def inject_css():
-    SIDEBAR_BG  = "#1B3A6B"   # Azul oscuro ICA  |  verde: "#1a4d2e"
-    SIDEBAR_ACC = "#2e6da4"   # Acento más claro  |  verde: "#2d7a4f"
+def main():
+    inject_css()
 
-    st.markdown(f"""
-    <style>
-    /* ── SIDEBAR ─────────────────────────────────────────────── */
-    [data-testid="stSidebar"],
-    [data-testid="stSidebarHeader"],
-    section[data-testid="stSidebar"] > div:first-child {{
-        background-color: {SIDEBAR_BG} !important;
-    }}
-    [data-testid="stSidebar"] p,
-    [data-testid="stSidebar"] span,
-    [data-testid="stSidebar"] label,
-    [data-testid="stSidebar"] small,
-    [data-testid="stSidebar"] .stMarkdown {{
-        color: #e8eef8 !important;
-    }}
-    [data-testid="stSidebar"] hr {{
-        border-color: rgba(255,255,255,0.2) !important;
-    }}
-    /* ── Radio navegación ─────────────────────────────────────── */
-    [data-testid="stSidebar"] .stRadio > label > div {{
-        color: rgba(255,255,255,0.6) !important;
-        font-size: 0.78rem; font-weight: 700;
-        text-transform: uppercase; letter-spacing: 0.07em;
-    }}
-    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
-        color: #ccd8ee !important;
-        padding: 6px 12px; border-radius: 8px;
-        font-size: 0.9rem; transition: background 0.15s;
-    }}
-    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {{
-        background: rgba(255,255,255,0.10) !important;
-    }}
-    /* ── Métricas ─────────────────────────────────────────────── */
-    [data-testid="stMetric"] {{
-        background: #f5f7fb; border-radius: 10px;
-        padding: 1rem 1.2rem;
-        border-left: 4px solid {SIDEBAR_BG};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    }}
-    [data-testid="stMetricLabel"] p {{
-        font-size: 0.78rem !important; font-weight: 700 !important;
-        color: #555 !important; text-transform: uppercase; letter-spacing: 0.04em;
-    }}
-    [data-testid="stMetricValue"] div {{
-        font-size: 1.9rem !important; font-weight: 800 !important;
-        color: {SIDEBAR_BG} !important;
-    }}
-    /* ── Botones ──────────────────────────────────────────────── */
-    .stButton > button {{
-        background: linear-gradient(135deg, {SIDEBAR_BG}, {SIDEBAR_ACC});
-        color: #FFFFFF !important; border: none; border-radius: 8px;
-        font-weight: 600; box-shadow: 0 2px 6px rgba(27,58,107,0.30);
-        transition: all 0.18s;
-    }}
-    .stButton > button:hover {{
-        transform: translateY(-1px);
-        box-shadow: 0 4px 14px rgba(27,58,107,0.40);
-    }}
-    /* ── Tabs ─────────────────────────────────────────────────── */
-    .stTabs [data-baseweb="tab-list"] {{
-        background: #f0f3f9; border-radius: 8px; padding: 4px;
-    }}
-    .stTabs [aria-selected="true"] {{
-        background: {SIDEBAR_BG} !important;
-        color: #fff !important; border-radius: 6px !important;
-    }}
-    /* ── Alertas (mantener las clases existentes) ─────────────── */
-    .alerta-roja     {{ background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }}
-    .alerta-verde    {{ background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }}
-    .alerta-amarilla {{ background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }}
-    .stProgress > div > div > div > div {{ background-color: #27ae60; }}
-    /* ── Misc ─────────────────────────────────────────────────── */
-    [data-testid="stDataFrame"] {{ border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }}
-    footer {{visibility: hidden;}}
-    #MainMenu {{visibility: hidden;}}
-    </style>
-    """, unsafe_allow_html=True)
+    with st.sidebar:
+        # ── Logo ICA ──────────────────────────────────────────────
+        LOGO_URL = (
+            "https://raw.githubusercontent.com/"
+            "mauricio-chem/programa_entrenamiento_iiad/main/assets/logo_ica.png"
+        )
+        st.markdown(f"""
+        <div style="text-align:center; padding:1.2rem 0.5rem 0.6rem 0.5rem;">
+            <img src="{LOGO_URL}"
+                 style="max-width:150px; filter:brightness(0) invert(1);"
+                 onerror="this.style.display='none'" />
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ── Identificación institucional ───────────────────────────
+        st.markdown("""
+        <div style="text-align:center; padding:0 0.5rem 0.8rem 0.5rem;
+                    border-bottom:1px solid rgba(255,255,255,0.18);
+                    margin-bottom:0.8rem;">
+            <div style="font-size:0.82rem; font-weight:700;
+                        color:#FFFFFF; letter-spacing:0.02em;">
+                Subgerencia de Análisis y Diagnóstico
+            </div>
+            <div style="font-size:0.70rem; color:rgba(255,255,255,0.55); margin-top:3px;">
+                Área IIAD · ISO 17034 | ISO 17043
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ── Menú de navegación ─────────────────────────────────────
+        pagina = st.radio(
+            "NAVEGACIÓN",
+            ["🏠 Dashboard",
+             "📝 Registro de Avances",
+             "📊 Análisis por Rol",
+             "📅 Cronograma",
+             "📋 Reportes",
+             "⚙️ Administración"],
+        )
+
+        # ── Pie de sidebar ─────────────────────────────────────────
+        st.markdown("""
+        <div style="position:absolute; bottom:1rem; left:0; right:0;
+                    text-align:center; padding:0 1rem;">
+            <div style="font-size:0.65rem; color:rgba(255,255,255,0.35);
+                        border-top:1px solid rgba(255,255,255,0.12);
+                        padding-top:0.6rem;">
+                v2.1 · Feb 2026<br>
+                🗄️ GitHub JSON · ARCAL RLA5091
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ── Contenido principal ────────────────────────────────────────
+    if   pagina == "🏠 Dashboard":           pagina_dashboard()
+    elif pagina == "📝 Registro de Avances": pagina_registro()
+    elif pagina == "📊 Análisis por Rol":    pagina_analisis_rol()
+    elif pagina == "📅 Cronograma":          pagina_cronograma()
+    elif pagina == "📋 Reportes":            pagina_reportes()
+    elif pagina == "⚙️ Administración":      pagina_admin()
 
 
-    
+if __name__ == "__main__":
+    main()
+
 
