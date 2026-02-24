@@ -806,6 +806,3 @@ def main():
     elif pagina == "📅 Cronograma":          pagina_cronograma()
     elif pagina == "📋 Reportes":            pagina_reportes()
 
-
-if __name__ == "__main__":
-    main()
