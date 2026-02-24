@@ -736,35 +736,75 @@ def pagina_admin():
 # ─────────────────────────────────────────────────────────────────────────────
 def main():
     inject_css()
-    if not GITHUB_TOKEN:
-        st.sidebar.warning("⚠️ GITHUB_TOKEN no configurado en .streamlit/secrets.toml")
+    init_db()
 
+    # ── SIDEBAR ──────────────────────────────────────────────────────
     with st.sidebar:
-        st.image(
-            "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Instituto_Colombiano_Agropecuario.svg/320px-Instituto_Colombiano_Agropecuario.svg.png",
-            width=120
-        )
-        st.title("Sistema de seguimiento a la formación\nÁrea IIAD")
-        st.markdown('### Laboratorio Nacional de Insumos Agrícolas - LANIA - Área IIAD')
-        st.caption("ISO 17034 | ISO 17043 | ICA")
-        st.divider()
-        pagina = st.radio("Navegación", [
-            "🏠 Dashboard",
-            "📝 Registro de Avances",
-            "📊 Análisis por Rol",
-            "📅 Cronograma",
-            "📋 Reportes",
-            "⚙️ Administración"
-        ])
-        st.divider()
-        st.caption("v2.0 — Feb 2026 | 🗄️ GitHub JSON")
 
-    if   pagina == "🏠 Dashboard":          pagina_dashboard()
+        # ── Logo ICA ────────────────────────────────────────────────
+        # Opción A: logo en el repo (recomendada)
+        LOGO_URL = (
+            "https://raw.githubusercontent.com/"
+            "mauricio-chem/programa_entrenamiento_iiad/main/assets/logo_ica.png"
+        )
+        # Opción B: logo local (si corres en local)
+        # LOGO_URL = "assets/logo_ica.png"
+
+        st.markdown(f"""
+        <div style="text-align:center; padding:1.2rem 0.5rem 0.6rem 0.5rem;">
+            <img src="{LOGO_URL}"
+                 style="max-width:150px; filter:brightness(0) invert(1);"
+                 onerror="this.style.display='none'" />
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ── Identificación institucional ────────────────────────────
+        st.markdown("""
+        <div style="text-align:center; padding:0 0.5rem 0.8rem 0.5rem; 
+                    border-bottom:1px solid rgba(255,255,255,0.18); 
+                    margin-bottom:0.8rem;">
+            <div style="font-size:0.82rem; font-weight:700; 
+                        color:#FFFFFF; letter-spacing:0.02em;">
+                Subgerencia de Análisis y Diagnóstico
+            </div>
+            <div style="font-size:0.70rem; color:rgba(255,255,255,0.55); 
+                        margin-top:3px;">
+                Área IIAD · ISO 17034 | ISO 17043
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        # ── Menú de navegación ──────────────────────────────────────
+        pagina = st.radio(
+            "NAVEGACIÓN",
+            [
+                "🏠 Dashboard",
+                "📝 Registro de Avances",
+                "📊 Análisis por Rol",
+                "📅 Cronograma",
+                "📋 Reportes",
+            ],
+        )
+
+        # ── Pie de sidebar ──────────────────────────────────────────
+        st.markdown("""
+        <div style="position:absolute; bottom:1rem; left:0; right:0; 
+                    text-align:center; padding:0 1rem;">
+            <div style="font-size:0.65rem; color:rgba(255,255,255,0.35); 
+                        border-top:1px solid rgba(255,255,255,0.12); 
+                        padding-top:0.6rem;">
+                v2.0 · Feb 2026<br>
+                🗄️ GitHub JSON · ARCAL RLA5091
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    # ── CONTENIDO PRINCIPAL ──────────────────────────────────────────
+    if   pagina == "🏠 Dashboard":           pagina_dashboard()
     elif pagina == "📝 Registro de Avances": pagina_registro()
     elif pagina == "📊 Análisis por Rol":    pagina_analisis_rol()
     elif pagina == "📅 Cronograma":          pagina_cronograma()
     elif pagina == "📋 Reportes":            pagina_reportes()
-    elif pagina == "⚙️ Administración":      pagina_admin()
 
 
 if __name__ == "__main__":
