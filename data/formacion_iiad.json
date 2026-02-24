@@ -1,0 +1,1682 @@
+{
+  "personal": [
+    {
+      "id": 1,
+      "nombre": "Juan Pérez García",
+      "rol": "Responsable área IIAD",
+      "fecha_ingreso": "2023-01-15",
+      "estado": "Activo"
+    },
+    {
+      "id": 2,
+      "nombre": "María González López",
+      "rol": "Profesional área IIAD",
+      "fecha_ingreso": "2024-03-20",
+      "estado": "Activo"
+    },
+    {
+      "id": 3,
+      "nombre": "Carlos Rodríguez M.",
+      "rol": "Líder de producción",
+      "fecha_ingreso": "2025-06-10",
+      "estado": "Activo"
+    },
+    {
+      "id": 4,
+      "nombre": "Ana Martínez Silva",
+      "rol": "Profesional análisis datos",
+      "fecha_ingreso": "2026-01-15",
+      "estado": "Activo"
+    },
+    {
+      "id": 5,
+      "nombre": "Pedro Gómez Torres",
+      "rol": "Líder de comparación",
+      "fecha_ingreso": "2024-09-01",
+      "estado": "Activo"
+    }
+  ],
+  "documentos": [
+    {
+      "id": 1,
+      "codigo": "GSA-SAD-MC-001",
+      "nombre": "Manual del Sistema de Calidad SAD",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §8 / ISO 17043 §8",
+      "es_critico": 1
+    },
+    {
+      "id": 2,
+      "codigo": "GSA-SAD-MC-003",
+      "nombre": "Manual Técnico Áreas de Referencia",
+      "categoria": "SGC Base",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §8.2 / ISO 17043 §8.2",
+      "es_critico": 1
+    },
+    {
+      "id": 3,
+      "codigo": "GSA-SAD-P-009",
+      "nombre": "Confidencialidad e Imparcialidad SAD",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §4.2-4.3 / ISO 17043 §4.1-4.2",
+      "es_critico": 1
+    },
+    {
+      "id": 4,
+      "codigo": "GSA-SAD-P-020",
+      "nombre": "Manejo de documentos y registros SAD",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §8.4 / ISO 17043 §8.3",
+      "es_critico": 0
+    },
+    {
+      "id": 5,
+      "codigo": "GSA-I-SAD-020",
+      "nombre": "Manejo documentos en subgerencia",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §8.3 / ISO 17043 §8.2",
+      "es_critico": 0
+    },
+    {
+      "id": 6,
+      "codigo": "GSA-SAD-P-012",
+      "nombre": "Gestión del Personal SAD",
+      "categoria": "SGC Base",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §6.1.4 / ISO 17043 §6.2.3",
+      "es_critico": 0
+    },
+    {
+      "id": 7,
+      "codigo": "GSA-SAD-P-013",
+      "nombre": "Supervisión en la SAD",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §6.1.1 / ISO 17043 §6.2.1",
+      "es_critico": 0
+    },
+    {
+      "id": 8,
+      "codigo": "GSA-SAD-G-012",
+      "nombre": "Guía requisitos formación personal",
+      "categoria": "SGC Base",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §6.1.4 / ISO 17043 §6.2.3",
+      "es_critico": 0
+    },
+    {
+      "id": 9,
+      "codigo": "ISO 17034:2017",
+      "nombre": "ISO 17034:2017 - Requisitos PMR",
+      "categoria": "Normas ISO",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "Norma completa PMR",
+      "es_critico": 1
+    },
+    {
+      "id": 10,
+      "codigo": "ISO 17043:2023",
+      "nombre": "ISO/IEC 17043:2023 - Requisitos PEA",
+      "categoria": "Normas ISO",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "Norma completa PEA",
+      "es_critico": 1
+    },
+    {
+      "id": 11,
+      "codigo": "ISO 17025:2017",
+      "nombre": "ISO/IEC 17025:2017 - Laboratorios",
+      "categoria": "Normas ISO",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "Base laboratorios",
+      "es_critico": 0
+    },
+    {
+      "id": 12,
+      "codigo": "ISO 13528:2022",
+      "nombre": "ISO 13528:2022 - Métodos Estadísticos PT",
+      "categoria": "Normas ISO",
+      "horas": 8.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17043 §7.2.2-7.4",
+      "es_critico": 1
+    },
+    {
+      "id": 13,
+      "codigo": "ISO 33405:2022",
+      "nombre": "ISO 33405:2022 - Homog. y Estabilidad",
+      "categoria": "Normas ISO",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §7.10-7.11",
+      "es_critico": 1
+    },
+    {
+      "id": 14,
+      "codigo": "ISO 33403:2023",
+      "nombre": "ISO 33403:2023 - Caracterización MR",
+      "categoria": "Normas ISO",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §7.12",
+      "es_critico": 1
+    },
+    {
+      "id": 15,
+      "codigo": "ISO 33402:2022",
+      "nombre": "ISO 33402:2022 - Certificados MRC",
+      "categoria": "Normas ISO",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.14",
+      "es_critico": 0
+    },
+    {
+      "id": 16,
+      "codigo": "ISO Guide 30",
+      "nombre": "ISO Guide 30:2015 - Términos MR",
+      "categoria": "Normas ISO",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "Definiciones MR",
+      "es_critico": 0
+    },
+    {
+      "id": 17,
+      "codigo": "ISO 2859-1",
+      "nombre": "ISO 2859-1 - Muestreo",
+      "categoria": "Normas ISO",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.10",
+      "es_critico": 0
+    },
+    {
+      "id": 18,
+      "codigo": "GSA-SAD-P-024",
+      "nombre": "Planificación y control producción MR",
+      "categoria": "Proceso Técnico",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.2-7.3",
+      "es_critico": 1
+    },
+    {
+      "id": 19,
+      "codigo": "GSA-SAD-P-026",
+      "nombre": "Evaluación Homogeneidad y Estabilidad",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §7.10-7.11",
+      "es_critico": 1
+    },
+    {
+      "id": 20,
+      "codigo": "GSA-SAD-P-031",
+      "nombre": "Diseño y planificación EA/CI",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17043 §7.2.1-7.2.2",
+      "es_critico": 1
+    },
+    {
+      "id": 21,
+      "codigo": "GSA-SAD-P-033",
+      "nombre": "Diseño estadístico PT",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17043 §7.2.2",
+      "es_critico": 1
+    },
+    {
+      "id": 22,
+      "codigo": "GSA-SAD-P-030",
+      "nombre": "Gestión de ítems de ensayo",
+      "categoria": "Proceso Técnico",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.5 / ISO 17043 §7.3.1",
+      "es_critico": 0
+    },
+    {
+      "id": 23,
+      "codigo": "GSA-SAD-P-027",
+      "nombre": "Análisis y reporte datos PT",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17043 §7.4.1-7.4.2",
+      "es_critico": 1
+    },
+    {
+      "id": 24,
+      "codigo": "GSA-SAD-P-003",
+      "nombre": "Estimación de Incertidumbre",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §7.13",
+      "es_critico": 0
+    },
+    {
+      "id": 25,
+      "codigo": "GSA-SAD-P-002",
+      "nombre": "Validación/Verificación de métodos",
+      "categoria": "Proceso Técnico",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §7.6 / ISO 17043 §6.1.2",
+      "es_critico": 0
+    },
+    {
+      "id": 26,
+      "codigo": "GSA-SAD-P-001",
+      "nombre": "Gestión de equipos",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.7",
+      "es_critico": 0
+    },
+    {
+      "id": 27,
+      "codigo": "GSA-SAD-P-004",
+      "nombre": "Trabajo no conforme",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.17 / ISO 17043 §7.5.4",
+      "es_critico": 0
+    },
+    {
+      "id": 28,
+      "codigo": "GSA-SAD-P-007",
+      "nombre": "Emisión de reportes e informes",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.14",
+      "es_critico": 0
+    },
+    {
+      "id": 29,
+      "codigo": "GSA-SAD-P-006",
+      "nombre": "Revisión solicitudes de servicios",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §4.1 / ISO 17043 §7.1.1",
+      "es_critico": 0
+    },
+    {
+      "id": 30,
+      "codigo": "GSA-SAD-P-008",
+      "nombre": "Adquisiciones",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §6.2",
+      "es_critico": 0
+    },
+    {
+      "id": 31,
+      "codigo": "GSA-SAD-P-014",
+      "nombre": "Instalaciones y condiciones ambientales",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §7.17 / ISO 17043 §7.5.4",
+      "es_critico": 0
+    },
+    {
+      "id": 32,
+      "codigo": "GSA-SAD-P-017",
+      "nombre": "Recepción de ítems",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §7.5",
+      "es_critico": 0
+    },
+    {
+      "id": 33,
+      "codigo": "GSA-SAD-P-025",
+      "nombre": "Distribución MR e ítems EA",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §7.15 / ISO 17043 §7.3.4",
+      "es_critico": 0
+    },
+    {
+      "id": 34,
+      "codigo": "GSA-I-SAD-006",
+      "nombre": "Auditorías internas en laboratorios",
+      "categoria": "SGC Operativo",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §8.7 / ISO 17043 §8.8",
+      "es_critico": 0
+    },
+    {
+      "id": 35,
+      "codigo": "GSA-I-SAD-039",
+      "nombre": "Trabajos colaborativos MR/CI/EA",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §6.2 / ISO 17043 §6.4",
+      "es_critico": 0
+    },
+    {
+      "id": 36,
+      "codigo": "GSA-I-SAD-040",
+      "nombre": "Requisitos de Registros MR y EA",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.14-7.16",
+      "es_critico": 0
+    },
+    {
+      "id": 37,
+      "codigo": "GSA-I-SAD-041",
+      "nombre": "Integridad SGC ante cambios",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §5.5 / ISO 17043 §5.5",
+      "es_critico": 0
+    },
+    {
+      "id": 38,
+      "codigo": "GSA-I-SAD-001",
+      "nombre": "Quejas en laboratorios",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §7.18 / ISO 17043 §7.6",
+      "es_critico": 0
+    },
+    {
+      "id": 39,
+      "codigo": "GSA-I-SAD-007",
+      "nombre": "Acciones correctivas y de mejora",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §8.9 / ISO 17043 §8.7",
+      "es_critico": 0
+    },
+    {
+      "id": 40,
+      "codigo": "GSA-SAD-007",
+      "nombre": "Acciones correctivas SAD",
+      "categoria": "Calidad Avanzada",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "Mejora continua",
+      "es_critico": 0
+    },
+    {
+      "id": 41,
+      "codigo": "GSA-I-SAD-038",
+      "nombre": "Riesgos y oportunidades",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §8.8 / ISO 17043 §8.5",
+      "es_critico": 0
+    },
+    {
+      "id": 42,
+      "codigo": "GSA-I-SAD-042",
+      "nombre": "Apelaciones EA",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17043 §7.7",
+      "es_critico": 0
+    },
+    {
+      "id": 43,
+      "codigo": "GSA-I-SAD-012",
+      "nombre": "Revisión del sistema de gestión",
+      "categoria": "Calidad Avanzada",
+      "horas": 1.5,
+      "nivel": "Nivel 2",
+      "norma_cubierta": "ISO 17034 §8.6 / ISO 17043 §8.9",
+      "es_critico": 0
+    },
+    {
+      "id": 44,
+      "codigo": "GSA-SAD-G-004",
+      "nombre": "Gestión de riesgos imparcialidad",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §4.2 / ISO 17043 §4.1",
+      "es_critico": 0
+    },
+    {
+      "id": 45,
+      "codigo": "GSA-SAD-G-006",
+      "nombre": "Matriz de Autoridad",
+      "categoria": "Calidad Avanzada",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §5.5 / ISO 17043 §5.5",
+      "es_critico": 0
+    },
+    {
+      "id": 46,
+      "codigo": "GSA-SAD-G-007",
+      "nombre": "Interacción y coordinación de roles",
+      "categoria": "Calidad Avanzada",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 §5.5 / ISO 17043 §5.5",
+      "es_critico": 0
+    },
+    {
+      "id": 47,
+      "codigo": "GSA-SAD-G-015",
+      "nombre": "Matriz de objetivos de calidad",
+      "categoria": "Calidad Avanzada",
+      "horas": 4.0,
+      "nivel": "Nivel 4",
+      "norma_cubierta": "ISO 17034 §8.8 / ISO 17043 §8.6",
+      "es_critico": 0
+    }
+  ],
+  "requisitos_rol": [
+    {
+      "id": 1,
+      "rol": "Responsable área IIAD",
+      "documento_id": 30
+    },
+    {
+      "id": 2,
+      "rol": "Responsable área IIAD",
+      "documento_id": 31
+    },
+    {
+      "id": 3,
+      "rol": "Responsable área IIAD",
+      "documento_id": 46
+    },
+    {
+      "id": 4,
+      "rol": "Responsable área IIAD",
+      "documento_id": 3
+    },
+    {
+      "id": 5,
+      "rol": "Responsable área IIAD",
+      "documento_id": 12
+    },
+    {
+      "id": 6,
+      "rol": "Responsable área IIAD",
+      "documento_id": 19
+    },
+    {
+      "id": 7,
+      "rol": "Responsable área IIAD",
+      "documento_id": 9
+    },
+    {
+      "id": 8,
+      "rol": "Responsable área IIAD",
+      "documento_id": 11
+    },
+    {
+      "id": 9,
+      "rol": "Responsable área IIAD",
+      "documento_id": 40
+    },
+    {
+      "id": 10,
+      "rol": "Responsable área IIAD",
+      "documento_id": 21
+    },
+    {
+      "id": 11,
+      "rol": "Responsable área IIAD",
+      "documento_id": 16
+    },
+    {
+      "id": 12,
+      "rol": "Responsable área IIAD",
+      "documento_id": 2
+    },
+    {
+      "id": 13,
+      "rol": "Responsable área IIAD",
+      "documento_id": 35
+    },
+    {
+      "id": 14,
+      "rol": "Responsable área IIAD",
+      "documento_id": 39
+    },
+    {
+      "id": 15,
+      "rol": "Responsable área IIAD",
+      "documento_id": 4
+    },
+    {
+      "id": 16,
+      "rol": "Responsable área IIAD",
+      "documento_id": 37
+    },
+    {
+      "id": 17,
+      "rol": "Responsable área IIAD",
+      "documento_id": 24
+    },
+    {
+      "id": 18,
+      "rol": "Responsable área IIAD",
+      "documento_id": 14
+    },
+    {
+      "id": 19,
+      "rol": "Responsable área IIAD",
+      "documento_id": 13
+    },
+    {
+      "id": 20,
+      "rol": "Responsable área IIAD",
+      "documento_id": 23
+    },
+    {
+      "id": 21,
+      "rol": "Responsable área IIAD",
+      "documento_id": 18
+    },
+    {
+      "id": 22,
+      "rol": "Responsable área IIAD",
+      "documento_id": 22
+    },
+    {
+      "id": 23,
+      "rol": "Responsable área IIAD",
+      "documento_id": 8
+    },
+    {
+      "id": 24,
+      "rol": "Responsable área IIAD",
+      "documento_id": 6
+    },
+    {
+      "id": 25,
+      "rol": "Responsable área IIAD",
+      "documento_id": 28
+    },
+    {
+      "id": 26,
+      "rol": "Responsable área IIAD",
+      "documento_id": 41
+    },
+    {
+      "id": 27,
+      "rol": "Responsable área IIAD",
+      "documento_id": 34
+    },
+    {
+      "id": 28,
+      "rol": "Responsable área IIAD",
+      "documento_id": 17
+    },
+    {
+      "id": 29,
+      "rol": "Responsable área IIAD",
+      "documento_id": 32
+    },
+    {
+      "id": 30,
+      "rol": "Responsable área IIAD",
+      "documento_id": 26
+    },
+    {
+      "id": 31,
+      "rol": "Responsable área IIAD",
+      "documento_id": 27
+    },
+    {
+      "id": 32,
+      "rol": "Responsable área IIAD",
+      "documento_id": 47
+    },
+    {
+      "id": 33,
+      "rol": "Responsable área IIAD",
+      "documento_id": 43
+    },
+    {
+      "id": 34,
+      "rol": "Responsable área IIAD",
+      "documento_id": 5
+    },
+    {
+      "id": 35,
+      "rol": "Responsable área IIAD",
+      "documento_id": 44
+    },
+    {
+      "id": 36,
+      "rol": "Responsable área IIAD",
+      "documento_id": 10
+    },
+    {
+      "id": 37,
+      "rol": "Responsable área IIAD",
+      "documento_id": 15
+    },
+    {
+      "id": 38,
+      "rol": "Responsable área IIAD",
+      "documento_id": 45
+    },
+    {
+      "id": 39,
+      "rol": "Responsable área IIAD",
+      "documento_id": 38
+    },
+    {
+      "id": 40,
+      "rol": "Responsable área IIAD",
+      "documento_id": 7
+    },
+    {
+      "id": 41,
+      "rol": "Responsable área IIAD",
+      "documento_id": 20
+    },
+    {
+      "id": 42,
+      "rol": "Responsable área IIAD",
+      "documento_id": 25
+    },
+    {
+      "id": 43,
+      "rol": "Responsable área IIAD",
+      "documento_id": 1
+    },
+    {
+      "id": 44,
+      "rol": "Responsable área IIAD",
+      "documento_id": 36
+    },
+    {
+      "id": 45,
+      "rol": "Profesional área IIAD",
+      "documento_id": 30
+    },
+    {
+      "id": 46,
+      "rol": "Profesional área IIAD",
+      "documento_id": 31
+    },
+    {
+      "id": 47,
+      "rol": "Profesional área IIAD",
+      "documento_id": 33
+    },
+    {
+      "id": 48,
+      "rol": "Profesional área IIAD",
+      "documento_id": 3
+    },
+    {
+      "id": 49,
+      "rol": "Profesional área IIAD",
+      "documento_id": 19
+    },
+    {
+      "id": 50,
+      "rol": "Profesional área IIAD",
+      "documento_id": 9
+    },
+    {
+      "id": 51,
+      "rol": "Profesional área IIAD",
+      "documento_id": 11
+    },
+    {
+      "id": 52,
+      "rol": "Profesional área IIAD",
+      "documento_id": 40
+    },
+    {
+      "id": 53,
+      "rol": "Profesional área IIAD",
+      "documento_id": 16
+    },
+    {
+      "id": 54,
+      "rol": "Profesional área IIAD",
+      "documento_id": 2
+    },
+    {
+      "id": 55,
+      "rol": "Profesional área IIAD",
+      "documento_id": 35
+    },
+    {
+      "id": 56,
+      "rol": "Profesional área IIAD",
+      "documento_id": 4
+    },
+    {
+      "id": 57,
+      "rol": "Profesional área IIAD",
+      "documento_id": 24
+    },
+    {
+      "id": 58,
+      "rol": "Profesional área IIAD",
+      "documento_id": 14
+    },
+    {
+      "id": 59,
+      "rol": "Profesional área IIAD",
+      "documento_id": 13
+    },
+    {
+      "id": 60,
+      "rol": "Profesional área IIAD",
+      "documento_id": 18
+    },
+    {
+      "id": 61,
+      "rol": "Profesional área IIAD",
+      "documento_id": 22
+    },
+    {
+      "id": 62,
+      "rol": "Profesional área IIAD",
+      "documento_id": 8
+    },
+    {
+      "id": 63,
+      "rol": "Profesional área IIAD",
+      "documento_id": 6
+    },
+    {
+      "id": 64,
+      "rol": "Profesional área IIAD",
+      "documento_id": 34
+    },
+    {
+      "id": 65,
+      "rol": "Profesional área IIAD",
+      "documento_id": 27
+    },
+    {
+      "id": 66,
+      "rol": "Profesional área IIAD",
+      "documento_id": 32
+    },
+    {
+      "id": 67,
+      "rol": "Profesional área IIAD",
+      "documento_id": 5
+    },
+    {
+      "id": 68,
+      "rol": "Profesional área IIAD",
+      "documento_id": 44
+    },
+    {
+      "id": 69,
+      "rol": "Profesional área IIAD",
+      "documento_id": 15
+    },
+    {
+      "id": 70,
+      "rol": "Profesional área IIAD",
+      "documento_id": 7
+    },
+    {
+      "id": 71,
+      "rol": "Profesional área IIAD",
+      "documento_id": 25
+    },
+    {
+      "id": 72,
+      "rol": "Profesional área IIAD",
+      "documento_id": 1
+    },
+    {
+      "id": 73,
+      "rol": "Profesional área IIAD",
+      "documento_id": 36
+    },
+    {
+      "id": 74,
+      "rol": "Líder de producción",
+      "documento_id": 30
+    },
+    {
+      "id": 75,
+      "rol": "Líder de producción",
+      "documento_id": 31
+    },
+    {
+      "id": 76,
+      "rol": "Líder de producción",
+      "documento_id": 33
+    },
+    {
+      "id": 77,
+      "rol": "Líder de producción",
+      "documento_id": 3
+    },
+    {
+      "id": 78,
+      "rol": "Líder de producción",
+      "documento_id": 19
+    },
+    {
+      "id": 79,
+      "rol": "Líder de producción",
+      "documento_id": 9
+    },
+    {
+      "id": 80,
+      "rol": "Líder de producción",
+      "documento_id": 11
+    },
+    {
+      "id": 81,
+      "rol": "Líder de producción",
+      "documento_id": 40
+    },
+    {
+      "id": 82,
+      "rol": "Líder de producción",
+      "documento_id": 16
+    },
+    {
+      "id": 83,
+      "rol": "Líder de producción",
+      "documento_id": 2
+    },
+    {
+      "id": 84,
+      "rol": "Líder de producción",
+      "documento_id": 35
+    },
+    {
+      "id": 85,
+      "rol": "Líder de producción",
+      "documento_id": 39
+    },
+    {
+      "id": 86,
+      "rol": "Líder de producción",
+      "documento_id": 4
+    },
+    {
+      "id": 87,
+      "rol": "Líder de producción",
+      "documento_id": 24
+    },
+    {
+      "id": 88,
+      "rol": "Líder de producción",
+      "documento_id": 14
+    },
+    {
+      "id": 89,
+      "rol": "Líder de producción",
+      "documento_id": 13
+    },
+    {
+      "id": 90,
+      "rol": "Líder de producción",
+      "documento_id": 18
+    },
+    {
+      "id": 91,
+      "rol": "Líder de producción",
+      "documento_id": 22
+    },
+    {
+      "id": 92,
+      "rol": "Líder de producción",
+      "documento_id": 8
+    },
+    {
+      "id": 93,
+      "rol": "Líder de producción",
+      "documento_id": 6
+    },
+    {
+      "id": 94,
+      "rol": "Líder de producción",
+      "documento_id": 28
+    },
+    {
+      "id": 95,
+      "rol": "Líder de producción",
+      "documento_id": 34
+    },
+    {
+      "id": 96,
+      "rol": "Líder de producción",
+      "documento_id": 17
+    },
+    {
+      "id": 97,
+      "rol": "Líder de producción",
+      "documento_id": 32
+    },
+    {
+      "id": 98,
+      "rol": "Líder de producción",
+      "documento_id": 26
+    },
+    {
+      "id": 99,
+      "rol": "Líder de producción",
+      "documento_id": 27
+    },
+    {
+      "id": 100,
+      "rol": "Líder de producción",
+      "documento_id": 5
+    },
+    {
+      "id": 101,
+      "rol": "Líder de producción",
+      "documento_id": 15
+    },
+    {
+      "id": 102,
+      "rol": "Líder de producción",
+      "documento_id": 38
+    },
+    {
+      "id": 103,
+      "rol": "Líder de producción",
+      "documento_id": 7
+    },
+    {
+      "id": 104,
+      "rol": "Líder de producción",
+      "documento_id": 25
+    },
+    {
+      "id": 105,
+      "rol": "Líder de producción",
+      "documento_id": 1
+    },
+    {
+      "id": 106,
+      "rol": "Líder de producción",
+      "documento_id": 36
+    },
+    {
+      "id": 107,
+      "rol": "Líder de producción",
+      "documento_id": 29
+    },
+    {
+      "id": 108,
+      "rol": "Líder de comparación",
+      "documento_id": 30
+    },
+    {
+      "id": 109,
+      "rol": "Líder de comparación",
+      "documento_id": 31
+    },
+    {
+      "id": 110,
+      "rol": "Líder de comparación",
+      "documento_id": 33
+    },
+    {
+      "id": 111,
+      "rol": "Líder de comparación",
+      "documento_id": 46
+    },
+    {
+      "id": 112,
+      "rol": "Líder de comparación",
+      "documento_id": 3
+    },
+    {
+      "id": 113,
+      "rol": "Líder de comparación",
+      "documento_id": 12
+    },
+    {
+      "id": 114,
+      "rol": "Líder de comparación",
+      "documento_id": 11
+    },
+    {
+      "id": 115,
+      "rol": "Líder de comparación",
+      "documento_id": 40
+    },
+    {
+      "id": 116,
+      "rol": "Líder de comparación",
+      "documento_id": 21
+    },
+    {
+      "id": 117,
+      "rol": "Líder de comparación",
+      "documento_id": 16
+    },
+    {
+      "id": 118,
+      "rol": "Líder de comparación",
+      "documento_id": 2
+    },
+    {
+      "id": 119,
+      "rol": "Líder de comparación",
+      "documento_id": 35
+    },
+    {
+      "id": 120,
+      "rol": "Líder de comparación",
+      "documento_id": 39
+    },
+    {
+      "id": 121,
+      "rol": "Líder de comparación",
+      "documento_id": 4
+    },
+    {
+      "id": 122,
+      "rol": "Líder de comparación",
+      "documento_id": 37
+    },
+    {
+      "id": 123,
+      "rol": "Líder de comparación",
+      "documento_id": 24
+    },
+    {
+      "id": 124,
+      "rol": "Líder de comparación",
+      "documento_id": 13
+    },
+    {
+      "id": 125,
+      "rol": "Líder de comparación",
+      "documento_id": 23
+    },
+    {
+      "id": 126,
+      "rol": "Líder de comparación",
+      "documento_id": 22
+    },
+    {
+      "id": 127,
+      "rol": "Líder de comparación",
+      "documento_id": 42
+    },
+    {
+      "id": 128,
+      "rol": "Líder de comparación",
+      "documento_id": 8
+    },
+    {
+      "id": 129,
+      "rol": "Líder de comparación",
+      "documento_id": 6
+    },
+    {
+      "id": 130,
+      "rol": "Líder de comparación",
+      "documento_id": 28
+    },
+    {
+      "id": 131,
+      "rol": "Líder de comparación",
+      "documento_id": 34
+    },
+    {
+      "id": 132,
+      "rol": "Líder de comparación",
+      "documento_id": 17
+    },
+    {
+      "id": 133,
+      "rol": "Líder de comparación",
+      "documento_id": 32
+    },
+    {
+      "id": 134,
+      "rol": "Líder de comparación",
+      "documento_id": 26
+    },
+    {
+      "id": 135,
+      "rol": "Líder de comparación",
+      "documento_id": 27
+    },
+    {
+      "id": 136,
+      "rol": "Líder de comparación",
+      "documento_id": 5
+    },
+    {
+      "id": 137,
+      "rol": "Líder de comparación",
+      "documento_id": 10
+    },
+    {
+      "id": 138,
+      "rol": "Líder de comparación",
+      "documento_id": 38
+    },
+    {
+      "id": 139,
+      "rol": "Líder de comparación",
+      "documento_id": 7
+    },
+    {
+      "id": 140,
+      "rol": "Líder de comparación",
+      "documento_id": 20
+    },
+    {
+      "id": 141,
+      "rol": "Líder de comparación",
+      "documento_id": 25
+    },
+    {
+      "id": 142,
+      "rol": "Líder de comparación",
+      "documento_id": 1
+    },
+    {
+      "id": 143,
+      "rol": "Líder de comparación",
+      "documento_id": 36
+    },
+    {
+      "id": 144,
+      "rol": "Líder de comparación",
+      "documento_id": 29
+    },
+    {
+      "id": 145,
+      "rol": "Profesional análisis datos",
+      "documento_id": 30
+    },
+    {
+      "id": 146,
+      "rol": "Profesional análisis datos",
+      "documento_id": 31
+    },
+    {
+      "id": 147,
+      "rol": "Profesional análisis datos",
+      "documento_id": 3
+    },
+    {
+      "id": 148,
+      "rol": "Profesional análisis datos",
+      "documento_id": 12
+    },
+    {
+      "id": 149,
+      "rol": "Profesional análisis datos",
+      "documento_id": 19
+    },
+    {
+      "id": 150,
+      "rol": "Profesional análisis datos",
+      "documento_id": 11
+    },
+    {
+      "id": 151,
+      "rol": "Profesional análisis datos",
+      "documento_id": 40
+    },
+    {
+      "id": 152,
+      "rol": "Profesional análisis datos",
+      "documento_id": 21
+    },
+    {
+      "id": 153,
+      "rol": "Profesional análisis datos",
+      "documento_id": 16
+    },
+    {
+      "id": 154,
+      "rol": "Profesional análisis datos",
+      "documento_id": 2
+    },
+    {
+      "id": 155,
+      "rol": "Profesional análisis datos",
+      "documento_id": 4
+    },
+    {
+      "id": 156,
+      "rol": "Profesional análisis datos",
+      "documento_id": 24
+    },
+    {
+      "id": 157,
+      "rol": "Profesional análisis datos",
+      "documento_id": 14
+    },
+    {
+      "id": 158,
+      "rol": "Profesional análisis datos",
+      "documento_id": 13
+    },
+    {
+      "id": 159,
+      "rol": "Profesional análisis datos",
+      "documento_id": 23
+    },
+    {
+      "id": 160,
+      "rol": "Profesional análisis datos",
+      "documento_id": 8
+    },
+    {
+      "id": 161,
+      "rol": "Profesional análisis datos",
+      "documento_id": 41
+    },
+    {
+      "id": 162,
+      "rol": "Profesional análisis datos",
+      "documento_id": 34
+    },
+    {
+      "id": 163,
+      "rol": "Profesional análisis datos",
+      "documento_id": 32
+    },
+    {
+      "id": 164,
+      "rol": "Profesional análisis datos",
+      "documento_id": 43
+    },
+    {
+      "id": 165,
+      "rol": "Profesional análisis datos",
+      "documento_id": 5
+    },
+    {
+      "id": 166,
+      "rol": "Profesional análisis datos",
+      "documento_id": 10
+    },
+    {
+      "id": 167,
+      "rol": "Profesional análisis datos",
+      "documento_id": 7
+    },
+    {
+      "id": 168,
+      "rol": "Profesional análisis datos",
+      "documento_id": 20
+    },
+    {
+      "id": 169,
+      "rol": "Profesional análisis datos",
+      "documento_id": 1
+    },
+    {
+      "id": 170,
+      "rol": "Profesional análisis datos",
+      "documento_id": 36
+    }
+  ],
+  "avances": [
+    {
+      "id": 1,
+      "persona_id": 4,
+      "documento_id": 12,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 2,
+      "persona_id": 4,
+      "documento_id": 10,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 3,
+      "persona_id": 4,
+      "documento_id": 14,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 4,
+      "persona_id": 4,
+      "documento_id": 13,
+      "estado": "Completado",
+      "fecha_inicio": "2026-02-24",
+      "fecha_completitud": "2026-02-24",
+      "calificacion": 100.0,
+      "observaciones": "ninguna",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 5,
+      "persona_id": 4,
+      "documento_id": 19,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 6,
+      "persona_id": 4,
+      "documento_id": 23,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 7,
+      "persona_id": 4,
+      "documento_id": 20,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 8,
+      "persona_id": 4,
+      "documento_id": 21,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 9,
+      "persona_id": 4,
+      "documento_id": 1,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 10,
+      "persona_id": 4,
+      "documento_id": 2,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 11,
+      "persona_id": 4,
+      "documento_id": 3,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 12,
+      "persona_id": 4,
+      "documento_id": 43,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 13,
+      "persona_id": 4,
+      "documento_id": 41,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 14,
+      "persona_id": 4,
+      "documento_id": 40,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 15,
+      "persona_id": 4,
+      "documento_id": 11,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 16,
+      "persona_id": 4,
+      "documento_id": 16,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 17,
+      "persona_id": 4,
+      "documento_id": 24,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 18,
+      "persona_id": 4,
+      "documento_id": 5,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 19,
+      "persona_id": 4,
+      "documento_id": 8,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 20,
+      "persona_id": 4,
+      "documento_id": 7,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 21,
+      "persona_id": 4,
+      "documento_id": 4,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 22,
+      "persona_id": 4,
+      "documento_id": 34,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 23,
+      "persona_id": 4,
+      "documento_id": 36,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 24,
+      "persona_id": 4,
+      "documento_id": 30,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 25,
+      "persona_id": 4,
+      "documento_id": 31,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    },
+    {
+      "id": 26,
+      "persona_id": 4,
+      "documento_id": 32,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-02-24 19:00:37"
+    }
+  ],
+  "_meta": {
+    "version": "2.0",
+    "creado": "2026-02-24 19:00",
+    "descripcion": "Datos formación IIAD - ICA | Almacenamiento GitHub JSON"
+  }
+}
