@@ -303,6 +303,8 @@ def calcular_estadisticas_persona(persona_id, rol):
         return {"total": 0, "completados": 0, "en_curso": 0, "pendientes": 0,
                 "pct_avance": 0.0, "horas_completadas": 0.0, "horas_totales": 0.0}
     merged = docs_rol.merge(avances, left_on="id", right_on="documento_id", how="left")
+    avances_clean = avances.drop(columns=["id"], errors="ignore")
+    merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
     total             = len(merged)
     completados       = (merged["estado"] == "Completado").sum()
@@ -446,6 +448,8 @@ def pagina_registro():
     docs_rol = get_docs_por_rol(persona["rol"])
     avances  = get_avance_persona(persona["id"])
     merged   = docs_rol.merge(avances, left_on="id", right_on="documento_id", how="left")
+    avances_clean = avances.drop(columns=["id"], errors="ignore")
+    merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
     st.divider()
 
