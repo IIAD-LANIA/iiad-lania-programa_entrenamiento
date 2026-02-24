@@ -232,11 +232,9 @@ def _datos_iniciales():
                 req_id += 1
 
     personal_ejemplo = [
-        {"id": 1, "nombre": "Juan Pérez García",    "rol": "Responsable área IIAD",      "fecha_ingreso": "2023-01-15", "estado": "Activo"},
-        {"id": 2, "nombre": "María González López", "rol": "Profesional área IIAD",      "fecha_ingreso": "2024-03-20", "estado": "Activo"},
-        {"id": 3, "nombre": "Carlos Rodríguez M.",  "rol": "Líder de producción",        "fecha_ingreso": "2025-06-10", "estado": "Activo"},
-        {"id": 4, "nombre": "Ana Martínez Silva",   "rol": "Profesional análisis datos", "fecha_ingreso": "2026-01-15", "estado": "Activo"},
-        {"id": 5, "nombre": "Pedro Gómez Torres",   "rol": "Líder de comparación",       "fecha_ingreso": "2024-09-01", "estado": "Activo"},
+        {"id": 1, "nombre": "Iván Mauricio Huérfano",    "rol": "Responsable área IIAD",      "fecha_ingreso": "2026-02-11", "estado": "Activo"},
+        {"id": 2, "nombre": "Clauida Marcela Duarte", "rol": "Profesional área IIAD",      "fecha_ingreso": "2025-01-10", "estado": "Activo"},
+        {"id": 3, "nombre": "David Esquivel Valderrama",  "rol": "Profesional área IIAD",        "fecha_ingreso": "2026-01-10", "estado": "Activo"},
     ]
 
     return {
