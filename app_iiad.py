@@ -744,7 +744,8 @@ def main():
             "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Instituto_Colombiano_Agropecuario.svg/320px-Instituto_Colombiano_Agropecuario.svg.png",
             width=120
         )
-        st.title("Sistema Formación\nÁrea IIAD")
+        st.title("Sistema de seguimiento a la formación\nÁrea IIAD")
+        st.markdown('### Laboratorio Nacional de Insumos Agrícolas - LANIA - Área IIAD')
         st.caption("ISO 17034 | ISO 17043 | ICA")
         st.divider()
         pagina = st.radio("Navegación", [
