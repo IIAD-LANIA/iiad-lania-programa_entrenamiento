@@ -829,17 +829,19 @@ def main():
         )
 
         # ── Pie de sidebar ─────────────────────────────────────────
+
+        st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
         st.markdown("""
-        <div style="position:absolute; bottom:1rem; left:0; right:0;
-                    text-align:center; padding:0 1rem;">
+        <div style="text-align:center; padding:0.6rem 1rem 0.5rem 1rem;
+                    border-top:1px solid rgba(255,255,255,0.15);">
             <div style="font-size:0.65rem; color:rgba(255,255,255,0.35);
-                        border-top:1px solid rgba(255,255,255,0.12);
-                        padding-top:0.6rem;">
+                        line-height:1.6;">
                 v2.1 · Feb 2026<br>
                 🗄️ GitHub JSON · ARCAL RLA5091
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+           </div>
+       </div>
+       """, unsafe_allow_html=True)
+
 
     # ── Contenido principal ────────────────────────────────────────
     if   pagina == "🏠 Dashboard":           pagina_dashboard()
