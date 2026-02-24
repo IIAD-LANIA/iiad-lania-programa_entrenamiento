@@ -2,37 +2,23 @@
   "personal": [
     {
       "id": 1,
-      "nombre": "Juan Pérez García",
+      "nombre": "Iván Mauricio Huérfano",
       "rol": "Responsable área IIAD",
-      "fecha_ingreso": "2023-01-15",
+      "fecha_ingreso": "2026-02-11",
       "estado": "Activo"
     },
     {
       "id": 2,
-      "nombre": "María González López",
+      "nombre": "Claudia Marcela Duarte ",
       "rol": "Profesional área IIAD",
-      "fecha_ingreso": "2024-03-20",
+      "fecha_ingreso": "2026-01-10",
       "estado": "Activo"
     },
     {
       "id": 3,
-      "nombre": "Carlos Rodríguez M.",
-      "rol": "Líder de producción",
-      "fecha_ingreso": "2025-06-10",
-      "estado": "Activo"
-    },
-    {
-      "id": 4,
-      "nombre": "Ana Martínez Silva",
-      "rol": "Profesional análisis datos",
-      "fecha_ingreso": "2026-01-15",
-      "estado": "Activo"
-    },
-    {
-      "id": 5,
-      "nombre": "Pedro Gómez Torres",
-      "rol": "Líder de comparación",
-      "fecha_ingreso": "2024-09-01",
+      "nombre": "David Esquivel Valderrama",
+      "rol": "Profesional área IIAD",
+      "fecha_ingreso": "2026-01-10",
       "estado": "Activo"
     }
   ],
