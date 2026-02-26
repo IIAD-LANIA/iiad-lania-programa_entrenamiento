@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # =============================================================================
 # SISTEMA DE SEGUIMIENTO DE FORMACIÓN - ÁREA IIAD / ICA
-# Versión 2.1 | Almacenamiento: JSON en repositorio GitHub
+# Versión 2.2 | Almacenamiento: JSON en repositorio GitHub
 # Desarrollado para cumplimiento ISO 17034 & ISO 17043
 # =============================================================================
 import streamlit as st
@@ -224,7 +224,7 @@ def _datos_iniciales():
         "requisitos_rol": requisitos_rol,
         "avances": [],
         "_meta": {
-            "version": "2.1",
+            "version": "2.2",
             "creado": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "descripcion": "Datos formación IIAD - ICA | Almacenamiento GitHub JSON"
         }
@@ -324,8 +324,9 @@ def exportar_excel():
 # ESTILOS CSS
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
-    SIDEBAR_BG  = "#1B3A6B"   # Azul oscuro ICA  |  verde oscuro: "#1a4d2e"
-    SIDEBAR_ACC = "#2e6da4"   # Acento más claro  |  verde acento: "#2d7a4f"
+    # ── Paleta institucional ICA ──────────────────────────────────────────────
+    SIDEBAR_BG  = "#6B8E23"   # Verde oliva ICA
+    SIDEBAR_ACC = "#8fba30"   # Verde oliva claro (acento)
 
     st.markdown(f"""
     <style>
@@ -340,24 +341,24 @@ def inject_css():
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] small,
     [data-testid="stSidebar"] .stMarkdown {{
-        color: #e8eef8 !important;
+        color: #f5f8ee !important;
     }}
     [data-testid="stSidebar"] hr {{
-        border-color: rgba(255,255,255,0.2) !important;
+        border-color: rgba(255,255,255,0.25) !important;
     }}
     /* ── Radio navegación ─────────────────────────────────────── */
     [data-testid="stSidebar"] .stRadio > label > div {{
-        color: rgba(255,255,255,0.6) !important;
+        color: rgba(255,255,255,0.7) !important;
         font-size: 0.78rem; font-weight: 700;
         text-transform: uppercase; letter-spacing: 0.07em;
     }}
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
-        color: #ccd8ee !important;
+        color: #edf2d8 !important;
         padding: 6px 12px; border-radius: 8px;
         font-size: 0.9rem; transition: background 0.15s;
     }}
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {{
-        background: rgba(255,255,255,0.10) !important;
+        background: rgba(255,255,255,0.12) !important;
     }}
     /* ── Métricas ─────────────────────────────────────────────── */
     [data-testid="stMetric"] {{
@@ -378,20 +379,46 @@ def inject_css():
     .stButton > button {{
         background: linear-gradient(135deg, {SIDEBAR_BG}, {SIDEBAR_ACC});
         color: #FFFFFF !important; border: none; border-radius: 8px;
-        font-weight: 600; box-shadow: 0 2px 6px rgba(27,58,107,0.30);
+        font-weight: 600; box-shadow: 0 2px 6px rgba(107,142,35,0.35);
         transition: all 0.18s;
     }}
     .stButton > button:hover {{
         transform: translateY(-1px);
-        box-shadow: 0 4px 14px rgba(27,58,107,0.40);
+        box-shadow: 0 4px 14px rgba(107,142,35,0.45);
     }}
-    /* ── Tabs ─────────────────────────────────────────────────── */
+    /* ── Tabs: corregido overflow y sombreado ─────────────────── */
     .stTabs [data-baseweb="tab-list"] {{
-        background: #f0f3f9; border-radius: 8px; padding: 4px;
+        background: #eef2e6;
+        border-radius: 10px;
+        padding: 4px 6px;
+        gap: 4px;
+        overflow: visible !important;
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+    }}
+    .stTabs [data-baseweb="tab"] {{
+        border-radius: 7px !important;
+        padding: 6px 16px !important;
+        font-weight: 500;
+        color: #4a5e1a !important;
+        background: transparent !important;
+        border: none !important;
+        transition: background 0.15s;
+    }}
+    .stTabs [data-baseweb="tab"]:hover {{
+        background: rgba(107,142,35,0.15) !important;
     }}
     .stTabs [aria-selected="true"] {{
         background: {SIDEBAR_BG} !important;
-        color: #fff !important; border-radius: 6px !important;
+        color: #ffffff !important;
+        border-radius: 7px !important;
+        box-shadow: 0 2px 6px rgba(107,142,35,0.40) !important;
+    }}
+    /* Ocultar la línea indicadora por defecto de baseweb */
+    .stTabs [data-baseweb="tab-highlight"] {{
+        display: none !important;
+    }}
+    .stTabs [data-baseweb="tab-border"] {{
+        display: none !important;
     }}
     /* ── DataFrames ───────────────────────────────────────────── */
     [data-testid="stDataFrame"] {{
@@ -402,7 +429,7 @@ def inject_css():
     .alerta-roja     {{ background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }}
     .alerta-verde    {{ background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }}
     .alerta-amarilla {{ background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }}
-    .stProgress > div > div > div > div {{ background-color: #27ae60; }}
+    .stProgress > div > div > div > div {{ background-color: #6B8E23; }}
     /* ── Misc ─────────────────────────────────────────────────── */
     footer {{visibility: hidden;}}
     #MainMenu {{visibility: hidden;}}
@@ -684,7 +711,7 @@ def pagina_cronograma():
     meses_horas = df_cron.groupby("MesNom")["Horas"].sum().reset_index()
     fig = px.bar(meses_horas, x="MesNom", y="Horas",
                  title="Distribución de Horas por Mes",
-                 color="Horas", color_continuous_scale="Blues", text="Horas")
+                 color="Horas", color_continuous_scale="YlGn", text="Horas")
     fig.update_traces(texttemplate="%{text:.0f}h", textposition="outside")
     st.plotly_chart(fig, use_container_width=True)
 
@@ -705,7 +732,6 @@ def pagina_reportes():
             stats    = calcular_estadisticas_persona(persona["id"], persona["rol"])
             docs_rol = get_docs_por_rol(persona["rol"])
             avances  = get_avance_persona(persona["id"])
-            # ── FIX: eliminar columna 'id' de avances antes del merge ──
             avances_clean = avances.drop(columns=["id"], errors="ignore")
             merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
             merged["estado"] = merged["estado"].fillna("Pendiente")
@@ -790,28 +816,50 @@ def main():
 
     with st.sidebar:
         # ── Logo ICA ──────────────────────────────────────────────
+        # Intenta cargar logo desde assets/; si no existe muestra badge institucional
         LOGO_URL = (
             "https://raw.githubusercontent.com/"
-            "mauricio-chem/programa_entrenamiento_iiad/main/assets/logo_ica.png"
+            "Mauricio-CHEM/programa_entrenamiento_iiad/main/assets/logo_ica.png"
         )
         st.markdown(f"""
-        <div style="text-align:center; padding:1.2rem 0.5rem 0.6rem 0.5rem;">
+        <div style="text-align:center; padding:1.4rem 0.5rem 0.8rem 0.5rem;">
             <img src="{LOGO_URL}"
-                 style="max-width:150px; filter:brightness(0) invert(1);"
-                 onerror="this.style.display='none'" />
+                 id="ica-logo"
+                 style="max-width:140px; width:100%; filter:brightness(0) invert(1);
+                        display:block; margin:0 auto;"
+                 onerror="
+                     this.style.display='none';
+                     document.getElementById('ica-badge').style.display='flex';
+                 " />
+            <div id="ica-badge" style="
+                display:none; justify-content:center; align-items:center;
+                flex-direction:column; gap:4px;
+            ">
+                <div style="
+                    width:64px; height:64px; border-radius:50%;
+                    background:rgba(255,255,255,0.15);
+                    border:2px solid rgba(255,255,255,0.40);
+                    display:flex; align-items:center; justify-content:center;
+                    font-size:1.8rem;
+                ">🌿</div>
+                <div style="
+                    font-size:0.95rem; font-weight:800; color:#FFFFFF;
+                    letter-spacing:0.12em; margin-top:4px;
+                ">ICA</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
 
         # ── Identificación institucional ───────────────────────────
         st.markdown("""
         <div style="text-align:center; padding:0 0.5rem 0.8rem 0.5rem;
-                    border-bottom:1px solid rgba(255,255,255,0.18);
+                    border-bottom:1px solid rgba(255,255,255,0.20);
                     margin-bottom:0.8rem;">
             <div style="font-size:0.82rem; font-weight:700;
                         color:#FFFFFF; letter-spacing:0.02em;">
                 Subgerencia de Análisis y Diagnóstico
             </div>
-            <div style="font-size:0.70rem; color:rgba(255,255,255,0.55); margin-top:3px;">
+            <div style="font-size:0.70rem; color:rgba(255,255,255,0.60); margin-top:3px;">
                 Área IIAD · ISO 17034 | ISO 17043
             </div>
         </div>
@@ -829,19 +877,17 @@ def main():
         )
 
         # ── Pie de sidebar ─────────────────────────────────────────
-
         st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
         st.markdown("""
         <div style="text-align:center; padding:0.6rem 1rem 0.5rem 1rem;
                     border-top:1px solid rgba(255,255,255,0.15);">
-            <div style="font-size:0.65rem; color:rgba(255,255,255,0.35);
+            <div style="font-size:0.65rem; color:rgba(255,255,255,0.40);
                         line-height:1.6;">
-                v2.1 · Feb 2026<br>
+                v2.2 · Feb 2026<br>
                 🗄️ GitHub JSON · ARCAL RLA5091
            </div>
        </div>
        """, unsafe_allow_html=True)
-
 
     # ── Contenido principal ────────────────────────────────────────
     if   pagina == "🏠 Dashboard":           pagina_dashboard()
@@ -854,5 +900,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
