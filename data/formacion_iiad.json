@@ -5,21 +5,33 @@
       "nombre": "Iván Mauricio Huérfano",
       "rol": "Responsable área IIAD",
       "fecha_ingreso": "2026-02-11",
-      "estado": "Activo"
+      "estado": "Activo",
+      "roles": [
+        "Responsable área IIAD"
+      ]
     },
     {
       "id": 2,
       "nombre": "Claudia Marcela Duarte ",
       "rol": "Profesional área IIAD",
       "fecha_ingreso": "2026-01-10",
-      "estado": "Activo"
+      "estado": "Activo",
+      "roles": [
+        "Profesional área IIAD",
+        "Líder de producción",
+        "Líder de comparación",
+        "Profesional análisis datos"
+      ]
     },
     {
       "id": 3,
       "nombre": "David Esquivel Valderrama",
       "rol": "Profesional área IIAD",
       "fecha_ingreso": "2026-01-10",
-      "estado": "Activo"
+      "estado": "Activo",
+      "roles": [
+        "Profesional área IIAD"
+      ]
     }
   ],
   "documentos": [
