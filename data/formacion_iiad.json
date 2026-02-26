@@ -30,7 +30,10 @@
       "fecha_ingreso": "2026-01-10",
       "estado": "Activo",
       "roles": [
-        "Profesional área IIAD"
+        "Profesional área IIAD",
+        "Líder de producción",
+        "Líder de comparación",
+        "Profesional análisis datos"
       ]
     }
   ],
