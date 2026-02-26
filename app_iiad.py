@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # =============================================================================
 # SISTEMA DE SEGUIMIENTO DE FORMACIÓN - ÁREA IIAD / ICA
-# Versión 2.3 | Almacenamiento: JSON en repositorio GitHub
+# Versión 2.4 | Almacenamiento: JSON en repositorio GitHub
 # Desarrollado para cumplimiento ISO 17034 & ISO 17043
 # Estilo visual: alineado con Dashboard-SG-IDI_V4
+# NUEVO v2.4: soporte multi-roles por persona (campo "roles" lista)
+#             con retrocompatibilidad automática del campo "rol" (string)
 # =============================================================================
 import streamlit as st
 import pandas as pd
@@ -33,6 +35,14 @@ GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "Mauricio-CHEM")
 GITHUB_REPO  = st.secrets.get("GITHUB_REPO",  "programa_entrenamiento_iiad")
 DATA_FILE    = "data/formacion_iiad.json"
 
+# Lista canónica de roles disponibles
+ROLES_DISPONIBLES = [
+    "Responsable área IIAD",
+    "Profesional área IIAD",
+    "Líder de producción",
+    "Líder de comparación",
+    "Profesional análisis datos",
+]
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CAPA DE PERSISTENCIA — GITHUB JSON
@@ -52,6 +62,8 @@ def load_data_from_github():
             payload = r.json()
             raw  = base64.b64decode(payload["content"]).decode("utf-8")
             data = json.loads(raw)
+            # ── Migración automática: "rol" (str) → "roles" (lista) ──────────
+            data = _migrar_roles(data)
             return data, payload["sha"]
         elif r.status_code == 404:
             return _datos_iniciales(), None
@@ -61,6 +73,17 @@ def load_data_from_github():
     except Exception as e:
         st.error(f"Error de conexión con GitHub: {e}")
         return _datos_iniciales(), None
+
+
+def _migrar_roles(data):
+    """Convierte el campo legacy 'rol' (string) a 'roles' (lista)."""
+    for p in data.get("personal", []):
+        if "roles" not in p:
+            p["roles"] = [p["rol"]] if p.get("rol") else []
+        # Asegurar que siempre sea lista (por si alguien guardó string)
+        if isinstance(p.get("roles"), str):
+            p["roles"] = [p["roles"]]
+    return data
 
 
 def save_data_to_github(data, sha=None):
@@ -214,9 +237,9 @@ def _datos_iniciales():
                 req_id += 1
 
     personal_ejemplo = [
-        {"id": 1, "nombre": "Iván Mauricio Huérfano",    "rol": "Responsable área IIAD",     "fecha_ingreso": "2026-02-11", "estado": "Activo"},
-        {"id": 2, "nombre": "Claudia Marcela Duarte",    "rol": "Profesional área IIAD",     "fecha_ingreso": "2025-01-10", "estado": "Activo"},
-        {"id": 3, "nombre": "David Esquivel Valderrama", "rol": "Profesional área IIAD",     "fecha_ingreso": "2026-01-10", "estado": "Activo"},
+        {"id": 1, "nombre": "Iván Mauricio Huérfano",    "roles": ["Responsable área IIAD"],     "fecha_ingreso": "2026-02-11", "estado": "Activo"},
+        {"id": 2, "nombre": "Claudia Marcela Duarte",    "roles": ["Profesional área IIAD"],     "fecha_ingreso": "2025-01-10", "estado": "Activo"},
+        {"id": 3, "nombre": "David Esquivel Valderrama", "roles": ["Profesional área IIAD"],     "fecha_ingreso": "2026-01-10", "estado": "Activo"},
     ]
 
     return {
@@ -225,9 +248,9 @@ def _datos_iniciales():
         "requisitos_rol": requisitos_rol,
         "avances": [],
         "_meta": {
-            "version": "2.3",
+            "version": "2.4",
             "creado": datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "descripcion": "Datos formación IIAD - ICA | Almacenamiento GitHub JSON"
+            "descripcion": "Datos formación IIAD - ICA | Multi-roles por persona"
         }
     }
 
@@ -238,7 +261,13 @@ def _datos_iniciales():
 def get_personal():
     data = get_data()
     df = pd.DataFrame([p for p in data["personal"] if p["estado"] == "Activo"])
-    return df.sort_values("nombre").reset_index(drop=True) if not df.empty else df
+    if df.empty:
+        return df
+    # Columna auxiliar "rol_display" para retrocompatibilidad visual
+    df["rol_display"] = df["roles"].apply(
+        lambda r: " · ".join(r) if isinstance(r, list) else str(r)
+    )
+    return df.sort_values("nombre").reset_index(drop=True)
 
 
 def get_documentos():
@@ -258,6 +287,36 @@ def get_docs_por_rol(rol):
                           ascending=[False, True, True]).reset_index(drop=True)
 
 
+def get_docs_por_persona(roles_lista):
+    """
+    Devuelve la unión de documentos requeridos para todos los roles de una persona.
+    Agrega columna 'roles_que_cubre' (lista) y 'es_transversal' (bool).
+    """
+    data = get_data()
+    doc_roles: dict[int, list] = {}
+    for rol in roles_lista:
+        for r in data["requisitos_rol"]:
+            if r["rol"] == rol:
+                did = r["documento_id"]
+                doc_roles.setdefault(did, [])
+                if rol not in doc_roles[did]:
+                    doc_roles[did].append(rol)
+
+    docs = []
+    for d in data["documentos"]:
+        if d["id"] in doc_roles:
+            entry = dict(d)
+            entry["roles_que_cubre"] = doc_roles[d["id"]]
+            entry["es_transversal"]  = len(doc_roles[d["id"]]) > 1
+            docs.append(entry)
+
+    df = pd.DataFrame(docs)
+    if df.empty:
+        return df
+    return df.sort_values(["es_critico", "categoria", "codigo"],
+                          ascending=[False, True, True]).reset_index(drop=True)
+
+
 def get_avance_persona(persona_id):
     data = get_data()
     avances = [a for a in data["avances"] if a["persona_id"] == persona_id]
@@ -266,24 +325,35 @@ def get_avance_persona(persona_id):
     )
 
 
-def agregar_personal(nombre, rol, fecha_ingreso):
+def agregar_personal(nombre, roles, fecha_ingreso):
     data = get_data()
     new_id = max((p["id"] for p in data["personal"]), default=0) + 1
     data["personal"].append({
-        "id": new_id, "nombre": nombre, "rol": rol,
+        "id": new_id, "nombre": nombre, "roles": roles,
         "fecha_ingreso": str(fecha_ingreso), "estado": "Activo"
     })
     return save_data(data)
 
 
-def calcular_estadisticas_persona(persona_id, rol):
-    docs_rol = get_docs_por_rol(rol)
-    avances  = get_avance_persona(persona_id)
-    if docs_rol.empty:
+def actualizar_roles_personal(persona_id, nuevos_roles):
+    data = get_data()
+    for p in data["personal"]:
+        if p["id"] == persona_id:
+            p["roles"] = nuevos_roles
+            break
+    return save_data(data)
+
+
+def calcular_estadisticas_persona(persona_id, roles_lista):
+    if isinstance(roles_lista, str):
+        roles_lista = [roles_lista]
+    docs_persona = get_docs_por_persona(roles_lista)
+    avances      = get_avance_persona(persona_id)
+    if docs_persona.empty:
         return {"total": 0, "completados": 0, "en_curso": 0, "pendientes": 0,
                 "pct_avance": 0.0, "horas_completadas": 0.0, "horas_totales": 0.0}
     avances_clean = avances.drop(columns=["id"], errors="ignore")
-    merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
+    merged = docs_persona.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
     total             = len(merged)
     completados       = (merged["estado"] == "Completado").sum()
@@ -307,9 +377,10 @@ def exportar_excel():
         personal.to_excel(writer, sheet_name="Personal", index=False)
         resumen = []
         for _, p in personal.iterrows():
-            stats = calcular_estadisticas_persona(p["id"], p["rol"])
+            roles = p["roles"] if isinstance(p["roles"], list) else [p["roles"]]
+            stats = calcular_estadisticas_persona(p["id"], roles)
             resumen.append({
-                "Nombre": p["nombre"], "Rol": p["rol"],
+                "Nombre": p["nombre"], "Roles": " · ".join(roles),
                 "% Avance": stats["pct_avance"],
                 "Docs Completados": stats["completados"],
                 "Docs Total": stats["total"],
@@ -325,22 +396,18 @@ def exportar_excel():
 # ESTILOS CSS  —  Estilo visual alineado con Dashboard-SG-IDI_V4
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
-    # ── Paleta institucional: azul marino oscuro (igual que SGI I+D+I) ────────
-    SIDEBAR_BG   = "#0D1B2A"   # Azul marino oscuro
-    SIDEBAR_ACC  = "#1565C0"   # Azul acento
-    ACCENT_LIGHT = "#E8EDF3"   # Texto sidebar claro
-    BTN_BG       = "#1565C0"   # Botón primario azul
-    BTN_HOVER    = "#1976D2"   # Botón hover
-    METRIC_VAL   = "#1565C0"   # Color valor métrica
+    SIDEBAR_BG   = "#0D1B2A"
+    SIDEBAR_ACC  = "#1565C0"
+    ACCENT_LIGHT = "#E8EDF3"
+    BTN_BG       = "#1565C0"
+    BTN_HOVER    = "#1976D2"
+    METRIC_VAL   = "#1565C0"
 
     st.markdown(f"""
     <style>
-    /* ── FUENTE GLOBAL ────────────────────────────────────────────── */
     html, body, [class*="css"] {{
         font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }}
-
-    /* ── SIDEBAR — fondo azul marino oscuro ──────────────────────── */
     [data-testid="stSidebar"],
     [data-testid="stSidebarHeader"],
     section[data-testid="stSidebar"] > div:first-child {{
@@ -356,8 +423,6 @@ def inject_css():
     [data-testid="stSidebar"] hr {{
         border-color: rgba(255,255,255,0.15) !important;
     }}
-
-    /* ── NAVEGACIÓN — radio limpio sin label visible ──────────────── */
     [data-testid="stSidebar"] .stRadio > label > div {{
         color: rgba(232,237,243,0.5) !important;
         font-size: 0.70rem;
@@ -384,8 +449,6 @@ def inject_css():
         color: #FFFFFF !important;
         font-weight: 600;
     }}
-
-    /* ── MÉTRICAS — estilo limpio sin border lateral de color ────── */
     [data-testid="stMetric"] {{
         background: #F7F9FC;
         border-radius: 12px;
@@ -410,8 +473,6 @@ def inject_css():
         font-size: 0.78rem !important;
         color: #27ae60 !important;
     }}
-
-    /* ── BOTONES ──────────────────────────────────────────────────── */
     .stButton > button {{
         background: {BTN_BG};
         color: #FFFFFF !important;
@@ -428,8 +489,6 @@ def inject_css():
         transform: translateY(-1px);
         box-shadow: 0 4px 14px rgba(21,101,192,0.40);
     }}
-
-    /* ── TABS — estilo pill compacto ──────────────────────────────── */
     .stTabs [data-baseweb="tab-list"] {{
         background: #EEF2F8;
         border-radius: 10px;
@@ -459,20 +518,14 @@ def inject_css():
     }}
     .stTabs [data-baseweb="tab-highlight"] {{ display: none !important; }}
     .stTabs [data-baseweb="tab-border"]    {{ display: none !important; }}
-
-    /* ── DATAFRAMES ───────────────────────────────────────────────── */
     [data-testid="stDataFrame"] {{
         border-radius: 10px;
         overflow: hidden;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }}
-
-    /* ── BARRA DE PROGRESO ────────────────────────────────────────── */
     .stProgress > div > div > div > div {{
         background-color: {SIDEBAR_ACC};
     }}
-
-    /* ── ALERTAS PERSONALIZADAS ───────────────────────────────────── */
     .alerta-roja {{
         background: #FFF0F0;
         border-left: 4px solid #E53935;
@@ -497,8 +550,28 @@ def inject_css():
         margin: 5px 0;
         font-size: 0.88rem;
     }}
-
-    /* ── OCULTAR ELEMENTOS STREAMLIT ──────────────────────────────── */
+    .badge-rol {{
+        display: inline-block;
+        background: #E8F0FE;
+        color: #1565C0;
+        border: 1px solid #BBDEFB;
+        border-radius: 12px;
+        padding: 2px 10px;
+        font-size: 0.78rem;
+        font-weight: 600;
+        margin: 2px 3px;
+    }}
+    .badge-transversal {{
+        display: inline-block;
+        background: #FFF8E1;
+        color: #F57F17;
+        border: 1px solid #FFE082;
+        border-radius: 12px;
+        padding: 2px 10px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        margin-left: 6px;
+    }}
     footer    {{ visibility: hidden; }}
     #MainMenu {{ visibility: hidden; }}
     </style>
@@ -520,8 +593,9 @@ def pagina_dashboard():
 
     all_stats = []
     for _, p in personal.iterrows():
-        s = calcular_estadisticas_persona(p["id"], p["rol"])
-        s["nombre"] = p["nombre"]; s["rol"] = p["rol"]
+        roles = p["roles"] if isinstance(p["roles"], list) else [p["roles"]]
+        s = calcular_estadisticas_persona(p["id"], roles)
+        s["nombre"] = p["nombre"]; s["rol_display"] = p["rol_display"]
         all_stats.append(s)
     df_stats = pd.DataFrame(all_stats)
 
@@ -575,11 +649,11 @@ def pagina_dashboard():
 
     st.subheader("🚦 Sistema de Alertas")
     for _, row in df_stats[df_stats["pct_avance"] < 20].iterrows():
-        st.markdown(f'<div class="alerta-roja">🔴 <strong>{row["nombre"]}</strong> ({row["rol"]}) — {row["pct_avance"]}% — Acción urgente requerida</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="alerta-roja">🔴 <strong>{row["nombre"]}</strong> ({row["rol_display"]}) — {row["pct_avance"]}% — Acción urgente requerida</div>', unsafe_allow_html=True)
     for _, row in df_stats[(df_stats["pct_avance"] >= 20) & (df_stats["pct_avance"] < 60)].iterrows():
-        st.markdown(f'<div class="alerta-amarilla">🟡 <strong>{row["nombre"]}</strong> ({row["rol"]}) — {row["pct_avance"]}% — Revisar cronograma</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="alerta-amarilla">🟡 <strong>{row["nombre"]}</strong> ({row["rol_display"]}) — {row["pct_avance"]}% — Revisar cronograma</div>', unsafe_allow_html=True)
     for _, row in df_stats[df_stats["pct_avance"] >= 60].iterrows():
-        st.markdown(f'<div class="alerta-verde">🟢 <strong>{row["nombre"]}</strong> ({row["rol"]}) — {row["pct_avance"]}% — En buen camino</div>', unsafe_allow_html=True)
+        st.markdown(f'<div class="alerta-verde">🟢 <strong>{row["nombre"]}</strong> ({row["rol_display"]}) — {row["pct_avance"]}% — En buen camino</div>', unsafe_allow_html=True)
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -595,40 +669,58 @@ def pagina_registro():
     with col1:
         nombre_sel = st.selectbox("👤 Seleccionar persona", personal["nombre"].tolist())
     persona = personal[personal["nombre"] == nombre_sel].iloc[0]
+    roles   = persona["roles"] if isinstance(persona["roles"], list) else [persona["roles"]]
     with col2:
-        st.info(f"**Rol:** {persona['rol']} | **Ingreso:** {persona['fecha_ingreso']}")
+        badges = " ".join([f'<span class="badge-rol">{r}</span>' for r in roles])
+        st.markdown(
+            f'<div style="padding:10px 0;">👤 <strong>Roles:</strong> {badges}<br>'
+            f'<small style="color:#7A8599;">Ingreso: {persona["fecha_ingreso"]}</small></div>',
+            unsafe_allow_html=True
+        )
 
-    stats = calcular_estadisticas_persona(persona["id"], persona["rol"])
+    stats = calcular_estadisticas_persona(persona["id"], roles)
     st.progress(stats["pct_avance"] / 100,
-                text=f"Avance: {stats['pct_avance']}% ({stats['completados']}/{stats['total']} docs | {stats['horas_completadas']}h/{stats['horas_totales']}h)")
+                text=f"Avance global: {stats['pct_avance']}% ({stats['completados']}/{stats['total']} docs | {stats['horas_completadas']}h/{stats['horas_totales']}h)")
 
-    docs_rol = get_docs_por_rol(persona["rol"])
-    avances  = get_avance_persona(persona["id"])
+    docs_persona  = get_docs_por_persona(roles)
+    avances       = get_avance_persona(persona["id"])
     avances_clean = avances.drop(columns=["id"], errors="ignore")
-    merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
+    merged = docs_persona.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
     st.divider()
 
-    col_f1, col_f2, col_f3 = st.columns(3)
+    col_f1, col_f2, col_f3, col_f4 = st.columns(4)
     with col_f1:
         filtro_estado = st.selectbox("Filtrar por estado", ["Todos","Pendiente","En curso","Completado"])
     with col_f2:
-        filtro_cat = st.selectbox("Filtrar por categoría", ["Todas"] + sorted(docs_rol["categoria"].unique().tolist()))
+        filtro_cat = st.selectbox("Filtrar por categoría", ["Todas"] + sorted(docs_persona["categoria"].unique().tolist()))
     with col_f3:
-        solo_criticos = st.checkbox("⚠️ Solo documentos críticos")
+        solo_criticos = st.checkbox("⚠️ Solo críticos")
+    with col_f4:
+        solo_transversal = st.checkbox("🔀 Solo transversales")
 
     df_filtrado = merged.copy()
-    if filtro_estado != "Todos":   df_filtrado = df_filtrado[df_filtrado["estado"]    == filtro_estado]
-    if filtro_cat   != "Todas":    df_filtrado = df_filtrado[df_filtrado["categoria"]  == filtro_cat]
-    if solo_criticos:              df_filtrado = df_filtrado[df_filtrado["es_critico"] == 1]
+    if filtro_estado    != "Todos":  df_filtrado = df_filtrado[df_filtrado["estado"]         == filtro_estado]
+    if filtro_cat       != "Todas":  df_filtrado = df_filtrado[df_filtrado["categoria"]       == filtro_cat]
+    if solo_criticos:                df_filtrado = df_filtrado[df_filtrado["es_critico"]      == 1]
+    if solo_transversal:             df_filtrado = df_filtrado[df_filtrado["es_transversal"]  == True]
 
     st.subheader(f"📋 {len(df_filtrado)} de {len(merged)} documentos mostrados")
     registrado_por = st.text_input("👤 Registrado por", value="Capacitador IIAD")
 
     cambios = {}
     for _, doc in df_filtrado.iterrows():
-        badge = "⚠️ CRÍTICO " if doc["es_critico"] else ""
-        with st.expander(f"{badge}[{doc['codigo']}] {doc['nombre']} — {doc['horas']}h — {doc['nivel']} — Estado: {doc['estado']}"):
+        badge_crit = "⚠️ CRÍTICO " if doc["es_critico"] else ""
+        roles_cubre = doc.get("roles_que_cubre", [])
+        badge_trans = " 🔀 TRANSVERSAL" if doc.get("es_transversal") else ""
+        roles_str   = " · ".join(roles_cubre) if roles_cubre else ""
+        with st.expander(
+            f"{badge_crit}[{doc['codigo']}] {doc['nombre']} — {doc['horas']}h — {doc['nivel']}{badge_trans} — Estado: {doc['estado']}"
+        ):
+            if roles_cubre:
+                badges_roles = " ".join([f'<span class="badge-rol">{r}</span>' for r in roles_cubre])
+                trans_badge  = '<span class="badge-transversal">🔀 Transversal</span>' if doc.get("es_transversal") else ""
+                st.markdown(f"📌 **Cubre roles:** {badges_roles} {trans_badge}", unsafe_allow_html=True)
             c1, c2, c3, c4 = st.columns([2, 2, 1, 3])
             with c1:
                 nuevo_estado = st.selectbox("Estado", ["Pendiente","En curso","Completado"],
@@ -696,16 +788,28 @@ def pagina_registro():
 def pagina_analisis_rol():
     st.title("📊 Análisis por Rol")
     personal = get_personal()
-    roles    = personal["rol"].unique().tolist()
-    rol_sel  = st.selectbox("🔍 Seleccionar Rol", ["Todos los roles"] + roles)
+    # Recopilar todos los roles únicos presentes en la BD
+    all_roles = set()
+    for _, p in personal.iterrows():
+        roles = p["roles"] if isinstance(p["roles"], list) else [p["roles"]]
+        all_roles.update(roles)
+    rol_sel = st.selectbox("🔍 Seleccionar Rol", ["Todos los roles"] + sorted(all_roles))
 
-    personal_filtrado = personal[personal["rol"] == rol_sel] if rol_sel != "Todos los roles" else personal
+    # Filtrar personas que tienen el rol seleccionado
+    if rol_sel == "Todos los roles":
+        personal_filtrado = personal
+    else:
+        personal_filtrado = personal[personal["roles"].apply(
+            lambda r: rol_sel in (r if isinstance(r, list) else [r])
+        )]
 
     resumen = []
     for _, p in personal_filtrado.iterrows():
-        s = calcular_estadisticas_persona(p["id"], p["rol"])
+        roles = p["roles"] if isinstance(p["roles"], list) else [p["roles"]]
+        s = calcular_estadisticas_persona(p["id"], roles)
         resumen.append({
-            "Nombre": p["nombre"], "Rol": p["rol"], "% Avance": s["pct_avance"],
+            "Nombre": p["nombre"], "Roles": p["rol_display"],
+            "% Avance": s["pct_avance"],
             "Completados": s["completados"], "Total Docs": s["total"],
             "Horas Completadas": s["horas_completadas"], "Horas Totales": s["horas_totales"],
             "Estado": "🟢 Bien" if s["pct_avance"] >= 60 else "🟡 Atención" if s["pct_avance"] >= 20 else "🔴 Crítico"
@@ -807,18 +911,19 @@ def pagina_reportes():
         nombre_sel = st.selectbox("Seleccionar persona", personal["nombre"].tolist(), key="rep_ind")
         persona = personal[personal["nombre"] == nombre_sel].iloc[0]
         if st.button("Generar Vista Previa"):
-            stats    = calcular_estadisticas_persona(persona["id"], persona["rol"])
-            docs_rol = get_docs_por_rol(persona["rol"])
-            avances  = get_avance_persona(persona["id"])
+            roles = persona["roles"] if isinstance(persona["roles"], list) else [persona["roles"]]
+            stats       = calcular_estadisticas_persona(persona["id"], roles)
+            docs_persona = get_docs_por_persona(roles)
+            avances     = get_avance_persona(persona["id"])
             avances_clean = avances.drop(columns=["id"], errors="ignore")
-            merged = docs_rol.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
+            merged = docs_persona.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
             merged["estado"] = merged["estado"].fillna("Pendiente")
-            st.info(f"**{persona['nombre']}** | Rol: {persona['rol']} | "
+            st.info(f"**{persona['nombre']}** | Roles: {persona['rol_display']} | "
                     f"Avance: {stats['pct_avance']}% | "
                     f"Docs: {stats['completados']}/{stats['total']} | "
                     f"Horas: {stats['horas_completadas']}h/{stats['horas_totales']}h")
             st.dataframe(merged[["codigo","nombre","categoria","horas","nivel","estado",
-                                  "fecha_completitud","calificacion"]],
+                                  "fecha_completitud","calificacion","es_transversal"]],
                          use_container_width=True, hide_index=True)
     with col2:
         st.subheader("Reporte Ejecutivo Excel")
@@ -841,20 +946,70 @@ def pagina_admin():
     tab1, tab2, tab3 = st.tabs(["👥 Personal", "📚 Documentos", "🗄️ Datos GitHub"])
 
     with tab1:
-        st.subheader("Gestión de Personal")
-        st.dataframe(get_personal(), use_container_width=True, hide_index=True)
-        st.subheader("Agregar Nueva Persona")
+        st.subheader("Personal Activo")
+        personal = get_personal()
+
+        # ── Tabla de personal con roles como texto ────────────────────────────
+        if not personal.empty:
+            df_display = personal[["nombre", "rol_display", "fecha_ingreso", "estado"]].copy()
+            df_display.columns = ["Nombre", "Roles", "Ingreso", "Estado"]
+            st.dataframe(df_display, use_container_width=True, hide_index=True)
+
+        st.divider()
+
+        # ── Editar roles de persona existente ────────────────────────────────
+        st.subheader("✏️ Editar Roles de Persona Existente")
+        if not personal.empty:
+            nombre_edit = st.selectbox("Seleccionar persona a editar", personal["nombre"].tolist(), key="edit_sel")
+            persona_edit = personal[personal["nombre"] == nombre_edit].iloc[0]
+            roles_actuales = persona_edit["roles"] if isinstance(persona_edit["roles"], list) else [persona_edit["roles"]]
+
+            nuevos_roles = st.multiselect(
+                "Roles asignados",
+                options=ROLES_DISPONIBLES,
+                default=roles_actuales,
+                key="edit_roles"
+            )
+            # Badges visuales de roles seleccionados
+            if nuevos_roles:
+                badges = " ".join([f'<span class="badge-rol">{r}</span>' for r in nuevos_roles])
+                st.markdown(f"**Roles seleccionados:** {badges}", unsafe_allow_html=True)
+
+            col_btn1, col_btn2 = st.columns([1, 3])
+            with col_btn1:
+                if st.button("💾 Actualizar Roles", type="primary"):
+                    if not nuevos_roles:
+                        st.warning("⚠️ Debe asignar al menos un rol.")
+                    else:
+                        with st.spinner("Guardando en GitHub..."):
+                            if actualizar_roles_personal(int(persona_edit["id"]), nuevos_roles):
+                                st.success(f"✅ Roles actualizados para {nombre_edit}")
+                                st.rerun()
+
+        st.divider()
+
+        # ── Agregar nueva persona ─────────────────────────────────────────────
+        st.subheader("➕ Agregar Nueva Persona")
         with st.form("form_persona"):
             nombre = st.text_input("Nombre Completo")
-            rol    = st.selectbox("Rol", ["Responsable área IIAD","Profesional área IIAD",
-                                          "Líder de producción","Líder de comparación",
-                                          "Profesional análisis datos"])
+            roles_nuevos = st.multiselect(
+                "Roles (puede seleccionar varios)",
+                options=ROLES_DISPONIBLES,
+                default=[ROLES_DISPONIBLES[0]]
+            )
+            # Nota informativa sobre roles transversales
+            if len(roles_nuevos) > 1:
+                st.info(f"ℹ️ Los documentos comunes a los {len(roles_nuevos)} roles seleccionados "
+                        f"se marcarán como **transversales** y solo se registrarán una vez.")
             fecha_ingreso = st.date_input("Fecha de ingreso")
             if st.form_submit_button("Guardar") and nombre:
-                with st.spinner("Guardando en GitHub..."):
-                    if agregar_personal(nombre, rol, fecha_ingreso):
-                        st.success(f"✅ {nombre} agregado correctamente")
-                        st.rerun()
+                if not roles_nuevos:
+                    st.warning("⚠️ Seleccione al menos un rol.")
+                else:
+                    with st.spinner("Guardando en GitHub..."):
+                        if agregar_personal(nombre, roles_nuevos, fecha_ingreso):
+                            st.success(f"✅ {nombre} agregado con roles: {' · '.join(roles_nuevos)}")
+                            st.rerun()
 
     with tab2:
         st.subheader("Catálogo de Documentos")
@@ -893,7 +1048,6 @@ def main():
     inject_css()
 
     with st.sidebar:
-        # ── Logo ICA ──────────────────────────────────────────────────────────
         LOGO_URL = (
             "https://raw.githubusercontent.com/"
             "Mauricio-CHEM/programa_entrenamiento_iiad/main/assets/logo_ica.png"
@@ -928,7 +1082,6 @@ def main():
         </div>
         """, unsafe_allow_html=True)
 
-        # ── Identificación institucional ───────────────────────────────────────
         st.markdown("""
         <div style="
             text-align:center;
@@ -951,7 +1104,6 @@ def main():
         st.markdown('## Sistema de seguimiento de formación')
         st.markdown('### Área de Investigación e Innovación Analítica y Diagnóstica - IIAD')
 
-        # ── Menú de navegación ────────────────────────────────────────────────
         pagina = st.radio(
             "NAVEGACIÓN",
             ["🏠 Dashboard",
@@ -962,7 +1114,6 @@ def main():
              "⚙️ Administración"],
         )
 
-        # ── Pie de sidebar ────────────────────────────────────────────────────
         st.markdown("<div style='margin-top:auto; padding-top:2rem;'></div>", unsafe_allow_html=True)
         st.markdown("""
         <div style="
@@ -971,13 +1122,12 @@ def main():
             border-top: 1px solid rgba(255,255,255,0.10);
         ">
             <div style="font-size:0.65rem; color:rgba(232,237,243,0.35); line-height:1.7;">
-                v2.3 · Feb 2026<br>
+                v2.4 · Feb 2026<br>
                 🗄️ GitHub JSON · ARCAL RLA5091
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-    # ── Contenido principal ────────────────────────────────────────────────────
     if   pagina == "🏠 Dashboard":           pagina_dashboard()
     elif pagina == "📝 Registro de Avances": pagina_registro()
     elif pagina == "📊 Análisis por Rol":    pagina_analisis_rol()
