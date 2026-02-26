@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 # =============================================================================
 # SISTEMA DE SEGUIMIENTO DE FORMACIÓN - ÁREA IIAD / ICA
-# Versión 2.2 | Almacenamiento: JSON en repositorio GitHub
+# Versión 2.3 | Almacenamiento: JSON en repositorio GitHub
 # Desarrollado para cumplimiento ISO 17034 & ISO 17043
+# Estilo visual: alineado con Dashboard-SG-IDI_V4
 # =============================================================================
 import streamlit as st
 import pandas as pd
@@ -224,7 +225,7 @@ def _datos_iniciales():
         "requisitos_rol": requisitos_rol,
         "avances": [],
         "_meta": {
-            "version": "2.2",
+            "version": "2.3",
             "creado": datetime.now().strftime("%Y-%m-%d %H:%M"),
             "descripcion": "Datos formación IIAD - ICA | Almacenamiento GitHub JSON"
         }
@@ -321,16 +322,25 @@ def exportar_excel():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ESTILOS CSS
+# ESTILOS CSS  —  Estilo visual alineado con Dashboard-SG-IDI_V4
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
-    # ── Paleta institucional ICA ──────────────────────────────────────────────
-    SIDEBAR_BG  = "#6B8E23"   # Verde oliva ICA
-    SIDEBAR_ACC = "#8fba30"   # Verde oliva claro (acento)
+    # ── Paleta institucional: azul marino oscuro (igual que SGI I+D+I) ────────
+    SIDEBAR_BG   = "#0D1B2A"   # Azul marino oscuro
+    SIDEBAR_ACC  = "#1565C0"   # Azul acento
+    ACCENT_LIGHT = "#E8EDF3"   # Texto sidebar claro
+    BTN_BG       = "#1565C0"   # Botón primario azul
+    BTN_HOVER    = "#1976D2"   # Botón hover
+    METRIC_VAL   = "#1565C0"   # Color valor métrica
 
     st.markdown(f"""
     <style>
-    /* ── SIDEBAR fondo ────────────────────────────────────────── */
+    /* ── FUENTE GLOBAL ────────────────────────────────────────────── */
+    html, body, [class*="css"] {{
+        font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    }}
+
+    /* ── SIDEBAR — fondo azul marino oscuro ──────────────────────── */
     [data-testid="stSidebar"],
     [data-testid="stSidebarHeader"],
     section[data-testid="stSidebar"] > div:first-child {{
@@ -341,98 +351,156 @@ def inject_css():
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] small,
     [data-testid="stSidebar"] .stMarkdown {{
-        color: #f5f8ee !important;
+        color: {ACCENT_LIGHT} !important;
     }}
     [data-testid="stSidebar"] hr {{
-        border-color: rgba(255,255,255,0.25) !important;
+        border-color: rgba(255,255,255,0.15) !important;
     }}
-    /* ── Radio navegación ─────────────────────────────────────── */
+
+    /* ── NAVEGACIÓN — radio limpio sin label visible ──────────────── */
     [data-testid="stSidebar"] .stRadio > label > div {{
-        color: rgba(255,255,255,0.7) !important;
-        font-size: 0.78rem; font-weight: 700;
-        text-transform: uppercase; letter-spacing: 0.07em;
+        color: rgba(232,237,243,0.5) !important;
+        font-size: 0.70rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.09em;
+        margin-bottom: 4px;
     }}
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
-        color: #edf2d8 !important;
-        padding: 6px 12px; border-radius: 8px;
-        font-size: 0.9rem; transition: background 0.15s;
+        color: {ACCENT_LIGHT} !important;
+        padding: 7px 14px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        font-weight: 500;
+        transition: background 0.15s;
+        margin-bottom: 2px;
     }}
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {{
-        background: rgba(255,255,255,0.12) !important;
+        background: rgba(255,255,255,0.08) !important;
     }}
-    /* ── Métricas ─────────────────────────────────────────────── */
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label[data-checked="true"],
+    [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) {{
+        background: rgba(21,101,192,0.35) !important;
+        color: #FFFFFF !important;
+        font-weight: 600;
+    }}
+
+    /* ── MÉTRICAS — estilo limpio sin border lateral de color ────── */
     [data-testid="stMetric"] {{
-        background: #f5f7fb; border-radius: 10px;
-        padding: 1rem 1.2rem;
-        border-left: 4px solid {SIDEBAR_BG};
-        box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+        background: #F7F9FC;
+        border-radius: 12px;
+        padding: 1.1rem 1.4rem;
+        box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+        border: 1px solid #E8ECF2;
     }}
     [data-testid="stMetricLabel"] p {{
-        font-size: 0.78rem !important; font-weight: 700 !important;
-        color: #555 !important; text-transform: uppercase; letter-spacing: 0.04em;
+        font-size: 0.75rem !important;
+        font-weight: 600 !important;
+        color: #7A8599 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
     }}
     [data-testid="stMetricValue"] div {{
-        font-size: 1.9rem !important; font-weight: 800 !important;
-        color: {SIDEBAR_BG} !important;
+        font-size: 2.0rem !important;
+        font-weight: 800 !important;
+        color: {METRIC_VAL} !important;
+        line-height: 1.1 !important;
     }}
-    /* ── Botones ──────────────────────────────────────────────── */
+    [data-testid="stMetricDelta"] {{
+        font-size: 0.78rem !important;
+        color: #27ae60 !important;
+    }}
+
+    /* ── BOTONES ──────────────────────────────────────────────────── */
     .stButton > button {{
-        background: linear-gradient(135deg, {SIDEBAR_BG}, {SIDEBAR_ACC});
-        color: #FFFFFF !important; border: none; border-radius: 8px;
-        font-weight: 600; box-shadow: 0 2px 6px rgba(107,142,35,0.35);
+        background: {BTN_BG};
+        color: #FFFFFF !important;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.88rem;
+        padding: 0.5rem 1.2rem;
+        box-shadow: 0 2px 6px rgba(21,101,192,0.30);
         transition: all 0.18s;
     }}
     .stButton > button:hover {{
+        background: {BTN_HOVER} !important;
         transform: translateY(-1px);
-        box-shadow: 0 4px 14px rgba(107,142,35,0.45);
+        box-shadow: 0 4px 14px rgba(21,101,192,0.40);
     }}
-    /* ── Tabs: corregido overflow y sombreado ─────────────────── */
+
+    /* ── TABS — estilo pill compacto ──────────────────────────────── */
     .stTabs [data-baseweb="tab-list"] {{
-        background: #eef2e6;
+        background: #EEF2F8;
         border-radius: 10px;
         padding: 4px 6px;
         gap: 4px;
         overflow: visible !important;
-        box-shadow: inset 0 1px 3px rgba(0,0,0,0.08);
+        box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
     }}
     .stTabs [data-baseweb="tab"] {{
         border-radius: 7px !important;
         padding: 6px 16px !important;
         font-weight: 500;
-        color: #4a5e1a !important;
+        font-size: 0.88rem;
+        color: #3A4A6B !important;
         background: transparent !important;
         border: none !important;
         transition: background 0.15s;
     }}
     .stTabs [data-baseweb="tab"]:hover {{
-        background: rgba(107,142,35,0.15) !important;
+        background: rgba(21,101,192,0.10) !important;
     }}
     .stTabs [aria-selected="true"] {{
-        background: {SIDEBAR_BG} !important;
-        color: #ffffff !important;
+        background: {SIDEBAR_ACC} !important;
+        color: #FFFFFF !important;
         border-radius: 7px !important;
-        box-shadow: 0 2px 6px rgba(107,142,35,0.40) !important;
+        box-shadow: 0 2px 6px rgba(21,101,192,0.35) !important;
     }}
-    /* Ocultar la línea indicadora por defecto de baseweb */
-    .stTabs [data-baseweb="tab-highlight"] {{
-        display: none !important;
-    }}
-    .stTabs [data-baseweb="tab-border"] {{
-        display: none !important;
-    }}
-    /* ── DataFrames ───────────────────────────────────────────── */
+    .stTabs [data-baseweb="tab-highlight"] {{ display: none !important; }}
+    .stTabs [data-baseweb="tab-border"]    {{ display: none !important; }}
+
+    /* ── DATAFRAMES ───────────────────────────────────────────────── */
     [data-testid="stDataFrame"] {{
-        border-radius: 8px; overflow: hidden;
+        border-radius: 10px;
+        overflow: hidden;
         box-shadow: 0 2px 8px rgba(0,0,0,0.06);
     }}
-    /* ── Alertas ──────────────────────────────────────────────── */
-    .alerta-roja     {{ background:#ffe0e0; border-left:4px solid #e74c3c; padding:10px; border-radius:5px; margin:5px 0; }}
-    .alerta-verde    {{ background:#e0ffe0; border-left:4px solid #27ae60; padding:10px; border-radius:5px; margin:5px 0; }}
-    .alerta-amarilla {{ background:#fff9e0; border-left:4px solid #f39c12; padding:10px; border-radius:5px; margin:5px 0; }}
-    .stProgress > div > div > div > div {{ background-color: #6B8E23; }}
-    /* ── Misc ─────────────────────────────────────────────────── */
-    footer {{visibility: hidden;}}
-    #MainMenu {{visibility: hidden;}}
+
+    /* ── BARRA DE PROGRESO ────────────────────────────────────────── */
+    .stProgress > div > div > div > div {{
+        background-color: {SIDEBAR_ACC};
+    }}
+
+    /* ── ALERTAS PERSONALIZADAS ───────────────────────────────────── */
+    .alerta-roja {{
+        background: #FFF0F0;
+        border-left: 4px solid #E53935;
+        padding: 10px 14px;
+        border-radius: 6px;
+        margin: 5px 0;
+        font-size: 0.88rem;
+    }}
+    .alerta-verde {{
+        background: #F0FFF4;
+        border-left: 4px solid #27AE60;
+        padding: 10px 14px;
+        border-radius: 6px;
+        margin: 5px 0;
+        font-size: 0.88rem;
+    }}
+    .alerta-amarilla {{
+        background: #FFFDF0;
+        border-left: 4px solid #F39C12;
+        padding: 10px 14px;
+        border-radius: 6px;
+        margin: 5px 0;
+        font-size: 0.88rem;
+    }}
+
+    /* ── OCULTAR ELEMENTOS STREAMLIT ──────────────────────────────── */
+    footer    {{ visibility: hidden; }}
+    #MainMenu {{ visibility: hidden; }}
     </style>
     """, unsafe_allow_html=True)
 
@@ -476,7 +544,7 @@ def pagina_dashboard():
     with col_left:
         st.subheader("📈 Avance por Persona")
         df_plot = df_stats.sort_values("pct_avance", ascending=True)
-        colors = ["#e74c3c" if v < 20 else "#f39c12" if v < 60 else "#27ae60" for v in df_plot["pct_avance"]]
+        colors = ["#E53935" if v < 20 else "#F39C12" if v < 60 else "#27AE60" for v in df_plot["pct_avance"]]
         fig = go.Figure(go.Bar(
             x=df_plot["pct_avance"], y=df_plot["nombre"], orientation="h",
             marker_color=colors,
@@ -484,17 +552,24 @@ def pagina_dashboard():
         ))
         fig.add_vline(x=60,  line_dash="dash", line_color="orange", annotation_text="Meta Intermedia 60%")
         fig.add_vline(x=100, line_dash="dash", line_color="green",  annotation_text="Meta Final 100%")
-        fig.update_layout(xaxis_range=[0, 110], height=350, xaxis_title="% Avance",
-                          margin=dict(l=10, r=10, t=10, b=10))
+        fig.update_layout(
+            xaxis_range=[0, 110], height=350, xaxis_title="% Avance",
+            plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF",
+            margin=dict(l=10, r=10, t=10, b=10)
+        )
         st.plotly_chart(fig, use_container_width=True)
     with col_right:
         st.subheader("🥧 Distribución Global")
         fig_pie = go.Figure(go.Pie(
             labels=["✅ Completado", "🔄 En curso", "⏸ Pendiente"],
             values=[df_stats["completados"].sum(), df_stats["en_curso"].sum(), df_stats["pendientes"].sum()],
-            hole=0.4, marker_colors=["#27ae60", "#f39c12", "#bdc3c7"]
+            hole=0.4, marker_colors=["#27AE60", "#F39C12", "#CFD8DC"]
         ))
-        fig_pie.update_layout(height=300, showlegend=True, margin=dict(l=10, r=10, t=10, b=10))
+        fig_pie.update_layout(
+            height=300, showlegend=True,
+            paper_bgcolor="#FFFFFF",
+            margin=dict(l=10, r=10, t=10, b=10)
+        )
         st.plotly_chart(fig_pie, use_container_width=True)
 
     st.subheader("🚦 Sistema de Alertas")
@@ -639,10 +714,11 @@ def pagina_analisis_rol():
 
     if not df_res.empty:
         fig = px.bar(df_res, x="Nombre", y="% Avance", color="Estado",
-                     color_discrete_map={"🟢 Bien": "#27ae60", "🟡 Atención": "#f39c12", "🔴 Crítico": "#e74c3c"},
+                     color_discrete_map={"🟢 Bien": "#27AE60", "🟡 Atención": "#F39C12", "🔴 Crítico": "#E53935"},
                      title=f"Comparación de Avances — {rol_sel}", text="% Avance")
         fig.add_hline(y=60, line_dash="dash", annotation_text="Meta intermedia 60%")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
+        fig.update_layout(plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF")
         st.plotly_chart(fig, use_container_width=True)
 
     if rol_sel != "Todos los roles":
@@ -711,8 +787,9 @@ def pagina_cronograma():
     meses_horas = df_cron.groupby("MesNom")["Horas"].sum().reset_index()
     fig = px.bar(meses_horas, x="MesNom", y="Horas",
                  title="Distribución de Horas por Mes",
-                 color="Horas", color_continuous_scale="YlGn", text="Horas")
+                 color="Horas", color_continuous_scale="Blues", text="Horas")
     fig.update_traces(texttemplate="%{text:.0f}h", textposition="outside")
+    fig.update_layout(plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF")
     st.plotly_chart(fig, use_container_width=True)
 
 
@@ -815,17 +892,17 @@ def main():
     inject_css()
 
     with st.sidebar:
-        # ── Logo ICA ──────────────────────────────────────────────
-        # Intenta cargar logo desde assets/; si no existe muestra badge institucional
+        # ── Logo ICA ──────────────────────────────────────────────────────────
         LOGO_URL = (
             "https://raw.githubusercontent.com/"
             "Mauricio-CHEM/programa_entrenamiento_iiad/main/assets/logo_ica.png"
         )
         st.markdown(f"""
-        <div style="text-align:center; padding:1.4rem 0.5rem 0.8rem 0.5rem;">
+        <div style="text-align:center; padding:1.6rem 0.5rem 1.0rem 0.5rem;">
             <img src="{LOGO_URL}"
                  id="ica-logo"
-                 style="max-width:140px; width:100%; filter:brightness(0) invert(1);
+                 style="max-width:130px; width:100%;
+                        filter:brightness(0) invert(1);
                         display:block; margin:0 auto;"
                  onerror="
                      this.style.display='none';
@@ -836,36 +913,42 @@ def main():
                 flex-direction:column; gap:4px;
             ">
                 <div style="
-                    width:64px; height:64px; border-radius:50%;
-                    background:rgba(255,255,255,0.15);
-                    border:2px solid rgba(255,255,255,0.40);
+                    width:60px; height:60px; border-radius:50%;
+                    background:rgba(255,255,255,0.10);
+                    border:2px solid rgba(255,255,255,0.30);
                     display:flex; align-items:center; justify-content:center;
-                    font-size:1.8rem;
-                ">🌿</div>
+                    font-size:1.7rem;
+                ">🧪</div>
                 <div style="
-                    font-size:0.95rem; font-weight:800; color:#FFFFFF;
+                    font-size:0.92rem; font-weight:800; color:#FFFFFF;
                     letter-spacing:0.12em; margin-top:4px;
                 ">ICA</div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # ── Identificación institucional ───────────────────────────
+        # ── Identificación institucional ───────────────────────────────────────
         st.markdown("""
-        <div style="text-align:center; padding:0 0.5rem 0.8rem 0.5rem;
-                    border-bottom:1px solid rgba(255,255,255,0.20);
-                    margin-bottom:0.8rem;">
-            <div style="font-size:0.82rem; font-weight:700;
-                        color:#FFFFFF; letter-spacing:0.02em;">
-                Subgerencia de Análisis y Diagnóstico
+        <div style="
+            text-align:center;
+            padding: 0 0.8rem 1.0rem 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            margin-bottom: 0.8rem;
+        ">
+            <div style="
+                font-size:0.85rem; font-weight:700;
+                color:#FFFFFF; letter-spacing:0.01em;
+                line-height:1.4;
+            ">
+                Laboratorio Nacional de Insumos Agrícolas
             </div>
-            <div style="font-size:0.70rem; color:rgba(255,255,255,0.60); margin-top:3px;">
+            <div style="font-size:0.72rem; color:rgba(232,237,243,0.55); margin-top:4px;">
                 Área IIAD · ISO 17034 | ISO 17043
             </div>
         </div>
         """, unsafe_allow_html=True)
 
-        # ── Menú de navegación ─────────────────────────────────────
+        # ── Menú de navegación ────────────────────────────────────────────────
         pagina = st.radio(
             "NAVEGACIÓN",
             ["🏠 Dashboard",
@@ -876,20 +959,22 @@ def main():
              "⚙️ Administración"],
         )
 
-        # ── Pie de sidebar ─────────────────────────────────────────
-        st.markdown("<div style='margin-top: 2rem;'></div>", unsafe_allow_html=True)
+        # ── Pie de sidebar ────────────────────────────────────────────────────
+        st.markdown("<div style='margin-top:auto; padding-top:2rem;'></div>", unsafe_allow_html=True)
         st.markdown("""
-        <div style="text-align:center; padding:0.6rem 1rem 0.5rem 1rem;
-                    border-top:1px solid rgba(255,255,255,0.15);">
-            <div style="font-size:0.65rem; color:rgba(255,255,255,0.40);
-                        line-height:1.6;">
-                v2.2 · Feb 2026<br>
+        <div style="
+            text-align:center;
+            padding: 0.7rem 1rem 0.6rem 1rem;
+            border-top: 1px solid rgba(255,255,255,0.10);
+        ">
+            <div style="font-size:0.65rem; color:rgba(232,237,243,0.35); line-height:1.7;">
+                v2.3 · Feb 2026<br>
                 🗄️ GitHub JSON · ARCAL RLA5091
-           </div>
-       </div>
-       """, unsafe_allow_html=True)
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
 
-    # ── Contenido principal ────────────────────────────────────────
+    # ── Contenido principal ────────────────────────────────────────────────────
     if   pagina == "🏠 Dashboard":           pagina_dashboard()
     elif pagina == "📝 Registro de Avances": pagina_registro()
     elif pagina == "📊 Análisis por Rol":    pagina_analisis_rol()
