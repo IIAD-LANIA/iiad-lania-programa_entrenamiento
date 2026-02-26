@@ -510,7 +510,7 @@ def inject_css():
 # ─────────────────────────────────────────────────────────────────────────────
 def pagina_dashboard():
     st.title("Dashboard — Sistema de Formación IIAD")
-    st.markdown('## Basado en las normas ISO 17034 / ISO 17043 / ISO 13528)
+    st.markdown('## Basado en las normas ISO 17034 / ISO 17043 / ISO 13528')
     st.caption(f"📅 Actualizado: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
 
     personal = get_personal()
