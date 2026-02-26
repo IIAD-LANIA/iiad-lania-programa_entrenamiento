@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # =============================================================================
 # SISTEMA DE SEGUIMIENTO DE FORMACIÓN - ÁREA IIAD / ICA
-# Versión 2.4 | Almacenamiento: JSON en repositorio GitHub
+# Versión 2.5 | Almacenamiento: JSON en repositorio GitHub
 # Desarrollado para cumplimiento ISO 17034 & ISO 17043
 # Estilo visual: alineado con Dashboard-SG-IDI_V4
-# NUEVO v2.4: soporte multi-roles por persona (campo "roles" lista)
-#             con retrocompatibilidad automática del campo "rol" (string)
+# NUEVO v2.5: gestión completa de catálogo de documentos
+#             - Agregar nuevos documentos con asignación de roles
+#             - Editar roles asociados a documentos existentes
 # =============================================================================
 import streamlit as st
 import pandas as pd
@@ -42,6 +43,21 @@ ROLES_DISPONIBLES = [
     "Líder de producción",
     "Líder de comparación",
     "Profesional análisis datos",
+]
+
+CATEGORIAS_DISPONIBLES = [
+    "SGC Base",
+    "Normas ISO",
+    "Proceso Técnico",
+    "SGC Operativo",
+    "Calidad Avanzada",
+]
+
+NIVELES_DISPONIBLES = [
+    "Nivel 1",
+    "Nivel 2",
+    "Nivel 3",
+    "Nivel 4",
 ]
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -248,9 +264,9 @@ def _datos_iniciales():
         "requisitos_rol": requisitos_rol,
         "avances": [],
         "_meta": {
-            "version": "2.4",
+            "version": "2.5",
             "creado": datetime.now().strftime("%Y-%m-%d %H:%M"),
-            "descripcion": "Datos formación IIAD - ICA | Multi-roles por persona"
+            "descripcion": "Datos formación IIAD - ICA | Multi-roles por persona | Gestión documentos"
         }
     }
 
@@ -263,7 +279,6 @@ def get_personal():
     df = pd.DataFrame([p for p in data["personal"] if p["estado"] == "Activo"])
     if df.empty:
         return df
-    # Columna auxiliar "rol_display" para retrocompatibilidad visual
     df["rol_display"] = df["roles"].apply(
         lambda r: " · ".join(r) if isinstance(r, list) else str(r)
     )
@@ -274,6 +289,12 @@ def get_documentos():
     data = get_data()
     df = pd.DataFrame(data["documentos"])
     return df.sort_values(["categoria", "codigo"]).reset_index(drop=True) if not df.empty else df
+
+
+def get_roles_de_documento(doc_id):
+    """Devuelve lista de roles asociados a un documento por su id."""
+    data = get_data()
+    return list({r["rol"] for r in data["requisitos_rol"] if r["documento_id"] == doc_id})
 
 
 def get_docs_por_rol(rol):
@@ -288,10 +309,6 @@ def get_docs_por_rol(rol):
 
 
 def get_docs_por_persona(roles_lista):
-    """
-    Devuelve la unión de documentos requeridos para todos los roles de una persona.
-    Agrega columna 'roles_que_cubre' (lista) y 'es_transversal' (bool).
-    """
     data = get_data()
     doc_roles: dict[int, list] = {}
     for rol in roles_lista:
@@ -344,6 +361,55 @@ def actualizar_roles_personal(persona_id, nuevos_roles):
     return save_data(data)
 
 
+def agregar_documento(codigo, nombre, categoria, horas, nivel, norma_cubierta, es_critico, roles_asignados):
+    """Agrega un nuevo documento al catálogo y crea sus entradas en requisitos_rol."""
+    data = get_data()
+    # Verificar que el código no exista ya
+    codigos_existentes = {d["codigo"] for d in data["documentos"]}
+    if codigo in codigos_existentes:
+        return False, "El código ya existe en el catálogo."
+    # Asignar nuevo ID
+    new_doc_id = max((d["id"] for d in data["documentos"]), default=0) + 1
+    data["documentos"].append({
+        "id": new_doc_id,
+        "codigo": codigo,
+        "nombre": nombre,
+        "categoria": categoria,
+        "horas": horas,
+        "nivel": nivel,
+        "norma_cubierta": norma_cubierta,
+        "es_critico": 1 if es_critico else 0,
+    })
+    # Crear entradas en requisitos_rol para cada rol asignado
+    req_id_base = max((r["id"] for r in data["requisitos_rol"]), default=0) + 1
+    for i, rol in enumerate(roles_asignados):
+        data["requisitos_rol"].append({
+            "id": req_id_base + i,
+            "rol": rol,
+            "documento_id": new_doc_id
+        })
+    ok = save_data(data)
+    return ok, None
+
+
+def actualizar_roles_documento(doc_id, nuevos_roles):
+    """Reemplaza los roles asociados a un documento existente."""
+    data = get_data()
+    # Eliminar entradas actuales del documento
+    data["requisitos_rol"] = [
+        r for r in data["requisitos_rol"] if r["documento_id"] != doc_id
+    ]
+    # Agregar nuevas entradas
+    req_id_base = max((r["id"] for r in data["requisitos_rol"]), default=0) + 1
+    for i, rol in enumerate(nuevos_roles):
+        data["requisitos_rol"].append({
+            "id": req_id_base + i,
+            "rol": rol,
+            "documento_id": doc_id
+        })
+    return save_data(data)
+
+
 def calcular_estadisticas_persona(persona_id, roles_lista):
     if isinstance(roles_lista, str):
         roles_lista = [roles_lista]
@@ -393,7 +459,7 @@ def exportar_excel():
 
 
 # ─────────────────────────────────────────────────────────────────────────────
-# ESTILOS CSS  —  Estilo visual alineado con Dashboard-SG-IDI_V4
+# ESTILOS CSS
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
     SIDEBAR_BG   = "#0D1B2A"
@@ -713,7 +779,6 @@ def pagina_registro():
         badge_crit = "⚠️ CRÍTICO " if doc["es_critico"] else ""
         roles_cubre = doc.get("roles_que_cubre", [])
         badge_trans = " 🔀 TRANSVERSAL" if doc.get("es_transversal") else ""
-        roles_str   = " · ".join(roles_cubre) if roles_cubre else ""
         with st.expander(
             f"{badge_crit}[{doc['codigo']}] {doc['nombre']} — {doc['horas']}h — {doc['nivel']}{badge_trans} — Estado: {doc['estado']}"
         ):
@@ -788,14 +853,12 @@ def pagina_registro():
 def pagina_analisis_rol():
     st.title("📊 Análisis por Rol")
     personal = get_personal()
-    # Recopilar todos los roles únicos presentes en la BD
     all_roles = set()
     for _, p in personal.iterrows():
         roles = p["roles"] if isinstance(p["roles"], list) else [p["roles"]]
         all_roles.update(roles)
     rol_sel = st.selectbox("🔍 Seleccionar Rol", ["Todos los roles"] + sorted(all_roles))
 
-    # Filtrar personas que tienen el rol seleccionado
     if rol_sel == "Todos los roles":
         personal_filtrado = personal
     else:
@@ -945,11 +1008,13 @@ def pagina_admin():
     st.title("⚙️ Administración del Sistema")
     tab1, tab2, tab3 = st.tabs(["👥 Personal", "📚 Documentos", "🗄️ Datos GitHub"])
 
+    # ══════════════════════════════════════════════════════════════════════════
+    # TAB 1 — PERSONAL
+    # ══════════════════════════════════════════════════════════════════════════
     with tab1:
         st.subheader("Personal Activo")
         personal = get_personal()
 
-        # ── Tabla de personal con roles como texto ────────────────────────────
         if not personal.empty:
             df_display = personal[["nombre", "rol_display", "fecha_ingreso", "estado"]].copy()
             df_display.columns = ["Nombre", "Roles", "Ingreso", "Estado"]
@@ -970,7 +1035,6 @@ def pagina_admin():
                 default=roles_actuales,
                 key="edit_roles"
             )
-            # Badges visuales de roles seleccionados
             if nuevos_roles:
                 badges = " ".join([f'<span class="badge-rol">{r}</span>' for r in nuevos_roles])
                 st.markdown(f"**Roles seleccionados:** {badges}", unsafe_allow_html=True)
@@ -997,7 +1061,6 @@ def pagina_admin():
                 options=ROLES_DISPONIBLES,
                 default=[ROLES_DISPONIBLES[0]]
             )
-            # Nota informativa sobre roles transversales
             if len(roles_nuevos) > 1:
                 st.info(f"ℹ️ Los documentos comunes a los {len(roles_nuevos)} roles seleccionados "
                         f"se marcarán como **transversales** y solo se registrarán una vez.")
@@ -1011,10 +1074,129 @@ def pagina_admin():
                             st.success(f"✅ {nombre} agregado con roles: {' · '.join(roles_nuevos)}")
                             st.rerun()
 
+    # ══════════════════════════════════════════════════════════════════════════
+    # TAB 2 — DOCUMENTOS
+    # ══════════════════════════════════════════════════════════════════════════
     with tab2:
         st.subheader("Catálogo de Documentos")
-        st.dataframe(get_documentos(), use_container_width=True, hide_index=True)
 
+        docs_df = get_documentos()
+        # Agregar columna de roles para cada documento
+        if not docs_df.empty:
+            docs_df["roles_asignados"] = docs_df["id"].apply(
+                lambda did: " · ".join(get_roles_de_documento(did)) or "—"
+            )
+            st.dataframe(
+                docs_df[["codigo", "nombre", "categoria", "horas", "nivel",
+                          "norma_cubierta", "es_critico", "roles_asignados"]],
+                use_container_width=True,
+                hide_index=True
+            )
+            st.caption(f"📄 Total: {len(docs_df)} documentos en catálogo")
+
+        st.divider()
+
+        # ── Editar roles de documento existente ───────────────────────────────
+        st.subheader("✏️ Editar Roles de Documento Existente")
+        if not docs_df.empty:
+            # Selector de documento
+            opciones_docs = {
+                f"[{row['codigo']}] {row['nombre']}": row["id"]
+                for _, row in docs_df.iterrows()
+            }
+            doc_sel_label = st.selectbox(
+                "Seleccionar documento",
+                options=list(opciones_docs.keys()),
+                key="doc_edit_sel"
+            )
+            doc_sel_id = opciones_docs[doc_sel_label]
+            roles_doc_actuales = get_roles_de_documento(doc_sel_id)
+
+            # Mostrar roles actuales con badges
+            if roles_doc_actuales:
+                badges_doc = " ".join([f'<span class="badge-rol">{r}</span>' for r in roles_doc_actuales])
+                st.markdown(f"**Roles actuales:** {badges_doc}", unsafe_allow_html=True)
+            else:
+                st.warning("Este documento no tiene roles asignados actualmente.")
+
+            nuevos_roles_doc = st.multiselect(
+                "Roles asignados al documento",
+                options=ROLES_DISPONIBLES,
+                default=roles_doc_actuales,
+                key="doc_edit_roles"
+            )
+
+            col_d1, col_d2 = st.columns([1, 3])
+            with col_d1:
+                if st.button("💾 Actualizar Roles del Documento", type="primary"):
+                    with st.spinner("Guardando en GitHub..."):
+                        if actualizar_roles_documento(doc_sel_id, nuevos_roles_doc):
+                            st.success(f"✅ Roles actualizados para [{docs_df[docs_df['id'] == doc_sel_id]['codigo'].values[0]}]")
+                            st.rerun()
+
+        st.divider()
+
+        # ── Agregar nuevo documento ───────────────────────────────────────────
+        st.subheader("➕ Agregar Nuevo Documento")
+        with st.form("form_nuevo_documento"):
+            col_a, col_b = st.columns(2)
+            with col_a:
+                nuevo_codigo   = st.text_input("Código del documento",     placeholder="Ej: GSA-SAD-P-099")
+                nuevo_nombre   = st.text_input("Nombre / Título",           placeholder="Ej: Procedimiento de validación...")
+                nueva_categoria = st.selectbox("Categoría", CATEGORIAS_DISPONIBLES)
+                nuevo_nivel    = st.selectbox("Nivel de formación", NIVELES_DISPONIBLES, index=1)
+            with col_b:
+                nuevas_horas   = st.number_input("Horas de formación", min_value=0.5, max_value=40.0,
+                                                  value=3.0, step=0.5)
+                nueva_norma    = st.text_input("Normas cubiertas",
+                                               placeholder="Ej: ISO 17034 §7.2 / ISO 17043 §6.1")
+                es_critico_new = st.checkbox("⚠️ Documento crítico")
+                roles_nuevos_doc = st.multiselect(
+                    "Roles que deben estudiar este documento",
+                    options=ROLES_DISPONIBLES,
+                    default=[]
+                )
+
+            # Nota informativa sobre transversalidad
+            if len(roles_nuevos_doc) > 1:
+                st.info(
+                    f"ℹ️ Este documento aparecerá como **transversal** para las personas "
+                    f"que tengan ≥2 de los {len(roles_nuevos_doc)} roles seleccionados."
+                )
+            elif len(roles_nuevos_doc) == 0:
+                st.warning("⚠️ Sin roles asignados, el documento no aparecerá en ningún plan de formación.")
+
+            submitted = st.form_submit_button("💾 Guardar Nuevo Documento", type="primary")
+            if submitted:
+                if not nuevo_codigo.strip():
+                    st.error("❌ El código es obligatorio.")
+                elif not nuevo_nombre.strip():
+                    st.error("❌ El nombre es obligatorio.")
+                else:
+                    with st.spinner("Guardando en GitHub..."):
+                        ok, err = agregar_documento(
+                            codigo=nuevo_codigo.strip(),
+                            nombre=nuevo_nombre.strip(),
+                            categoria=nueva_categoria,
+                            horas=nuevas_horas,
+                            nivel=nuevo_nivel,
+                            norma_cubierta=nueva_norma.strip(),
+                            es_critico=es_critico_new,
+                            roles_asignados=roles_nuevos_doc
+                        )
+                        if ok:
+                            roles_str = " · ".join(roles_nuevos_doc) if roles_nuevos_doc else "ningún rol"
+                            st.success(
+                                f"✅ Documento **{nuevo_codigo}** agregado al catálogo. "
+                                f"Asignado a: {roles_str}"
+                            )
+                            st.rerun()
+                        else:
+                            st.error(f"❌ {err}")
+
+    # ══════════════════════════════════════════════════════════════════════════
+    # TAB 3 — DATOS GITHUB
+    # ══════════════════════════════════════════════════════════════════════════
     with tab3:
         st.subheader("Información del Sistema — Almacenamiento GitHub")
         data = get_data()
@@ -1122,7 +1304,7 @@ def main():
             border-top: 1px solid rgba(255,255,255,0.10);
         ">
             <div style="font-size:0.65rem; color:rgba(232,237,243,0.35); line-height:1.7;">
-                v2.4 · Feb 2026<br>
+                v2.5 · Feb 2026<br>
                 🗄️ GitHub JSON · ARCAL RLA5091
             </div>
         </div>
