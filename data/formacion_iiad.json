@@ -312,10 +312,22 @@
     {"id":52,"persona_id":3,"documento_id":30,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"},
     {"id":53,"persona_id":3,"documento_id":31,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"},
     {"id":54,"persona_id":3,"documento_id":32,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"},
-    {"id":55,"persona_id":3,"documento_id":33,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"}
+    {"id":55,"persona_id":3,"documento_id":33,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"},
+    {"id":56,"persona_id":1,"documento_id":48,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":57,"persona_id":1,"documento_id":49,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":58,"persona_id":1,"documento_id":50,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":59,"persona_id":1,"documento_id":51,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":60,"persona_id":2,"documento_id":48,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":61,"persona_id":2,"documento_id":49,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":62,"persona_id":2,"documento_id":50,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":63,"persona_id":2,"documento_id":51,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":64,"persona_id":3,"documento_id":48,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":65,"persona_id":3,"documento_id":49,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":66,"persona_id":3,"documento_id":50,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"},
+    {"id":67,"persona_id":3,"documento_id":51,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-27 18:17:00"}
   ],
   "_meta": {
-    "version": "2.6",
+    "version": "2.7",
     "creado": "2026-02-24 19:00",
     "descripcion": "Datos formación IIAD - ICA | Multi-roles por persona | Gestión documentos"
   }
