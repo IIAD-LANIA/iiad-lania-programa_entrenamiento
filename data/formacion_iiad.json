@@ -85,7 +85,11 @@
     {"id":44,"codigo":"GSA-SAD-G-004","nombre":"Gestión de riesgos imparcialidad","categoria":"Calidad Avanzada","horas":3.0,"nivel":"Nivel 3","norma_cubierta":"ISO 17034 §4.2 / ISO 17043 §4.1","es_critico":0},
     {"id":45,"codigo":"GSA-SAD-G-006","nombre":"Matriz de Autoridad","categoria":"Calidad Avanzada","horas":4.0,"nivel":"Nivel 4","norma_cubierta":"ISO 17034 §5.5 / ISO 17043 §5.5","es_critico":0},
     {"id":46,"codigo":"GSA-SAD-G-007","nombre":"Interacción y coordinación de roles","categoria":"Calidad Avanzada","horas":3.0,"nivel":"Nivel 3","norma_cubierta":"ISO 17034 §5.5 / ISO 17043 §5.5","es_critico":0},
-    {"id":47,"codigo":"GSA-SAD-G-015","nombre":"Matriz de objetivos de calidad","categoria":"Calidad Avanzada","horas":4.0,"nivel":"Nivel 4","norma_cubierta":"ISO 17034 §8.8 / ISO 17043 §8.6","es_critico":0}
+    {"id":47,"codigo":"GSA-SAD-G-015","nombre":"Matriz de objetivos de calidad","categoria":"Calidad Avanzada","horas":4.0,"nivel":"Nivel 4","norma_cubierta":"ISO 17034 §8.8 / ISO 17043 §8.6","es_critico":0},
+    {"id":48,"codigo":"GSA-SAD-P-005","nombre":"Aseguramiento de la validez de los resultados","categoria":"SGC Operativo","horas":3.0,"nivel":"Nivel 3","norma_cubierta":"ISO/IEC 17025 §7.7","es_critico":0},
+    {"id":49,"codigo":"GSA-I-SAD-028","nombre":"Obligaciones ante acreditación ONAC","categoria":"SGC Base","horas":1.5,"nivel":"Nivel 2","norma_cubierta":"ISO/IEC 17025 §8.1","es_critico":0},
+    {"id":50,"codigo":"GSA-I-SAD-024","nombre":"Disposición de desechos biosaniatarios en los laboratorios","categoria":"SGC Operativo","horas":1.5,"nivel":"Nivel 1","norma_cubierta":"ISO/IEC 17025 §6.3","es_critico":0},
+    {"id":51,"codigo":"GSA-I-SAD-027","nombre":"Disposición de los desechos cortopunzantes","categoria":"SGC Operativo","horas":1.5,"nivel":"Nivel 1","norma_cubierta":"ISO/IEC 17025 §6.3","es_critico":0}
   ],
   "requisitos_rol": [
     {"id":1,"rol":"Responsable área IIAD","documento_id":30},
@@ -257,7 +261,27 @@
     {"id":167,"rol":"Profesional análisis datos","documento_id":7},
     {"id":168,"rol":"Profesional análisis datos","documento_id":20},
     {"id":169,"rol":"Profesional análisis datos","documento_id":1},
-    {"id":170,"rol":"Profesional análisis datos","documento_id":36}
+    {"id":170,"rol":"Profesional análisis datos","documento_id":36},
+    {"id":171,"rol":"Responsable área IIAD","documento_id":48},
+    {"id":172,"rol":"Responsable área IIAD","documento_id":49},
+    {"id":173,"rol":"Responsable área IIAD","documento_id":50},
+    {"id":174,"rol":"Responsable área IIAD","documento_id":51},
+    {"id":175,"rol":"Profesional área IIAD","documento_id":48},
+    {"id":176,"rol":"Profesional área IIAD","documento_id":49},
+    {"id":177,"rol":"Profesional área IIAD","documento_id":50},
+    {"id":178,"rol":"Profesional área IIAD","documento_id":51},
+    {"id":179,"rol":"Líder de producción","documento_id":48},
+    {"id":180,"rol":"Líder de producción","documento_id":49},
+    {"id":181,"rol":"Líder de producción","documento_id":50},
+    {"id":182,"rol":"Líder de producción","documento_id":51},
+    {"id":183,"rol":"Líder de comparación","documento_id":48},
+    {"id":184,"rol":"Líder de comparación","documento_id":49},
+    {"id":185,"rol":"Líder de comparación","documento_id":50},
+    {"id":186,"rol":"Líder de comparación","documento_id":51},
+    {"id":187,"rol":"Profesional análisis datos","documento_id":48},
+    {"id":188,"rol":"Profesional análisis datos","documento_id":49},
+    {"id":189,"rol":"Profesional análisis datos","documento_id":50},
+    {"id":190,"rol":"Profesional análisis datos","documento_id":51}
   ],
   "avances": [
     {"id":27,"persona_id":3,"documento_id":9,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"},
@@ -291,7 +315,7 @@
     {"id":55,"persona_id":3,"documento_id":33,"estado":"Pendiente","fecha_inicio":null,"fecha_completitud":null,"calificacion":null,"observaciones":null,"registrado_por":"Capacitador IIAD","timestamp_registro":"2026-02-24 21:31:24"}
   ],
   "_meta": {
-    "version": "2.5",
+    "version": "2.6",
     "creado": "2026-02-24 19:00",
     "descripcion": "Datos formación IIAD - ICA | Multi-roles por persona | Gestión documentos"
   }
