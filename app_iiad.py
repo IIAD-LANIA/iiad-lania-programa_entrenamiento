@@ -1305,3 +1305,30 @@ def main():
         )
 
         st.markdown("<div style='margin-top:auto; padding-top:2rem;'>
+                st.markdown("""
+        <div style='margin-top:auto; padding-top:2rem;'>
+            <hr style='border-color:rgba(255,255,255,0.12); margin-bottom:0.8rem;'/>
+            <div style='font-size:0.70rem; color:rgba(232,237,243,0.45); text-align:center; line-height:1.6;'>
+                v2.6 · ICA SAD · 2026<br>
+                ISO 17034 | ISO 17043 | ISO 13528
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+    if pagina == "🏠 Dashboard":
+        pagina_dashboard()
+    elif pagina == "📝 Registro de Avances":
+        pagina_registro()
+    elif pagina == "📊 Análisis por Rol":
+        pagina_analisis_rol()
+    elif pagina == "📅 Cronograma":
+        pagina_cronograma()
+    elif pagina == "📋 Reportes":
+        pagina_reportes()
+    elif pagina == "⚙️ Administración":
+        pagina_admin()
+
+
+if __name__ == "__main__":
+    main()
+
