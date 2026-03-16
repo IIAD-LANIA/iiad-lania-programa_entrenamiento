@@ -32,7 +32,7 @@ st.set_page_config(
 # CONFIGURACIÓN GITHUB  (desde Streamlit Secrets)
 # ─────────────────────────────────────────────────────────────────────────────
 GITHUB_TOKEN = st.secrets.get("GITHUB_TOKEN", "")
-GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "Mauricio-CHEM")
+GITHUB_OWNER = st.secrets.get("GITHUB_OWNER", "IIAD-LANIA")
 GITHUB_REPO  = st.secrets.get("GITHUB_REPO",  "programa_entrenamiento_iiad")
 DATA_FILE    = "data/formacion_iiad.json"
 
@@ -1232,7 +1232,7 @@ def main():
     with st.sidebar:
         LOGO_URL = (
             "https://raw.githubusercontent.com/"
-            "Mauricio-CHEM/programa_entrenamiento_iiad/main/assets/logo_ica.png"
+            "IIAD-LANIA/iiad-lania-programa_entrenamiento/blob/main/assets/logo_ica.png"
         )
         st.markdown(f"""
         <div style="text-align:center; padding:1.6rem 0.5rem 1.0rem 0.5rem;">
