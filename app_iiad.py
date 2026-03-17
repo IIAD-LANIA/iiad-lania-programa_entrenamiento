@@ -101,30 +101,53 @@ def _migrar_roles(data):
             p["roles"] = [p["roles"]]
     return data
 
-
-def save_data_to_github(data, sha=None):
+def save_data_to_github(data, sha=None, max_retries=2):
+    """Guarda data en GitHub con reintento automático ante conflictos de SHA (fix BUG-001)."""
     url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{DATA_FILE}"
-    content_b64 = base64.b64encode(
-        json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
-    ).decode("utf-8")
-    payload = {
-        "message": f"Actualización formación IIAD [{datetime.now().strftime('%Y-%m-%d %H:%M')}]",
-        "content": content_b64,
-    }
-    if sha:
-        payload["sha"] = sha
-    try:
-        r = requests.put(url, headers=_gh_headers(), json=payload, timeout=15)
-        if r.status_code in [200, 201]:
-            st.session_state["data_sha"] = r.json()["content"]["sha"]
-            return True
-        else:
-            st.error(f"Error al guardar: {r.status_code} — {r.json().get('message', '')}")
-            return False
-    except Exception as e:
-        st.error(f"Error al conectar con GitHub: {e}")
-        return False
+    current_sha = sha
 
+    for attempt in range(max_retries + 1):
+        if attempt > 0:
+            try:
+                r_get = requests.get(url, headers=_gh_headers(), timeout=10)
+                if r_get.status_code == 200:
+                    current_sha = r_get.json().get("sha")
+                    st.session_state["data_sha"] = current_sha
+            except Exception:
+                pass
+
+        content_b64 = base64.b64encode(
+            json.dumps(data, ensure_ascii=False, indent=2).encode("utf-8")
+        ).decode("utf-8")
+        payload = {
+            "message": f"Actualización formación IIAD [{datetime.now().strftime('%Y-%m-%d %H:%M')}]",
+            "content": content_b64,
+        }
+        if current_sha:
+            payload["sha"] = current_sha
+
+        try:
+            r = requests.put(url, headers=_gh_headers(), json=payload, timeout=15)
+            if r.status_code in [200, 201]:
+                st.session_state["data_sha"] = r.json()["content"]["sha"]
+                return True
+            elif r.status_code == 409 and attempt < max_retries:
+                st.warning(f"⚠️ Conflicto de versión. Reintentando ({attempt + 1}/{max_retries})…")
+                continue
+            else:
+                error_msg = r.json().get("message", "")
+                st.error(f"Error al guardar: {r.status_code} — {error_msg}")
+                if r.status_code == 409:
+                    st.error(
+                        "⚠️ Conflicto de versión: otro usuario modificó los datos simultáneamente. "
+                        "Use '🔄 Forzar recarga' en ⚙️ Administración → Datos GitHub e intente de nuevo."
+                    )
+                return False
+        except Exception as e:
+            st.error(f"Error al conectar con GitHub: {e}")
+            return False
+
+    return False
 
 def get_data():
     if "app_data" not in st.session_state or st.session_state.get("refresh", False):
@@ -946,7 +969,7 @@ def pagina_cronograma():
 
     mes_sel = st.selectbox("Filtrar por mes", ["Todos"] + [f"Mes {i}" for i in range(1, 7)])
     if mes_sel != "Todos":
-        df_cron = df_cron[df_cron["Mes"] == int(mes_sel.split("-")[1])]
+        df_cron = df_cron[df_cron["Mes"] == int(mes_sel.split(" ")[1])]
 
     st.dataframe(df_cron[["Semana","MesNom","Bloque","Código","Actividad",
                            "Horas","Roles","Modalidad","Prioridad"]],
