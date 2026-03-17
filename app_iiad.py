@@ -534,7 +534,7 @@ def inject_css():
     [data-testid="stSidebar"] label,
     [data-testid="stSidebar"] small,
     [data-testid="stSidebar"] .stMarkdown {{
-        color: {ACCENT_LIGHT} !important;
+        color: #2C3E50 !important;
     }}
     [data-testid="stSidebar"] hr {{
         border-color: rgba(255,255,255,0.15) !important;
@@ -548,7 +548,7 @@ def inject_css():
         margin-bottom: 4px;
     }}
     [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {{
-        color: {ACCENT_LIGHT} !important;
+        color: #2C3E50 !important;
         padding: 7px 14px;
         border-radius: 8px;
         font-size: 0.88rem;
@@ -582,7 +582,7 @@ def inject_css():
     [data-testid="stMetricValue"] div {{
         font-size: 2.0rem !important;
         font-weight: 800 !important;
-        color: {METRIC_VAL} !important;
+        color: #2C3E50 !important;
         line-height: 1.1 !important;
     }}
     [data-testid="stMetricDelta"] {{
@@ -649,6 +649,7 @@ def inject_css():
         border-radius: 6px;
         margin: 5px 0;
         font-size: 0.88rem;
+        color: #2C3E50 !important;
     }}
     .alerta-verde {{
         background: #F0FFF4;
@@ -657,6 +658,7 @@ def inject_css():
         border-radius: 6px;
         margin: 5px 0;
         font-size: 0.88rem;
+        color: #2C3E50 !important;
     }}
     .alerta-amarilla {{
         background: #FFFDF0;
@@ -665,6 +667,7 @@ def inject_css():
         border-radius: 6px;
         margin: 5px 0;
         font-size: 0.88rem;
+        color: #2C3E50 !important;
     }}
     .badge-rol {{
         display: inline-block;
