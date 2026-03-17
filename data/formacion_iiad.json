@@ -2546,10 +2546,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 61,
@@ -2558,10 +2558,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 62,
@@ -2570,10 +2570,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 63,
@@ -2582,10 +2582,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 64,
@@ -2858,10 +2858,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 87,
@@ -2870,10 +2870,10 @@
       "estado": "Pendiente",
       "fecha_inicio": null,
       "fecha_completitud": null,
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:38:52"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 88,
@@ -2882,22 +2882,22 @@
       "estado": "Completado",
       "fecha_inicio": "2023-10-17",
       "fecha_completitud": "2023-10-17",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-002 | Capacitación | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 89,
       "persona_id": 2,
       "documento_id": 5,
       "estado": "Completado",
-      "fecha_inicio": "2024-09-20",
-      "fecha_completitud": "2024-09-20",
-      "calificacion": null,
-      "observaciones": "FORMA 3-191 | GSA-I-SAD-020 | Capacitación | Con soporte verificado",
+      "fecha_inicio": "2024-10-07",
+      "fecha_completitud": "2024-10-07",
+      "calificacion": 0.0,
+      "observaciones": "FORMA 3-191 | GSA-I-SAD-020 | Enseñanza (segundo evento) | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 90,
@@ -2906,10 +2906,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-09-24",
       "fecha_completitud": "2024-09-24",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | ISO 17025:2017 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 91,
@@ -2918,10 +2918,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-09-26",
       "fecha_completitud": "2024-09-26",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-MC-003 | Capacitación + Enseñanza (doble evento mismo día) | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 92,
@@ -2930,10 +2930,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-10-03",
       "fecha_completitud": "2024-10-03",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-027 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 93,
@@ -2942,10 +2942,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-10-03",
       "fecha_completitud": "2024-10-03",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-039 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 94,
@@ -2954,10 +2954,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-10-07",
       "fecha_completitud": "2024-10-07",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-031 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 95,
@@ -2966,10 +2966,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-10-07",
       "fecha_completitud": "2024-10-07",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-041 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 96,
@@ -2990,10 +2990,10 @@
       "estado": "Completado",
       "fecha_inicio": "2024-10-31",
       "fecha_completitud": "2024-10-31",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-001 | Capacitación | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 98,
@@ -3002,10 +3002,10 @@
       "estado": "Completado",
       "fecha_inicio": "2025-03-21",
       "fecha_completitud": "2025-03-21",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-024 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 99,
@@ -3014,10 +3014,10 @@
       "estado": "Completado",
       "fecha_inicio": "2025-03-27",
       "fecha_completitud": "2025-03-27",
-      "calificacion": null,
+      "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-007 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-02-27 20:57:00"
+      "timestamp_registro": "2026-03-17 22:20:07"
     },
     {
       "id": 100,
@@ -3582,6 +3582,606 @@
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
       "timestamp_registro": "2026-03-12 21:40:02"
+    },
+    {
+      "id": 147,
+      "persona_id": 2,
+      "documento_id": 12,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 148,
+      "persona_id": 2,
+      "documento_id": 9,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 149,
+      "persona_id": 2,
+      "documento_id": 10,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 150,
+      "persona_id": 2,
+      "documento_id": 14,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 151,
+      "persona_id": 2,
+      "documento_id": 13,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 152,
+      "persona_id": 2,
+      "documento_id": 19,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 153,
+      "persona_id": 2,
+      "documento_id": 21,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 154,
+      "persona_id": 2,
+      "documento_id": 1,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 155,
+      "persona_id": 2,
+      "documento_id": 3,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 156,
+      "persona_id": 2,
+      "documento_id": 38,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 157,
+      "persona_id": 2,
+      "documento_id": 43,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 158,
+      "persona_id": 2,
+      "documento_id": 41,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 159,
+      "persona_id": 2,
+      "documento_id": 42,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 160,
+      "persona_id": 2,
+      "documento_id": 40,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 161,
+      "persona_id": 2,
+      "documento_id": 44,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 162,
+      "persona_id": 2,
+      "documento_id": 46,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 163,
+      "persona_id": 2,
+      "documento_id": 55,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 164,
+      "persona_id": 2,
+      "documento_id": 17,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 165,
+      "persona_id": 2,
+      "documento_id": 15,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 166,
+      "persona_id": 2,
+      "documento_id": 16,
+      "estado": "En curso",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 167,
+      "persona_id": 2,
+      "documento_id": 64,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 168,
+      "persona_id": 2,
+      "documento_id": 65,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 169,
+      "persona_id": 2,
+      "documento_id": 66,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 170,
+      "persona_id": 2,
+      "documento_id": 67,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 171,
+      "persona_id": 2,
+      "documento_id": 24,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 172,
+      "persona_id": 2,
+      "documento_id": 22,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 173,
+      "persona_id": 2,
+      "documento_id": 69,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 174,
+      "persona_id": 2,
+      "documento_id": 54,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 175,
+      "persona_id": 2,
+      "documento_id": 8,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 176,
+      "persona_id": 2,
+      "documento_id": 68,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 177,
+      "persona_id": 2,
+      "documento_id": 6,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 178,
+      "persona_id": 2,
+      "documento_id": 7,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 179,
+      "persona_id": 2,
+      "documento_id": 4,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 180,
+      "persona_id": 2,
+      "documento_id": 34,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 181,
+      "persona_id": 2,
+      "documento_id": 57,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 182,
+      "persona_id": 2,
+      "documento_id": 58,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 183,
+      "persona_id": 2,
+      "documento_id": 59,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 184,
+      "persona_id": 2,
+      "documento_id": 36,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 185,
+      "persona_id": 2,
+      "documento_id": 60,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 186,
+      "persona_id": 2,
+      "documento_id": 61,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 187,
+      "persona_id": 2,
+      "documento_id": 62,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 188,
+      "persona_id": 2,
+      "documento_id": 63,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 189,
+      "persona_id": 2,
+      "documento_id": 56,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 190,
+      "persona_id": 2,
+      "documento_id": 27,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 191,
+      "persona_id": 2,
+      "documento_id": 29,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 192,
+      "persona_id": 2,
+      "documento_id": 28,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 193,
+      "persona_id": 2,
+      "documento_id": 30,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 194,
+      "persona_id": 2,
+      "documento_id": 31,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 195,
+      "persona_id": 2,
+      "documento_id": 32,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
+    },
+    {
+      "id": 196,
+      "persona_id": 2,
+      "documento_id": 33,
+      "estado": "Pendiente",
+      "fecha_inicio": "nan",
+      "fecha_completitud": "nan",
+      "calificacion": NaN,
+      "observaciones": "nan",
+      "registrado_por": "Capacitador IIAD",
+      "timestamp_registro": "2026-03-17 22:20:07"
     }
   ]
 }
