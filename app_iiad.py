@@ -522,13 +522,6 @@ def inject_css():
 
     st.markdown(f"""
     <style>
-    ...
-    </style>
-    """, unsafe_allow_html=True)
-
-
-    st.markdown(f"""
-    <style>
     html, body, [class*="css"] {{
         font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
     }}
@@ -755,14 +748,15 @@ def pagina_dashboard():
         fig.add_vline(x=60,  line_dash="dash", line_color="orange", annotation_text="Meta Intermedia 60%")
         fig.add_vline(x=100, line_dash="dash", line_color="green",  annotation_text="Meta Final 100%")
         fig.update_layout(
-            xaxis_range=[0, 110], height=350, xaxis_title="% Avance",
+            xaxis_range=[0, 115], height=350, xaxis_title="% Avance",
+            margin=dict(l=200, r=30, t=40, b=40),
             **plotly_layout_base()
         )
         st.plotly_chart(fig, use_container_width=True)
     with col_right:
         st.subheader("🥧 Distribución Global")
         fig_pie = go.Figure(go.Pie(
-            labels=["✅ Completado", "🔄 En curso", "⏸ Pendiente"],
+            labels=["Completado", "En curso", "Pendiente"],
             values=[df_stats["completados"].sum(), df_stats["en_curso"].sum(), df_stats["pendientes"].sum()],
             hole=0.4, marker_colors=["#27AE60", "#F39C12", "#CFD8DC"]
         ))
