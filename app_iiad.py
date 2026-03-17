@@ -159,6 +159,7 @@ def get_data():
         st.session_state["app_data"] = data
         st.session_state["data_sha"] = sha
         st.session_state["refresh"] = False
+        st.session_state["data_version"] = st.session_state.get("data_version", 0) + 1
     return st.session_state["app_data"]
 
 
@@ -166,8 +167,9 @@ def save_data(data):
     sha = st.session_state.get("data_sha")
     ok  = save_data_to_github(data, sha)
     if ok:
-        st.session_state["app_data"] = data
-        st.session_state["refresh"]  = True
+        st.session_state["app_data"]    = data
+        st.session_state["refresh"]     = True
+        st.session_state["data_version"] = st.session_state.get("data_version", 0) + 1
     return ok
 
 
@@ -371,12 +373,9 @@ def get_avance_persona(persona_id):
 
 def agregar_personal(nombre, roles, fecha_ingreso):
     data = get_data()
-    new_id = max((a.get("id", 0) for a in data["avances"]), default=0) + 1
+    new_id = max((p.get("id", 0) for p in data["personal"]), default=0) + 1
     data["personal"].append({
-        "id": new_id, "nombre": nombre, "roles": roles,
-        "fecha_ingreso": str(fecha_ingreso), "estado": "Activo"
-    })
-    return save_data(data)
+
 
 
 def actualizar_roles_personal(persona_id, nuevos_roles):
@@ -799,7 +798,8 @@ def pagina_registro():
     if filtro_estado    != "Todos":  df_filtrado = df_filtrado[df_filtrado["estado"]         == filtro_estado]
     if filtro_cat       != "Todas":  df_filtrado = df_filtrado[df_filtrado["categoria"]       == filtro_cat]
     if solo_criticos:                df_filtrado = df_filtrado[df_filtrado["es_critico"]      == 1]
-    if solo_transversal:             df_filtrado = df_filtrado[df_filtrado["es_transversal"]  == True]
+    if solo_transversal:             df_filtrado = df_filtrado[df_filtrado["es_transversal"].fillna(False) == True]
+
 
     st.subheader(f"📋 {len(df_filtrado)} de {len(merged)} documentos mostrados")
     registrado_por = st.text_input("👤 Registrado por", value="Capacitador IIAD")
@@ -982,7 +982,12 @@ def pagina_cronograma():
                            "Horas","Roles","Modalidad","Prioridad"]],
                  use_container_width=True, hide_index=True)
 
+    orden_meses = ["Mar", "Abr", "May", "Jun", "Jul", "Ago"]
     meses_horas = df_cron.groupby("MesNom")["Horas"].sum().reset_index()
+    meses_horas["MesNom"] = pd.Categorical(
+        meses_horas["MesNom"], categories=orden_meses, ordered=True
+    )
+    meses_horas = meses_horas.sort_values("MesNom")
     fig = px.bar(meses_horas, x="MesNom", y="Horas",
                  title="Distribución de Horas por Mes",
                  color="Horas", color_continuous_scale="Blues", text="Horas")
