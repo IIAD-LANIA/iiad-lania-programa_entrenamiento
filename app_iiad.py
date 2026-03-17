@@ -492,8 +492,7 @@ def exportar_excel():
 # ─────────────────────────────────────────────────────────────────────────────
 # ESTILOS CSS
 # ─────────────────────────────────────────────────────────────────────────────
-def inject_css():
-    def plotly_layout_base():
+def plotly_layout_base():
     """Retorna parámetros de layout Plotly adaptados al tema activo."""
     is_dark = st.get_option("theme.base") == "dark"
     bg      = "#0E1117" if is_dark else "#FFFFFF"
