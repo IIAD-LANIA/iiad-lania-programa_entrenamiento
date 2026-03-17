@@ -493,12 +493,22 @@ def exportar_excel():
 # ESTILOS CSS
 # ─────────────────────────────────────────────────────────────────────────────
 def inject_css():
-    SIDEBAR_BG   = "#0D1B2A"
-    SIDEBAR_ACC  = "#1565C0"
-    ACCENT_LIGHT = "#E8EDF3"
-    BTN_BG       = "#1565C0"
-    BTN_HOVER    = "#1976D2"
-    METRIC_VAL   = "#1565C0"
+    def plotly_layout_base():
+    """Retorna parámetros de layout Plotly adaptados al tema activo."""
+    is_dark = st.get_option("theme.base") == "dark"
+    bg      = "#0E1117" if is_dark else "#FFFFFF"
+    plot_bg = "#1A1E2E" if is_dark else "#F7F9FC"
+    font_c  = "#E8EDF3" if is_dark else "#2C3E50"
+    grid_c  = "rgba(255,255,255,0.08)" if is_dark else "rgba(0,0,0,0.06)"
+    return dict(
+        plot_bgcolor=plot_bg,
+        paper_bgcolor=bg,
+        font=dict(color=font_c, family="Inter, Segoe UI, sans-serif"),
+        xaxis=dict(gridcolor=grid_c, linecolor=grid_c, zerolinecolor=grid_c),
+        yaxis=dict(gridcolor=grid_c, linecolor=grid_c, zerolinecolor=grid_c),
+        margin=dict(l=10, r=10, t=10, b=10),
+    )
+
 
     st.markdown(f"""
     <style>
@@ -729,8 +739,7 @@ def pagina_dashboard():
         fig.add_vline(x=100, line_dash="dash", line_color="green",  annotation_text="Meta Final 100%")
         fig.update_layout(
             xaxis_range=[0, 110], height=350, xaxis_title="% Avance",
-            plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF",
-            margin=dict(l=10, r=10, t=10, b=10)
+            **plotly_layout_base()
         )
         st.plotly_chart(fig, use_container_width=True)
     with col_right:
@@ -742,8 +751,7 @@ def pagina_dashboard():
         ))
         fig_pie.update_layout(
             height=300, showlegend=True,
-            paper_bgcolor="#FFFFFF",
-            margin=dict(l=10, r=10, t=10, b=10)
+            **plotly_layout_base()
         )
         st.plotly_chart(fig_pie, use_container_width=True)
 
@@ -926,7 +934,7 @@ def pagina_analisis_rol():
                      title=f"Comparación de Avances — {rol_sel}", text="% Avance")
         fig.add_hline(y=60, line_dash="dash", annotation_text="Meta intermedia 60%")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
-        fig.update_layout(plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF")
+        fig.update_layout(**plotly_layout_base())
         st.plotly_chart(fig, use_container_width=True)
 
     if rol_sel != "Todos los roles":
@@ -1002,7 +1010,7 @@ def pagina_cronograma():
                  title="Distribución de Horas por Mes",
                  color="Horas", color_continuous_scale="Blues", text="Horas")
     fig.update_traces(texttemplate="%{text:.0f}h", textposition="outside")
-    fig.update_layout(plot_bgcolor="#F7F9FC", paper_bgcolor="#FFFFFF")
+    fig.update_layout(**plotly_layout_base())
     st.plotly_chart(fig, use_container_width=True)
 
 
