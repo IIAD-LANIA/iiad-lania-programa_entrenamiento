@@ -375,7 +375,7 @@ def agregar_personal(nombre, roles, fecha_ingreso):
     data = get_data()
     new_id = max((p.get("id", 0) for p in data["personal"]), default=0) + 1
     data["personal"].append({
-
+    })
 
 
 def actualizar_roles_personal(persona_id, nuevos_roles):
