@@ -217,17 +217,19 @@ class GitHubStorage:
 
 
 # Función de conveniencia para Streamlit
+
 @st.cache_resource
 def get_storage() -> GitHubStorage:
     """Obtener instancia de almacenamiento GitHub con caché."""
     try:
         storage = GitHubStorage()
         if storage.verificar_conexion():
-            st.success("✅ Conectado a GitHub")
+            logger.info("Conectado a GitHub correctamente")
             return storage
         else:
-            st.error("❌ Error conectando a GitHub. Token inválido.")
+            logger.error("Error conectando a GitHub. Token inválido.")
             return None
     except Exception as e:
-        st.error(f"❌ Error inicializando almacenamiento: {e}")
+        logger.error(f"Error inicializando almacenamiento: {e}")
         return None
+
