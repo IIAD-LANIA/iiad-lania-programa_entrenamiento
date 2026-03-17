@@ -370,12 +370,17 @@ def get_avance_persona(persona_id):
         columns=["documento_id","estado","fecha_completitud","calificacion","observaciones","fecha_inicio"]
     )
 
-
 def agregar_personal(nombre, roles, fecha_ingreso):
     data = get_data()
     new_id = max((p.get("id", 0) for p in data["personal"]), default=0) + 1
     data["personal"].append({
+        "id": new_id,
+        "nombre": nombre,
+        "roles": roles,
+        "fecha_ingreso": str(fecha_ingreso),   # ← también fix del BUG-002
+        "estado": "Activo"
     })
+    return save_data(data)
 
 
 def actualizar_roles_personal(persona_id, nuevos_roles):
@@ -1029,9 +1034,11 @@ def pagina_reportes():
                     f"Avance: {stats['pct_avance']}% | "
                     f"Docs: {stats['completados']}/{stats['total']} | "
                     f"Horas: {stats['horas_completadas']}h/{stats['horas_totales']}h")
-            st.dataframe(merged[["codigo","nombre","categoria","horas","nivel","estado",
-                                  "fecha_completitud","calificacion","es_transversal"]],
-                         use_container_width=True, hide_index=True)
+            cols_mostrar = ["codigo","nombre","categoria","horas","nivel","estado","fecha_completitud","calificacion"]
+            if "es_transversal" in merged.columns:
+                cols_mostrar.append("es_transversal")
+            st.dataframe(merged[cols_mostrar], ...)
+
     with col2:
         st.subheader("Reporte Ejecutivo Excel")
         excel_data = exportar_excel()
