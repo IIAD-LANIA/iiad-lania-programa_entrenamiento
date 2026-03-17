@@ -507,7 +507,6 @@ def plotly_layout_base():
         font=dict(color=font_c, family="Inter, Segoe UI, sans-serif"),
         xaxis=dict(gridcolor=grid_c, linecolor=grid_c, zerolinecolor=grid_c),
         yaxis=dict(gridcolor=grid_c, linecolor=grid_c, zerolinecolor=grid_c),
-        margin=dict(l=10, r=10, t=10, b=10),
     )
 # ─────────────────────────────────────────────────────────────────────────────
 # ESTILOS CSS
@@ -762,6 +761,7 @@ def pagina_dashboard():
         ))
         fig_pie.update_layout(
             height=300, showlegend=True,
+            margin=dict(l=10, r=10, t=10, b=10),
             **plotly_layout_base()
         )
         st.plotly_chart(fig_pie, use_container_width=True)
@@ -945,7 +945,10 @@ def pagina_analisis_rol():
                      title=f"Comparación de Avances — {rol_sel}", text="% Avance")
         fig.add_hline(y=60, line_dash="dash", annotation_text="Meta intermedia 60%")
         fig.update_traces(texttemplate="%{text:.1f}%", textposition="outside")
-        fig.update_layout(**plotly_layout_base())
+        fig.update_layout(
+            margin=dict(l=20, r=20, t=40, b=40),
+            **plotly_layout_base()
+        )
         st.plotly_chart(fig, use_container_width=True)
 
     if rol_sel != "Todos los roles":
@@ -1021,7 +1024,10 @@ def pagina_cronograma():
                  title="Distribución de Horas por Mes",
                  color="Horas", color_continuous_scale="Blues", text="Horas")
     fig.update_traces(texttemplate="%{text:.0f}h", textposition="outside")
-    fig.update_layout(**plotly_layout_base())
+    fig.update_layout(
+        margin=dict(l=10, r=10, t=10, b=10),
+        **plotly_layout_base()
+    )
     st.plotly_chart(fig, use_container_width=True)
 
 
