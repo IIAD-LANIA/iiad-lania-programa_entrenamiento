@@ -72,14 +72,16 @@ def _gh_headers():
 
 def load_data_from_github():
     url = f"https://api.github.com/repos/{GITHUB_OWNER}/{GITHUB_REPO}/contents/{DATA_FILE}"
-    try:
+    try:            
         r = requests.get(url, headers=_gh_headers(), timeout=10)
         if r.status_code == 200:
             payload = r.json()
             raw  = base64.b64decode(payload["content"]).decode("utf-8")
             data = json.loads(raw)
             # ── Migración automática: "rol" (str) → "roles" (lista) ──────────
-            data = _migrar_roles(data)
+            data, migrated = _migrar_roles(data)
+            if migrated:
+                save_data_to_github(data, payload["sha"])
             return data, payload["sha"]
         elif r.status_code == 404:
             return _datos_iniciales(), None
@@ -90,16 +92,18 @@ def load_data_from_github():
         st.error(f"Error de conexión con GitHub: {e}")
         return _datos_iniciales(), None
 
-
 def _migrar_roles(data):
-    """Convierte el campo legacy 'rol' (string) a 'roles' (lista)."""
+    """Convierte el campo legacy 'rol' (string) a 'roles' (lista).
+    Retorna (data, migrated) donde migrated=True si hubo cambios."""
+    migrated = False
     for p in data.get("personal", []):
         if "roles" not in p:
             p["roles"] = [p["rol"]] if p.get("rol") else []
-        # Asegurar que siempre sea lista (por si alguien guardó string)
+            migrated = True
         if isinstance(p.get("roles"), str):
             p["roles"] = [p["roles"]]
-    return data
+            migrated = True
+    return data, migrated
 
 def save_data_to_github(data, sha=None, max_retries=2):
     """Guarda data en GitHub con reintento automático ante conflictos de SHA (fix BUG-001)."""
@@ -270,7 +274,7 @@ def _datos_iniciales():
     req_id = 1
     requisitos_rol = []
     for rol, codigos in roles_config.items():
-        for codigo in set(codigos):
+        for codigo in sorted(set(codigos)):
             if codigo in cod2id:
                 requisitos_rol.append({"id": req_id, "rol": rol, "documento_id": cod2id[codigo]})
                 req_id += 1
@@ -367,7 +371,7 @@ def get_avance_persona(persona_id):
 
 def agregar_personal(nombre, roles, fecha_ingreso):
     data = get_data()
-    new_id = max((p["id"] for p in data["personal"]), default=0) + 1
+    new_id = max((a.get("id", 0) for a in data["avances"]), default=0) + 1
     data["personal"].append({
         "id": new_id, "nombre": nombre, "roles": roles,
         "fecha_ingreso": str(fecha_ingreso), "estado": "Activo"
@@ -699,7 +703,10 @@ def pagina_dashboard():
     with col2:
         st.metric("✅ Personas Certificadas", f"{personas_completas}/{len(personal)}")
     with col3:
-        st.metric("⚠️ Personas en Alerta", str(personas_criticas), delta_color="inverse")
+        color_alerta = "inverse" if personas_criticas > 0 else "normal"
+        st.metric("⚠️ Personas en Alerta", str(personas_criticas),
+                  delta=f"{personas_criticas} requieren atención" if personas_criticas > 0 else "Sin alertas",
+                  delta_color=color_alerta)
     with col4:
         st.metric("⏱️ Horas Completadas", f"{df_stats['horas_completadas'].sum():.0f}h")
     st.divider()
@@ -854,7 +861,7 @@ def pagina_registro():
                         "timestamp_registro": now_str
                     })
                 else:
-                    new_id = max((a["id"] for a in data["avances"]), default=0) + 1
+                    new_id = max((a.get("id", 0) for a in data["avances"]), default=0) + 1
                     data["avances"].append({
                         "id": new_id, "persona_id": pid, "documento_id": did,
                         "estado": d["estado"],
@@ -1152,11 +1159,13 @@ def pagina_admin():
             col_d1, col_d2 = st.columns([1, 3])
             with col_d1:
                 if st.button("💾 Actualizar Roles del Documento", type="primary"):
-                    with st.spinner("Guardando en GitHub..."):
-                        if actualizar_roles_documento(doc_sel_id, nuevos_roles_doc):
-                            st.success(f"✅ Roles actualizados para [{docs_df[docs_df['id'] == doc_sel_id]['codigo'].values[0]}]")
-                            st.rerun()
-
+                    if not nuevos_roles_doc:
+                        st.warning("⚠️ Debe asignar al menos un rol antes de guardar.")
+                    else:
+                        with st.spinner("Guardando en GitHub..."):
+                            if actualizar_roles_documento(doc_sel_id, nuevos_roles_doc):
+                                st.success(f"✅ Roles actualizados para [{docs_df[docs_df['id'] == doc_sel_id]['codigo'].values[0]}]")
+                                st.rerun()
         st.divider()
 
         # ── Agregar nuevo documento ───────────────────────────────────────────
