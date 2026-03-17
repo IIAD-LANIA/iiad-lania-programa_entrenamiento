@@ -749,6 +749,7 @@ def pagina_dashboard():
         fig.update_layout(
             xaxis_range=[0, 115], height=350, xaxis_title="% Avance",
             margin=dict(l=200, r=30, t=40, b=40),
+            yaxis=dict(automargin=True),
             **plotly_layout_base()
         )
         st.plotly_chart(fig, use_container_width=True)
@@ -756,15 +757,26 @@ def pagina_dashboard():
         st.subheader("🥧 Distribución Global")
         fig_pie = go.Figure(go.Pie(
             labels=["Completado", "En curso", "Pendiente"],
-            values=[df_stats["completados"].sum(), df_stats["en_curso"].sum(), df_stats["pendientes"].sum()],
-            hole=0.4, marker_colors=["#27AE60", "#F39C12", "#CFD8DC"]
+            values=[df_stats["completados"].sum(), df_stats["en_curso"].sum(), 
+        df_stats["pendientes"].sum()],
+            hole=0.4,
+            marker_colors=["#27AE60", "#F39C12", "#CFD8DC"],
+            textinfo="percent",
+            textfont=dict(color="#FFFFFF", size=13),
         ))
         fig_pie.update_layout(
-            height=300, showlegend=True,
-            margin=dict(l=10, r=10, t=10, b=10),
+            height=300,
+            showlegend=True,
+            legend=dict(
+                font=dict(color="#E8EDF3", size=12),
+                bgcolor="rgba(0,0,0,0)",
+                orientation="v",
+                x=1.0,
+                y=0.5,
+            ),
+            margin=dict(l=10, r=120, t=10, b=10),
             **plotly_layout_base()
         )
-        st.plotly_chart(fig_pie, use_container_width=True)
 
     st.subheader("🚦 Sistema de Alertas")
     for _, row in df_stats[df_stats["pct_avance"] < 20].iterrows():
