@@ -776,13 +776,18 @@ def pagina_registro():
     stats = calcular_estadisticas_persona(persona["id"], roles)
     st.progress(stats["pct_avance"] / 100,
                 text=f"Avance global: {stats['pct_avance']}% ({stats['completados']}/{stats['total']} docs | {stats['horas_completadas']}h/{stats['horas_totales']}h)")
-
+    
     docs_persona  = get_docs_por_persona(roles)
     avances       = get_avance_persona(persona["id"])
     avances_clean = avances.drop(columns=["id"], errors="ignore")
+    # Deduplicar avances: conservar el registro más reciente por documento
+    if not avances_clean.empty and "documento_id" in avances_clean.columns:
+        avances_clean = avances_clean.drop_duplicates(
+            subset=["documento_id"], keep="last"
+        )
     merged = docs_persona.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
     merged["estado"] = merged["estado"].fillna("Pendiente")
-    st.divider()
+
 
     col_f1, col_f2, col_f3, col_f4 = st.columns(4)
     with col_f1:
