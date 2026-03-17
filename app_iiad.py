@@ -489,8 +489,10 @@ def exportar_excel():
     return output
 
 
+
+
 # ─────────────────────────────────────────────────────────────────────────────
-# ESTILOS CSS
+# HELPER TEMA — PLOTLY
 # ─────────────────────────────────────────────────────────────────────────────
 def plotly_layout_base():
     """Retorna parámetros de layout Plotly adaptados al tema activo."""
@@ -507,6 +509,22 @@ def plotly_layout_base():
         yaxis=dict(gridcolor=grid_c, linecolor=grid_c, zerolinecolor=grid_c),
         margin=dict(l=10, r=10, t=10, b=10),
     )
+# ─────────────────────────────────────────────────────────────────────────────
+# ESTILOS CSS
+# ─────────────────────────────────────────────────────────────────────────────
+def inject_css():
+    SIDEBAR_BG   = "#0D1B2A"
+    SIDEBAR_ACC  = "#1565C0"
+    ACCENT_LIGHT = "#E8EDF3"
+    BTN_BG       = "#1565C0"
+    BTN_HOVER    = "#1976D2"
+    METRIC_VAL   = "#1565C0"
+
+    st.markdown(f"""
+    <style>
+    ...
+    </style>
+    """, unsafe_allow_html=True)
 
 
     st.markdown(f"""
