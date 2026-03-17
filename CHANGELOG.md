@@ -1,3 +1,7 @@
+# Versión 2.6 | Bug fixes: IDs personal, SHA refresh, 
+#              cronograma meses, transversales NaN, 
+#              DuplicateElementKey avances
+
 ## [2.5.1] - 2026-03-17
 
 ### Fixed
