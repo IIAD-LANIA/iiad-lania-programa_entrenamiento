@@ -1019,6 +1019,10 @@ def pagina_reportes():
             docs_persona = get_docs_por_persona(roles)
             avances     = get_avance_persona(persona["id"])
             avances_clean = avances.drop(columns=["id"], errors="ignore")
+            if not avances_clean.empty and "documento_id" in avances_clean.columns:
+                avances_clean = avances_clean.drop_duplicates(
+                    subset=["documento_id"], keep="last"
+                )
             merged = docs_persona.merge(avances_clean, left_on="id", right_on="documento_id", how="left")
             merged["estado"] = merged["estado"].fillna("Pendiente")
             st.info(f"**{persona['nombre']}** | Roles: {persona['rol_display']} | "
