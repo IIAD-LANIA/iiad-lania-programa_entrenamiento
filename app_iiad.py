@@ -1037,7 +1037,7 @@ def pagina_reportes():
             cols_mostrar = ["codigo","nombre","categoria","horas","nivel","estado","fecha_completitud","calificacion"]
             if "es_transversal" in merged.columns:
                 cols_mostrar.append("es_transversal")
-            st.dataframe(merged[cols_mostrar], ...)
+            st.dataframe(merged[cols_mostrar], use_container_width=True, hide_index=True)
 
     with col2:
         st.subheader("Reporte Ejecutivo Excel")
