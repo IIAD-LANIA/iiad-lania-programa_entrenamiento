@@ -752,9 +752,9 @@ def pagina_dashboard():
         fig.update_layout(
             xaxis_range=[0, 115], height=350, xaxis_title="% Avance",
             margin=dict(l=200, r=30, t=40, b=40),
-            yaxis=dict(automargin=True),
             **plotly_layout_base()
         )
+        fig.update_yaxes(automargin=True)
         st.plotly_chart(fig, use_container_width=True)
     with col_right:
         st.subheader("🥧 Distribución Global")
