@@ -779,7 +779,7 @@ def inject_css():
 # PÁGINA 1 — DASHBOARD
 # ─────────────────────────────────────────────────────────────────────────────
 def pagina_dashboard():
-    st.markdown("# Dashboard — Sistema de seguimiento a la formación del personal del área IIAD")
+    st.markdown("# AR-F-006 — Sistema de seguimiento a la formación del personal del área IIAD")
     st.markdown('### Basado en las normas ISO 17034 / ISO 17043 / ISO 13528')
     st.caption(f"📅 Actualizado: {datetime.now().strftime('%d/%m/%Y %H:%M')}")
 
