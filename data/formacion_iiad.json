@@ -2165,7 +2165,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 29,
@@ -2177,7 +2177,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 30,
@@ -2201,7 +2201,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 32,
@@ -2237,7 +2237,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 35,
@@ -2249,7 +2249,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 36,
@@ -2261,7 +2261,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 37,
@@ -2285,7 +2285,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 39,
@@ -2321,7 +2321,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 42,
@@ -2333,7 +2333,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 43,
@@ -2357,7 +2357,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 45,
@@ -2369,19 +2369,19 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 46,
       "persona_id": 3,
       "documento_id": 7,
-      "estado": "Pendiente",
-      "fecha_inicio": "nan",
-      "fecha_completitud": "nan",
-      "calificacion": NaN,
-      "observaciones": "nan",
+      "estado": "Completado",
+      "fecha_inicio": "2023-10-06",
+      "fecha_completitud": "2023-10-06",
+      "calificacion": 100.0,
+      "observaciones": "Soporte en forma 3-191",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 47,
@@ -2393,7 +2393,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 48,
@@ -2405,7 +2405,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 49,
@@ -2429,7 +2429,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 51,
@@ -2441,7 +2441,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 52,
@@ -2453,7 +2453,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 53,
@@ -2465,7 +2465,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 54,
@@ -2477,7 +2477,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 55,
@@ -2489,7 +2489,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 56,
@@ -2597,7 +2597,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 65,
@@ -2609,7 +2609,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 66,
@@ -2621,7 +2621,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 67,
@@ -2633,7 +2633,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 68,
@@ -4241,19 +4241,19 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 202,
       "persona_id": 3,
       "documento_id": 38,
-      "estado": "Pendiente",
-      "fecha_inicio": "nan",
-      "fecha_completitud": "nan",
-      "calificacion": NaN,
-      "observaciones": "nan",
+      "estado": "Completado",
+      "fecha_inicio": "2023-10-06",
+      "fecha_completitud": "2023-10-06",
+      "calificacion": 100.0,
+      "observaciones": "Forma 3-191",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 203,
@@ -4277,7 +4277,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 205,
@@ -4289,7 +4289,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 206,
@@ -4301,7 +4301,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 207,
@@ -4313,7 +4313,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 208,
@@ -4325,7 +4325,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 209,
@@ -4337,7 +4337,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 210,
@@ -4349,7 +4349,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 211,
@@ -4361,7 +4361,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 212,
@@ -4373,7 +4373,7 @@
       "calificacion": 0.0,
       "observaciones": "",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 213,
@@ -4385,7 +4385,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 214,
@@ -4397,7 +4397,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 215,
@@ -4409,7 +4409,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 216,
@@ -4421,7 +4421,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 217,
@@ -4433,7 +4433,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 218,
@@ -4445,7 +4445,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 219,
@@ -4457,7 +4457,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 220,
@@ -4469,7 +4469,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 221,
@@ -4481,7 +4481,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 222,
@@ -4493,7 +4493,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 223,
@@ -4517,7 +4517,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 225,
@@ -4529,7 +4529,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 226,
@@ -4541,7 +4541,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 227,
@@ -4553,7 +4553,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 228,
@@ -4565,7 +4565,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 229,
@@ -4577,7 +4577,7 @@
       "calificacion": NaN,
       "observaciones": "nan",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 14:39:35"
+      "timestamp_registro": "2026-03-18 14:42:01"
     },
     {
       "id": 230,
