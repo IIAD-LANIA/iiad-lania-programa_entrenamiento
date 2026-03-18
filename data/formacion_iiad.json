@@ -4669,13 +4669,13 @@
       "id": 233,
       "persona_id": 4,
       "documento_id": 10,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2025-07-31",
       "fecha_completitud": "2025-07-31",
       "calificacion": 100.0,
       "observaciones": "3-191",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 234,
@@ -4705,49 +4705,49 @@
       "id": 236,
       "persona_id": 4,
       "documento_id": 18,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2025-03-21",
       "fecha_completitud": "2025-03-21",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-024 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 237,
       "persona_id": 4,
       "documento_id": 19,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2025-04-23",
       "fecha_completitud": "2025-04-23",
       "calificacion": 100.0,
       "observaciones": "Forma 3-191",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 238,
       "persona_id": 4,
       "documento_id": 23,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-10-03",
       "fecha_completitud": "2024-10-03",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-027 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 239,
       "persona_id": 4,
       "documento_id": 20,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-10-07",
       "fecha_completitud": "2024-10-07",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-031 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 240,
@@ -4777,13 +4777,13 @@
       "id": 242,
       "persona_id": 4,
       "documento_id": 2,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-09-26",
       "fecha_completitud": "2024-09-26",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-MC-003 | Capacitación + Enseñanza (doble evento mismo día) | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 243,
@@ -4813,13 +4813,13 @@
       "id": 245,
       "persona_id": 4,
       "documento_id": 39,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2025-03-27",
       "fecha_completitud": "2025-03-27",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-007 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 246,
@@ -4885,13 +4885,13 @@
       "id": 251,
       "persona_id": 4,
       "documento_id": 11,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-09-24",
       "fecha_completitud": "2024-09-24",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | ISO 17025:2017 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 252,
@@ -4981,13 +4981,13 @@
       "id": 259,
       "persona_id": 4,
       "documento_id": 25,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2023-10-17",
       "fecha_completitud": "2023-10-17",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-002 | Capacitación | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 260,
@@ -5035,7 +5035,7 @@
       "calificacion": NaN,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-020 | Enseñanza (segundo evento) | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 264,
@@ -5113,13 +5113,13 @@
       "id": 270,
       "persona_id": 4,
       "documento_id": 6,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2025-04-25",
       "fecha_completitud": "2025-04-25",
       "calificacion": 100.0,
       "observaciones": "Forma 3-91",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 271,
@@ -5221,13 +5221,13 @@
       "id": 279,
       "persona_id": 4,
       "documento_id": 35,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-10-03",
       "fecha_completitud": "2024-10-03",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-039 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 280,
@@ -5245,13 +5245,13 @@
       "id": 281,
       "persona_id": 4,
       "documento_id": 37,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-10-07",
       "fecha_completitud": "2024-10-07",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-I-SAD-041 | Enseñanza | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 282,
@@ -5317,13 +5317,13 @@
       "id": 287,
       "persona_id": 4,
       "documento_id": 26,
-      "estado": "Completado",
+      "estado": "Pendiente",
       "fecha_inicio": "2024-10-31",
       "fecha_completitud": "2024-10-31",
       "calificacion": 0.0,
       "observaciones": "FORMA 3-191 | GSA-SAD-P-001 | Capacitación | Con soporte verificado",
       "registrado_por": "Capacitador IIAD",
-      "timestamp_registro": "2026-03-18 18:34:48"
+      "timestamp_registro": "2026-03-18 18:36:07"
     },
     {
       "id": 288,
