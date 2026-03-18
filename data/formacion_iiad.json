@@ -748,6 +748,16 @@
       "nivel": "Nivel 3",
       "norma_cubierta": "ISO 17034 / ISO 17043",
       "es_critico": 1
+    },
+    {
+      "id": 71,
+      "codigo": "GSA-IO-LANIA-IIAD-001",
+      "nombre": "Preparación de materiales de referencia e ítems de ensayo de aptitud en café verde",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034/ ISO 17043",
+      "es_critico": 1
     }
   ],
   "requisitos_rol": [
@@ -2165,6 +2175,21 @@
       "id": 283,
       "rol": "Líder de producción",
       "documento_id": 70
+    },
+    {
+      "id": 284,
+      "rol": "Responsable área IIAD",
+      "documento_id": 71
+    },
+    {
+      "id": 285,
+      "rol": "Líder de producción",
+      "documento_id": 71
+    },
+    {
+      "id": 286,
+      "rol": "Profesional área IIAD",
+      "documento_id": 71
     }
   ],
   "avances": [
