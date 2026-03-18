@@ -738,6 +738,16 @@
       "nivel": "Nivel 1",
       "norma_cubierta": "ISO/IEC 17025 §8.3",
       "es_critico": 0
+    },
+    {
+      "id": 70,
+      "codigo": "GSA-MA-LANIA-IIAD-001",
+      "nombre": "Procedimiento para la evaluación de candidatos a materiales de referencia e ítems de ensayo de aptitud de café verde",
+      "categoria": "SGC Operativo",
+      "horas": 3.0,
+      "nivel": "Nivel 3",
+      "norma_cubierta": "ISO 17034 / ISO 17043",
+      "es_critico": 1
     }
   ],
   "requisitos_rol": [
@@ -2140,6 +2150,21 @@
       "id": 280,
       "rol": "Profesional análisis datos",
       "documento_id": 69
+    },
+    {
+      "id": 281,
+      "rol": "Responsable área IIAD",
+      "documento_id": 70
+    },
+    {
+      "id": 282,
+      "rol": "Profesional área IIAD",
+      "documento_id": 70
+    },
+    {
+      "id": 283,
+      "rol": "Líder de producción",
+      "documento_id": 70
     }
   ],
   "avances": [
