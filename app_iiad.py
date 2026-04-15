@@ -391,6 +391,15 @@ def actualizar_roles_personal(persona_id, nuevos_roles):
             break
     return save_data(data)
 
+def actualizar_nombre_personal(persona_id, nuevo_nombre):
+    data = get_data()
+    for p in data["personal"]:
+        if p["id"] == persona_id:
+            p["nombre"] = nuevo_nombre.strip()
+            break
+    return save_data(data)
+
+
 
 def agregar_documento(codigo, nombre, categoria, horas, nivel, norma_cubierta, es_critico, roles_asignados):
     """Agrega un nuevo documento al catálogo y crea sus entradas en requisitos_rol."""
@@ -1230,7 +1239,35 @@ def pagina_admin():
 
         st.divider()
 
-        # ── Editar roles de persona existente ────────────────────────────────
+        # ── Editar nombre de persona existente ────────────────────────────────
+        st.subheader("✏️ Editar Nombre de Persona")
+        if not personal.empty:
+            nombre_renombrar = st.selectbox(
+                "Seleccionar persona a renombrar",
+                personal["nombre"].tolist(),
+                key="rename_sel"
+            )
+            persona_renombrar = personal[personal["nombre"] == nombre_renombrar].iloc[0]
+            nuevo_nombre_input = st.text_input(
+                "Nuevo nombre completo",
+                value=nombre_renombrar,
+                key="rename_input"
+            )
+            col_rn1, col_rn2 = st.columns([1, 3])
+            with col_rn1:
+                if st.button("💾 Guardar Nombre", type="primary", key="btn_rename"):
+                    if not nuevo_nombre_input.strip():
+                        st.warning("⚠️ El nombre no puede estar vacío.")
+                    elif nuevo_nombre_input.strip() == nombre_renombrar:
+                        st.info("ℹ️ El nombre no ha cambiado.")
+                    else:
+                        with st.spinner("Guardando en GitHub..."):
+                            if actualizar_nombre_personal(int(persona_renombrar["id"]), nuevo_nombre_input):
+                                st.success(f"✅ Nombre actualizado: '{nombre_renombrar}' → '{nuevo_nombre_input.strip()}'")
+                                st.rerun()
+        st.divider()
+
+                # ── Editar roles de persona existente ────────────────────────────────
         st.subheader("✏️ Editar Roles de Persona Existente")
         if not personal.empty:
             nombre_edit = st.selectbox("Seleccionar persona a editar", personal["nombre"].tolist(), key="edit_sel")
