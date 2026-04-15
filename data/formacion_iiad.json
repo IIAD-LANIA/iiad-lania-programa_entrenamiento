@@ -96,6 +96,18 @@
         "Líder de comparación",
         "Profesional análisis datos"
       ]
+    },
+    {
+      "id": 9,
+      "nombre": "Darío de Jesús González",
+      "roles": [
+        "Profesional área IIAD",
+        "Líder de producción",
+        "Líder de comparación",
+        "Profesional análisis datos"
+      ],
+      "fecha_ingreso": "2026-04-15",
+      "estado": "Activo"
     }
   ],
   "documentos": [
